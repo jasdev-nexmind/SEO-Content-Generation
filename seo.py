@@ -61,6 +61,8 @@ def generate_title(keyword_clusters):
 
 def generate_articles(titles):
     articles = []
+    directory_path = "/articles"
+    os.makedirs(directory_path, exist_ok=True)
     for keywords in titles:
         prompt = f"""
         Generate a 1500-word, SEO-optimized article in HTML format on the topic related to these keywords: {keywords}. 
@@ -70,7 +72,7 @@ def generate_articles(titles):
         article = chat_with_gpt3(prompt)
         articles.append(article)
         filename = sanitize_filename(keywords)  # use the first keyword as the filename
-        with open(f'{filename}.html', 'w') as f:
+        with open(os.path.join(directory_path, f'{filename}.html'), 'w') as f:
             f.write(article)
     return articles
 
