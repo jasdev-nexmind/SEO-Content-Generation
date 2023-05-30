@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Revamp your workspace with contemporary office tables from leading manufacturer in Malaysia. Dynamic Brands offers customized solutions to cater to your unique requirements. Contact us today to get started on your workspace transformation journey.">
+	<title>Dynamic Brands | Manufacturer of Contemporary Office Tables in Malaysia</title>
+	<!-- Add Tailwind CSS library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.2/tailwind.min.css">
+	<!-- Add AOS scrolling animation library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+	<style>
+		/* Add custom styles here */
+		header {
+			background-color: #444;
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		header h1 {
+			font-size: 40px;
+		}
+
+		main p, main h2 {
+			margin-bottom: 20px;
+			font-size: 18px;
+			line-height: 1.5;
+			text-align: justify;
+			padding: 10px;
+			box-shadow: 1px 1px 3px #bbb;
+			border-radius: 5px;
+		}
+
+		main h2 {
+			font-size: 28px;
+			margin-top: 40px;
+			border-bottom: 1px solid #ccc;
+			padding-bottom: 10px;
+		}
+
+		main p {
+			color: #555;
+		}
+
+		h2:last-of-type {
+			margin-top: 60px;
+		}
+
+		main p:first-of-type {
+			font-weight: bold;
+			font-size: 22px;
+		}
+
+		footer {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		footer p {
+			font-size: 14px;
+		}
+
+		a:hover {
+			color: #555;
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+
+	<nav class="bg-gray-800">
+	  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+	    <div class="relative flex items-center justify-between h-16">
+	      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+	        <!-- Mobile menu button-->
+	        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+	          <span class="sr-only">Open main menu</span>
+	          <!--
+	            Icon when menu is closed.
+
+	            Heroicon name: menu
+
+	            Menu open: "hidden", Menu closed: "block"
+	          -->
+	          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+	          </svg>
+	          <!--
+	            Icon when menu is open.
+
+	            Heroicon name: x
+
+	            Menu open: "block", Menu closed: "hidden"
+	          -->
+	          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+	          </svg>
+	        </button>
+	      </div>
+	      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+	        <div class="flex-shrink-0 flex items-center">
+	          <img class="block lg:hidden h-8 w-auto" src="/assets/img/logo.svg" alt="Workflow">
+	          <img class="hidden lg:block h-8 w-auto" src="/assets/img/logo.svg" alt="Workflow">
+	        </div>
+	        <div class="hidden sm:block sm:ml-6">
+	          <div class="flex space-x-4">
+	            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+	            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+
+	            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Catalogue</a>
+
+	            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About Us</a>
+
+	            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact Us</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
+	    <!-- Mobile menu, show/hide based on mobile menu state. -->
+	    <div class="sm:hidden" id="mobile-menu">
+	      <div class="px-2 pt-2 pb-3 space-y-1">
+	        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+	        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+
+	        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Catalogue</a>
+
+	        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+
+	        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact Us</a>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
+
+	<header data-aos="fade-up">
+		<h1>Revamp Your Workspace with Contemporary Office Tables from Leading Manufacturer in Malaysia</h1>
+	</header>
+
+	<main>
+		<p data-aos="fade-right">As we spend a considerable amount of time at our workplaces, it's crucial to make sure our offices are not only functional but also visually appealing. At Dynamic Brands, we specialize in manufacturing contemporary office tables that cater to all your needs. Our tables are designed with both form and function in mind, ensuring that they are not only beautiful but also practical.</p>
+
+		<h2 data-aos="fade-left">Table Manufacturing in Malaysia</h2>
+		<p data-aos="fade-right">Dynamic Brands is a reputable manufacturer of office tables in Malaysia. We have established ourselves as one of the leaders in the furniture industry, providing top-quality products that meet the needs of various clients. Our modern office table designs are perfect for any workspace, whether it's a home office or a multinational corporation.</p>
+
+		<h2 data-aos="fade-left">Modern Office Table Manufacturer in Malaysia</h2>
+		<p data-aos="fade-right">Our company takes pride in being a modern office table manufacturer in Malaysia. We understand that every client has their own unique requirements, and hence, we offer customized solutions that cater to their individual needs. Our designers work closely with our clients to ensure that every piece of furniture is crafted according to their preferences.</p>
+
+		<p data-aos="fade-right">Our stylish and functional contemporary office tables are ideal for those who value aesthetics and comfort. They come in various sizes, shapes, and finishes, making them suitable for different types of offices. Additionally, we use only high-quality materials to ensure durability and longevity.</p>
+
+		<p data-aos="fade-right">Our furniture is perfect for various industries, including furniture manufacturers, interior designers, event planners, restaurant owners, hotel owners, office managers and even homeowners. Whether you're looking to furnish your new office space or give your existing workspace a makeover, we have everything you need.</p>
+
+		<h2 data-aos="fade-left">Conclusion</h2>
+		<p data-aos="fade-right">Dynamic Brands is the leading manufacturer of contemporary office tables in Malaysia. Our exquisite furniture designs are ideal for those who want to revamp their workspace with modern pieces that combine style and functionality. As a modern office table manufacturer in Malaysia, we take pride in offering customized solutions that cater to our clients' unique requirements. Contact us today to get started on your workspace transformation journey.</p>
+	</main>
+
+	<footer>
+		<p>&copy; 2021 Dynamic Brands. All Rights Reserved.</p>
+	</footer>
+
+	<!-- Add AOS scrolling animation library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+	<script>
+	  AOS.init({
+	    duration: 800,
+	    easing: 'ease-in-out-back',
+	    once: true
+	  });
+	</script>
+</body>
+</html>
