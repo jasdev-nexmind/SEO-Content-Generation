@@ -56,14 +56,14 @@ def chat_with_gpt3(prompt):
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
         
 def get_industry(topic):
-    prompt = f"Generate an industry for these keywords, no explanation is needed: {topic}"
+    prompt = f"Considering these keywords '{topic}', what industry do they seem to be most related to?"
     industry = chat_with_gpt3(prompt)
     print("Industry Found")
     return industry
 
 def get_target(topic):
     audienceList = []
-    prompt = f"Generate a list of target audience for these keywords, no explanation is needed: {topic}"
+    prompt = f"Given the keywords '{topic}', who are some potential target audiences that might be interested in a product or service related to these words?"
     audience = chat_with_gpt3(prompt)
     audiences = audience.split('\n')  # split the keywords into a list assuming they are comma-separated
     audiences = [target.replace('"', '') for target in audiences]
@@ -74,7 +74,7 @@ def get_target(topic):
 
 def generate_keyword_clusters(topic):
     keyword_clusters = []
-    prompt = f"Generate 5 SEO-optimized long-tail keywords related to the topic: {topic}."
+    prompt = f"Based on the topic '{topic}', please suggest 5 SEO-optimized long-tail keywords that could help enhance search engine visibility."
     keywords_str = chat_with_gpt3(prompt)
     keywords = keywords_str.split('\n')  # split the keywords into a list assuming they are comma-separated
     keywords = [keyword.replace('"', '') for keyword in keywords]
@@ -86,7 +86,7 @@ def generate_keyword_clusters(topic):
 def generate_title(keyword_clusters):
     titles = []
     for keywords in keyword_clusters:
-        prompt = f"Generate a short interesting and engaging title for a company related to these keywords, make sure they are grammatically correct: {keywords}"
+        prompt = f"Could you create a concise, engaging, and grammatically correct title for a company that relates to these keywords: '{keywords}'?"
         title = chat_with_gpt3(prompt)
         titles.append(title)
     titles = [title.replace('"', '') for title in titles]
@@ -98,7 +98,7 @@ def generate_content(name, topic, industry, audience, keyword, title):
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     base_prompt = f"""
-    Generate a website content for a company based on the following requirements.
+    Please create website content for a company with the following specifications:
     Company Name: {name}
     Industry: {industry}
     Target Audience: {audience}
