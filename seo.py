@@ -140,7 +140,7 @@ def generate_outline(company_name: str,
     os.makedirs(directorypath, exist_ok=True)
     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
         f.write(outline)
-    generate_content(company_name, topic, industry, keyword, title, True, False, outline)
+    generate_content(company_name, topic, industry, keyword, title, True, True, outline)
 
 def generate_content(company_name: str,
                      topic: str,
@@ -188,11 +188,11 @@ def generate_content(company_name: str,
     # 6) Conclusion is not needed
     
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8)
+    filename = sanitize_filename(title)  # use the first keyword as the filename
     if html_output:
         content = generate_html(content)
         if add_style:
-            content = add_styles_and_components(content)
-    filename = sanitize_filename(title)  # use the first keyword as the filename
+            content = add_styles_and_components(content, filename)
     with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
         f.write(content)
     print ("Finished file for " + title)
@@ -201,33 +201,29 @@ def generate_html(content: str) -> str:
     # Generate HTML code for the website
     print("Generating HTML code for the website...")
     prompt = f"""
-    Generate a website in HTML format for a company using the following content. The generated HTML should be properly structured, starting with a <!DOCTYPE html> declaration, followed by a <html> element, meta description and then the <head> and <body> elements.:
+    Generate a website in HTML format for a company using the following content. The generated HTML should be properly structured, starting with a <!DOCTYPE html> declaration, followed by a <html> element, meta description and then the <head> and <body> elements:
     {content}
     """
     website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
     return website
 
-def add_styles_and_components(website: str) -> str:
+def add_styles_and_components(website: str, filename: str) -> str:
     # Add styles and components to the website
     print("Adding styles and components to the website...")
-    
+    directory_path = "content"
+    os.makedirs(directory_path, exist_ok=True)
+
     # Call the chat_with_gpt3 function to generate the styles and components
-    updated_website = change_font(website)
-    updated_website = add_components(updated_website)
-    updated_website = add_footer(updated_website)
-    updated_website = add_animation(updated_website)
-
+    website = add_components(website)
+    website = add_footer(website)
+    styles_file = change_font()
+    styles_file = add_animation(styles_file)
+    with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
+        f.write(styles_file)
+    website = compile_files(website, filename)
+    
     # Write the updated HTML content back to the file
-    return updated_website
-
-def change_font(website: str) -> str:
-    print("Changing font...")
-    prompt= f""" 
-    Change the font family, color and background color of this website to an appropriate one to match the theme of the website.:
-    {website}
-    """
-    website = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
-    return website
+    print("Finished adding styles and components to the website")
 
 def add_components(website: str) -> str:
     print("Adding components...")
@@ -235,25 +231,42 @@ def add_components(website: str) -> str:
     Add components to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top):
     {website}
     """
-    website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
-    return website
+    styles_file = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
+    return styles_file
 
 def add_footer(website: str) -> str:
     print("Adding footer...")
     prompt= f""" 
-    Add a footer to the website with proper alignment.:
+    Add a footer to this HTML file with proper alignement:
     {website}
     """
-    website = chat_with_gpt3("Adding footer", prompt, temp=0.2, p=0.1)
+    styles_file = chat_with_gpt3("Adding footer", prompt, temp=0.2, p=0.1)
+    return styles_file
+
+def change_font() -> str:
+    print("Changing font...")
+    prompt= f""" 
+    Add a unique font family, color and background color CSS style for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
+    """
+    website = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return website
 
-def add_animation(website: str) -> str:
+def add_animation(styles_file: str) -> str:
     print("Adding animation...")
     prompt= f""" 
-    Add animations to the website. Use animations from these websites (https://michalsnik.github.io/aos/) and (https://animate.style/):
+    Add animations to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
+    {styles_file}
+    """
+    styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
+    return styles_file
+
+def compile_files(website: str, styles_file: str) -> str:
+    print("Compiling files...")
+    prompt= f""" 
+    Add a reference to the styles file "{styles_file}.css" in the HTML file:
     {website}
     """
-    website = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
+    website = chat_with_gpt3("Compiling files", prompt, temp=0.2, p=0.1)
     return website
 
 def sanitize_filename(filename: str) -> str:
