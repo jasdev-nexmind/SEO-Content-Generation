@@ -1,0 +1,258 @@
+Company Name,Keyword,Iteration,Stage,Prompt Tokens,Completion Tokens,Total Tokens,Price
+Dynamic Brands,Sofa Manufacturing in Malaysia,,,,,,
+,,2,Industry Identification,77,4,81,0.00016199999999999998
+,,3,Target Search,80,72,152,0.00030399999999999996
+,,4,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,5,Title Generating,75,80,155,0.00031
+,,6,Title Generating,75,83,158,0.000316
+,,7,Title Generating,75,89,164,0.000328
+,,8,Title Generating,77,68,145,0.00029
+,,9,Title Generating,75,74,149,0.000298
+,,10,Outline Generation,207,297,504,0.001008
+,,11,Outline Generation,213,347,560,0.00112
+,,12,Outline Generation,221,347,568,0.0011359999999999999
+,,13,Outline Generation,218,414,632,0.001264
+,,14,Outline Generation,225,373,598,0.001196
+,,15,Content Generation,440,422,862,0.0017239999999999998
+,,16,Content Generation,391,592,983,0.001966
+,,17,Content Generation,441,495,936,0.001872
+,,18,Content Generation,467,416,883,0.001766
+Dynamic Brand,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+Dynamic Brands,Video Commercial Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,76,3,79,0.000158
+,,2,Target Search,79,75,154,0.000308
+,,3,Keyword Clusters Search,80,48,128,0.000256
+,,4,Title Generating,77,17,94,0.000188
+,,5,Title Generating,75,16,91,0.00018199999999999998
+,,6,Title Generating,76,17,93,0.000186
+,,7,Title Generating,76,21,97,0.000194
+,,8,Title Generating,76,18,94,0.000188
+,,9,Outline Generation,162,245,407,0.0008139999999999999
+,,10,Outline Generation,158,265,423,0.000846
+,,11,Outline Generation,158,299,457,0.000914
+,,12,Outline Generation,159,295,454,0.000908
+,,13,Outline Generation,157,407,564,0.0011279999999999999
+Dynamic Brand,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generating,75,18,93,0.000186
+,,5,Title Generating,75,17,92,0.000184
+,,6,Title Generating,75,18,93,0.000186
+,,7,Title Generating,77,15,92,0.000184
+,,8,Title Generating,75,14,89,0.000178
+,,9,Outline Generation,161,247,408,0.000816
+,,10,Outline Generation,158,267,425,0.00085
+,,11,Outline Generation,160,222,382,0.0007639999999999999
+,,12,Outline Generation,157,351,508,0.001016
+,,13,Outline Generation,161,398,559,0.0011179999999999999
+,,14,Content Generation,341,376,717,0.001434
+,,15,Content Generation,492,289,781,0.001562
+,,16,Content Generation,361,502,863,0.0017259999999999999
+,,17,Content Generation,444,407,851,0.001702
+,,18,Content Generation,315,527,842,0.001684
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,18,93,0.000186
+,,5,Title Generation,75,17,92,0.000184
+,,6,Title Generation,75,18,93,0.000186
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,14,89,0.000178
+,,9,Outline Generation,160,249,409,0.0008179999999999999
+,,10,Outline Generation,157,267,424,0.000848
+,,11,Outline Generation,161,276,437,0.000874
+,,12,Outline Generation,158,264,422,0.0008439999999999999
+,,13,Content Generation,366,272,638,0.001276
+,,14,Outline Generation,161,586,747,0.0014939999999999999
+,,15,Content Generation,382,394,776,0.001552
+,,16,Content Generation,381,503,884,0.0017679999999999998
+,,17,Content Generation,396,913,1309,0.0026179999999999997
+,,18,HTML Conversion,516,616,1132,0.002264
+,,19,HTML Conversion,394,764,1158,0.002316
+,,20,Content Generation,706,765,1471,0.0029419999999999997
+,,21,HTML Conversion,626,1032,1658,0.003316
+,,22,HTML Conversion,887,1562,2449,0.004898
+,,23,HTML Conversion,1035,1773,2808,0.0056159999999999995
+Dynamic Brands,Video Commercial Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,76,3,79,0.000158
+,,2,Target Search,79,75,154,0.000308
+NexMind,Table Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,3,80,0.00015999999999999999
+,,2,Target Search,80,71,151,0.00030199999999999997
+,,3,Keyword Clusters Search,81,52,133,0.000266
+,,4,Title Generation,75,17,92,0.000184
+,,5,Title Generation,74,15,89,0.000178
+,,6,Title Generation,75,24,99,0.000198
+,,7,Title Generation,76,15,91,0.00018199999999999998
+,,8,Title Generation,77,17,94,0.000188
+,,9,Outline Generation,163,224,387,0.000774
+,,10,Outline Generation,154,238,392,0.000784
+,,11,Outline Generation,154,232,386,0.000772
+,,12,Outline Generation,156,260,416,0.000832
+,,13,Outline Generation,156,384,540,0.00108
+,,14,Content Generation,346,254,600,0.0012
+,,15,Content Generation,350,320,670,0.00134
+,,16,Content Generation,355,537,892,0.001784
+,,17,Content Generation,506,455,961,0.0019219999999999999
+,,18,Content Generation,379,682,1061,0.0021219999999999998
+,,19,HTML Conversion,376,508,884,0.0017679999999999998
+,,20,HTML Conversion,442,779,1221,0.0024419999999999997
+,,21,HTML Conversion,577,730,1307,0.002614
+,,22,HTML Conversion,803,719,1522,0.003044
+,,23,HTML Conversion,659,1056,1715,0.00343
+NexMind,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,53,134,0.000268
+,,4,Title Generation,75,17,92,0.000184
+,,5,Title Generation,76,14,90,0.00017999999999999998
+,,6,Title Generation,76,14,90,0.00017999999999999998
+,,7,Title Generation,75,18,93,0.000186
+,,8,Title Generation,76,16,92,0.000184
+,,9,Outline Generation,160,244,404,0.000808
+,,10,Outline Generation,156,276,432,0.000864
+,,11,Outline Generation,159,235,394,0.000788
+,,12,Outline Generation,156,324,480,0.0009599999999999999
+,,13,Outline Generation,158,299,457,0.000914
+,,14,Content Generation,354,331,685,0.00137
+,,15,Content Generation,364,389,753,0.001506
+,,16,Content Generation,441,423,864,0.001728
+,,17,Content Generation,393,616,1009,0.002018
+,,18,Content Generation,418,587,1005,0.00201
+,,19,HTML Conversion,511,631,1142,0.002284
+,,20,HTML Conversion,545,530,1075,0.00215
+,,21,HTML Conversion,454,615,1069,0.0021379999999999997
+,,22,HTML Conversion,709,645,1354,0.002708
+,,23,HTML Conversion,738,1179,1917,0.0038339999999999997
+NexMind,Video Commercial Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,76,3,79,0.000158
+,,2,Target Search,79,77,156,0.000312
+,,3,Keyword Clusters Search,80,48,128,0.000256
+,,4,Title Generation,77,17,94,0.000188
+,,5,Title Generation,75,16,91,0.00018199999999999998
+,,6,Title Generation,76,17,93,0.000186
+,,7,Title Generation,76,21,97,0.000194
+,,8,Title Generation,76,18,94,0.000188
+,,9,Outline Generation,89,93,182,0.00036399999999999996
+,,10,Outline Generation,90,182,272,0.000544
+,,11,Outline Generation,93,159,252,0.000504
+,,12,Outline Generation,88,201,289,0.000578
+,,13,Outline Generation,89,212,301,0.000602
+,,14,Content Generation,213,542,755,0.0015099999999999998
+,,15,Content Generation,302,501,803,0.001606
+,,16,Content Generation,282,637,919,0.001838
+,,17,Content Generation,331,606,937,0.001874
+,,18,Content Generation,318,1104,1422,0.0028439999999999997
+,,19,HTML Conversion,664,733,1397,0.002794
+,,20,HTML Conversion,624,928,1552,0.003104
+,,21,HTML Conversion,759,1082,1841,0.003682
+,,22,HTML Conversion,1226,1091,2317,0.004634
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,18,93,0.000186
+,,5,Title Generation,75,17,92,0.000184
+,,6,Title Generation,75,18,93,0.000186
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,14,89,0.000178
+,,9,Outline Generation,100,214,314,0.000628
+,,10,Outline Generation,97,233,330,0.00066
+,,11,Outline Generation,99,267,366,0.000732
+,,12,Outline Generation,96,276,372,0.000744
+,,13,Outline Generation,100,357,457,0.000914
+,,14,Content Generation,350,258,608,0.0012159999999999999
+,,15,Content Generation,384,320,704,0.001408
+,,16,Content Generation,477,455,932,0.001864
+,,17,Content Generation,391,664,1055,0.00211
+,,18,Content Generation,334,892,1226,0.0024519999999999998
+,,19,HTML Conversion,574,612,1186,0.002372
+,,20,HTML Conversion,377,923,1300,0.0026
+,,21,HTML Conversion,783,621,1404,0.0028079999999999997
+,,22,HTML Conversion,439,1265,1704,0.003408
+,,23,HTML Conversion,1011,1027,2038,0.004076
+Dynamic Brands,Vase Manufacturing in Malaysia,0,Initial,0,0,0,0
+Dynamic Brands,Vase Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,8,86,0.00017199999999999998
+,,2,Target Search,81,53,134,0.000268
+,,3,Keyword Clusters Search,82,47,129,0.000258
+,,4,Title Generation,76,13,89,0.000178
+,,5,Title Generation,76,19,95,0.00018999999999999998
+,,6,Title Generation,76,17,93,0.000186
+,,7,Title Generation,76,20,96,0.000192
+,,8,Title Generation,76,18,94,0.000188
+,,9,Outline Generation,103,196,299,0.000598
+,,10,Outline Generation,102,220,322,0.0006439999999999999
+,,11,Outline Generation,98,232,330,0.00066
+,,12,Outline Generation,104,254,358,0.000716
+,,13,Outline Generation,105,249,354,0.000708
+,,14,Content Generation,384,406,790,0.00158
+,,15,Content Generation,327,499,826,0.0016519999999999998
+,,16,Content Generation,380,483,863,0.0017259999999999999
+,,17,Content Generation,349,529,878,0.001756
+,,18,HTML Conversion,525,537,1062,0.002124
+,,19,Content Generation,357,967,1324,0.0026479999999999997
+,,20,HTML Conversion,602,662,1264,0.002528
+,,21,HTML Conversion,648,722,1370,0.00274
+,,22,HTML Conversion,618,677,1295,0.00259
+,,23,HTML Conversion,1086,1444,2530,0.005059999999999999
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,17,92,0.000184
+,,5,Title Generation,75,15,90,0.00017999999999999998
+,,6,Title Generation,75,16,91,0.00018199999999999998
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,19,94,0.000188
+,,5,Title Generation,75,13,88,0.000176
+,,6,Title Generation,75,16,91,0.00018199999999999998
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,15,90,0.00017999999999999998
+,,9,Outline Generation,121,292,413,0.0008259999999999999
+,,10,Outline Generation,125,295,420,0.0008399999999999999
+,,11,Outline Generation,121,288,409,0.0008179999999999999
+,,12,Outline Generation,122,362,484,0.000968
+,,13,Outline Generation,119,395,514,0.001028
+,,14,Content Generation,418,422,840,0.0016799999999999999
+,,15,Content Generation,414,523,937,0.001874
+,,16,Content Generation,489,501,990,0.00198
+,,17,Content Generation,425,633,1058,0.002116
+,,18,Content Generation,518,564,1082,0.0021639999999999997
+,,19,HTML Conversion,541,624,1165,0.00233
+,,20,HTML Conversion,620,715,1335,0.00267
+,,21,HTML Conversion,642,803,1445,0.0028899999999999998
+,,22,HTML Conversion,683,774,1457,0.002914
+,,23,HTML Conversion,752,834,1586,0.003172
+Dynamic Brands,Sofa Manufacturing Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,76,4,80,0.00015999999999999999
+,,2,Target Search,79,75,154,0.000308
+,,3,Keyword Clusters Search,80,46,126,0.000252
+,,4,Title Generation,75,14,89,0.000178
+,,5,Title Generation,76,18,94,0.000188
+,,6,Title Generation,75,20,95,0.00018999999999999998
+,,7,Title Generation,77,19,96,0.000192
+,,8,Title Generation,79,18,97,0.000194
+,,9,Outline Generation,121,147,268,0.000536
+,,10,Outline Generation,125,212,337,0.000674
+,,11,Outline Generation,125,286,411,0.0008219999999999999
+,,12,Outline Generation,127,315,442,0.0008839999999999999
+,,13,Outline Generation,126,290,416,0.000832
+,,14,Content Generation,271,409,680,0.0013599999999999999
+,,15,Content Generation,420,304,724,0.0014479999999999999
+,,16,Content Generation,339,718,1057,0.002114
+,,17,HTML Conversion,528,625,1153,0.002306
+,,18,HTML Conversion,423,548,971,0.001942
+,,19,Content Generation,445,861,1306,0.0026119999999999997
+,,20,HTML Conversion,837,1098,1935,0.0038699999999999997
+,,21,HTML Conversion,980,1302,2282,0.0045639999999999995
+,,22,Content Generation,416,521,937,0.001874
+,,23,HTML Conversion,640,809,1449,0.002898
