@@ -1,0 +1,28 @@
+Sure, here's an example of how you can add animations to your website using the AOS and Animate.css libraries:
+
+```css
+/* Import the AOS library */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+
+/* Import the Animate.css library */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Set the animation for an element using AOS */
+.element {
+  animation: fade-in-left 1s ease-in-out;
+}
+
+/* Define the animation using Animate.css */
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+```
+
+In this example, we're using the AOS library to trigger the animation when the element comes into view. We're also using the Animate.css library to define the animation itself. The animation we're using is called "fade-in-left" and it will fade in an element from the left while also moving it slightly to the right. You can adjust the animation and timing to fit your website's design and branding.

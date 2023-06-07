@@ -208,22 +208,16 @@ def generate_html(content: str) -> str:
     return website
 
 def add_styles_and_components(website: str, filename: str) -> str:
-    # Add styles and components to the website
-    print("Adding styles and components to the website...")
-    directory_path = "content"
-    os.makedirs(directory_path, exist_ok=True)
-
+    # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     website = add_components(website)
     website = add_footer(website)
-    styles_file = change_font()
-    styles_file = add_animation(styles_file)
-    with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
-        f.write(styles_file)
+    styles_file = add_styles(filename)    
     website = compile_files(website, filename)
     
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
+    return website
 
 def add_components(website: str) -> str:
     print("Adding components...")
@@ -231,8 +225,8 @@ def add_components(website: str) -> str:
     Add components to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top):
     {website}
     """
-    styles_file = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
-    return styles_file
+    website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
+    return website
 
 def add_footer(website: str) -> str:
     print("Adding footer...")
@@ -240,21 +234,31 @@ def add_footer(website: str) -> str:
     Add a footer to this HTML file with proper alignement:
     {website}
     """
-    styles_file = chat_with_gpt3("Adding footer", prompt, temp=0.2, p=0.1)
-    return styles_file
+    website = chat_with_gpt3("Adding footer", prompt, temp=0.2, p=0.1)
+    return website
 
+def add_styles(filename: str) -> str:
+    print("Adding styles...")
+    directory_path = "content"
+    os.makedirs(directory_path, exist_ok=True)
+    styles_file = change_font()
+    styles_file = add_animation(styles_file)
+    with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
+        f.write(styles_file)
+    print ("Finished adding styles ")
+    
 def change_font() -> str:
     print("Changing font...")
     prompt= f""" 
     Add a unique font family, color and background color CSS style for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
     """
-    website = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
-    return website
+    styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
+    return styles_file
 
 def add_animation(styles_file: str) -> str:
     print("Adding animation...")
     prompt= f""" 
-    Add animations to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
+    Add animations for each tag to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
     {styles_file}
     """
     styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)

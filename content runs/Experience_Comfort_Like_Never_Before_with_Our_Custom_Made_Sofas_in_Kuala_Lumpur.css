@@ -1,0 +1,28 @@
+Sure, here's an example of how you can add animations to your website using the AOS and Animate.css libraries:
+
+```css
+/* Import the AOS and Animate.css libraries */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Set the animation properties */
+h1 {
+  animation-duration: 1s;
+  animation-name: animate__fadeInDown;
+  animation-fill-mode: both;
+}
+
+/* Set the AOS properties */
+p {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Set the AOS data attributes */
+p[data-aos="fade-up"] {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+```
+
+In this example, we're importing the AOS and Animate.css libraries to add animations to our website. We're setting the animation properties for the `h1` element to use the `fadeInDown` animation from Animate.css. We're also setting the AOS properties for the `p` element to have an initial opacity of 0 and a transition of 0.5s ease-in-out. Finally, we're setting the AOS data attributes for the `p` element to fade up with a delay of 0.2s. You can adjust these values and use different animations to fit your website's design and branding.
