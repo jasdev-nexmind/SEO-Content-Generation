@@ -134,13 +134,11 @@ def generate_outline(company_name: str,
     Use this website as reference: https://milanote.com/templates/website-design/website-content
     """
     outline = chat_with_gpt3("Outline Generation", prompt, temp=0.7, p=0.8)
-    print("Outlines Generated")
     filename = sanitize_filename(title)  # use the first keyword as the filename
     directorypath = "outline"
     os.makedirs(directorypath, exist_ok=True)
     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
         f.write(outline)
-    generate_content(company_name, topic, industry, keyword, title, True, True, outline)
 
 def generate_content(company_name: str,
                      topic: str,
@@ -212,7 +210,7 @@ def add_styles_and_components(website: str, filename: str) -> str:
     # Call the chat_with_gpt3 function to generate the styles and components
     website = add_components(website)
     website = add_footer(website)
-    styles_file = add_styles(filename)    
+    styles_file = add_styles(filename)
     website = compile_files(website, filename)
     
     # Write the updated HTML content back to the file
@@ -222,7 +220,7 @@ def add_styles_and_components(website: str, filename: str) -> str:
 def add_components(website: str) -> str:
     print("Adding components...")
     prompt= f""" 
-    Add components to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top):
+    Add components such as navbar and logo placeholder to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top):
     {website}
     """
     website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
@@ -245,12 +243,12 @@ def add_styles(filename: str) -> str:
     styles_file = add_animation(styles_file)
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
         f.write(styles_file)
-    print ("Finished adding styles ")
+    print ("Finished adding styles")
     
 def change_font() -> str:
     print("Changing font...")
     prompt= f""" 
-    Add a unique font family, color and background color CSS style for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
+    Add a unique style to the website such as font family, color and background color for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
     """
     styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return styles_file
@@ -258,7 +256,7 @@ def change_font() -> str:
 def add_animation(styles_file: str) -> str:
     print("Adding animation...")
     prompt= f""" 
-    Add animations for each tag to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
+    Add animations for each tag to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/), respond in CSS only:
     {styles_file}
     """
     styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
@@ -266,12 +264,20 @@ def add_animation(styles_file: str) -> str:
 
 def compile_files(website: str, styles_file: str) -> str:
     print("Compiling files...")
-    prompt= f""" 
-    Add a reference to the styles file "{styles_file}.css" in the HTML file:
-    {website}
+    line_to_insert = f"""   
+    <link rel="stylesheet" href="{styles_file}.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.0/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     """
-    website = chat_with_gpt3("Compiling files", prompt, temp=0.2, p=0.1)
-    return website
+    
+    head_end_index = website.find('</head>')
+    if head_end_index == -1:
+        raise ValueError(f"Cannot find </head> in {website}")
+
+    new_website = website[:head_end_index] + line_to_insert + '\n' + website[head_end_index:]
+    return new_website
+    
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
@@ -290,18 +296,30 @@ def main():
     industry = get_industry(topic)
     print(industry)
     audience = get_target(topic)
-    print(audience)
+    for number, aud in enumerate(audience):
+        print(f"{number+1}. {aud}")
     keyword_clusters = generate_keyword_clusters(topic)
-    print(keyword_clusters)
+    for number, keyword in enumerate(keyword_clusters):
+        print(f"{number+1}. {keyword}")
     titles = generate_title(keyword_clusters)
-    print(titles)
+    for number, title in enumerate(titles):
+        print(f"{number+1}. {title}")
     threads = []
     for keyword, title in zip(keyword_clusters, titles):
         t = Thread(target=generate_outline, args=(company_name, topic, industry, audience, keyword, title))
         threads.append(t)
         t.start()
+    outlines = []
     for thread in threads:
-        thread.join()    
+        thread.join()
+    print("Outlines generated")
+    
+    outline_choice = int(input("Choose an outline: "))
+    outline_title = sanitize_filename(titles[outline_choice-1])
+    directory_path = "outline"
+    with open(os.path.join(directory_path, f'{outline_title}.txt'), 'r') as outline:
+        outline.read()
+    generate_content(company_name, topic, industry, keyword, title, True, True, outline)
 
 if __name__ == "__main__" :
     main()

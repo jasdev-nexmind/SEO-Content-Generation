@@ -1,0 +1,43 @@
+
+/* Import the AOS and Animate.css libraries */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Set the animation for each tag */
+h1 {
+  animation: animate__fadeInDown;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+h2 {
+  animation: animate__fadeInUp;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+p {
+  animation: animate__fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+/* Initialize the AOS library */
+[data-aos] {
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+/* Set the animation for each tag using the AOS library */
+h1[data-aos="fade-down"] {
+  animation: none;
+}
+
+h2[data-aos="fade-up"] {
+  animation: none;
+}
+
+p[data-aos="fade"] {
+  animation: none;
+}
+

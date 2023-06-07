@@ -347,3 +347,193 @@ Dynamic Brands,Video Commercial Company,0,Initial,0,0,0,0
 ,,15,Content Generation,363,454,817,0.0016339999999999998
 ,,16,Content Generation,463,393,856,0.001712
 ,,17,Content Generation,438,696,1134,0.002268
+,,18,HTML Conversion,511,542,1053,0.002106
+,,19,HTML Conversion,572,620,1192,0.002384
+,,20,HTML Conversion,536,848,1384,0.002768
+,,21,Content Generation,394,415,809,0.0016179999999999999
+,,22,Adding Components,642,829,1471,0.0029419999999999997
+,,23,HTML Conversion,814,1064,1878,0.003756
+,,24,Adding footer,906,146,1052,0.002104
+,,25,Changing font,108,231,339,0.000678
+,,26,HTML Conversion,533,702,1235,0.00247
+,,27,Adding animation,332,390,722,0.001444
+,,28,Adding Components,948,1519,2467,0.004934
+,,29,Compiling files,251,199,450,0.0009
+,,30,Adding Components,1164,1673,2837,0.005673999999999999
+,,31,Adding Components,802,1348,2150,0.0043
+,,32,Adding Components,720,3377,4097,0.008194
+,,33,Adding footer,3455,642,4097,0.008194
+,,34,Adding footer,1750,1616,3366,0.006731999999999999
+,,35,Changing font,108,195,303,0.000606
+,,36,Changing font,108,231,339,0.000678
+,,37,Adding animation,296,365,661,0.001322
+,,38,Compiling files,746,144,890,0.00178
+,,39,Adding animation,332,420,752,0.001504
+,,40,Compiling files,1720,262,1982,0.003964
+NexMind,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,53,134,0.000268
+,,4,Title Generation,75,17,92,0.000184
+,,5,Title Generation,76,14,90,0.00017999999999999998
+,,6,Title Generation,76,15,91,0.00018199999999999998
+,,7,Title Generation,75,21,96,0.000192
+,,8,Title Generation,76,15,91,0.00018199999999999998
+,,9,Outline Generation,128,221,349,0.0006979999999999999
+,,10,Outline Generation,122,224,346,0.000692
+,,11,Outline Generation,121,237,358,0.000716
+,,12,Outline Generation,124,276,400,0.0007999999999999999
+,,13,Outline Generation,122,342,464,0.000928
+OpenAI,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,17,92,0.000184
+,,5,Title Generation,75,16,91,0.00018199999999999998
+,,6,Title Generation,75,19,94,0.000188
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,13,88,0.000176
+,,9,Outline Generation,123,214,337,0.000674
+,,10,Outline Generation,124,247,371,0.0007419999999999999
+,,11,Outline Generation,120,267,387,0.000774
+,,12,Outline Generation,122,260,382,0.0007639999999999999
+,,13,Outline Generation,126,335,461,0.000922
+NexMind,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,19,94,0.000188
+,,5,Title Generation,75,16,91,0.00018199999999999998
+,,6,Title Generation,75,16,91,0.00018199999999999998
+,,7,Title Generation,77,16,93,0.000186
+,,8,Title Generation,75,18,93,0.000186
+,,9,Outline Generation,123,175,298,0.000596
+,,10,Outline Generation,125,187,312,0.000624
+,,11,Outline Generation,123,217,340,0.0006799999999999999
+,,12,Outline Generation,126,270,396,0.000792
+,,13,Outline Generation,123,328,451,0.0009019999999999999
+NexMind,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,70,150,0.0003
+,,3,Keyword Clusters Search,81,53,134,0.000268
+,,4,Title Generation,75,16,91,0.00018199999999999998
+,,5,Title Generation,76,14,90,0.00017999999999999998
+,,6,Title Generation,76,15,91,0.00018199999999999998
+,,7,Title Generation,75,16,91,0.00018199999999999998
+,,8,Title Generation,76,17,93,0.000186
+,,9,Outline Generation,124,149,273,0.0005459999999999999
+,,10,Outline Generation,123,242,365,0.00073
+,,11,Outline Generation,122,296,418,0.0008359999999999999
+,,12,Outline Generation,121,327,448,0.000896
+,,13,Outline Generation,123,398,521,0.001042
+NexMind,Video Commercial Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,5,83,0.000166
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,62,144,0.000288
+,,4,Title Generation,77,16,93,0.000186
+,,5,Title Generation,78,22,100,0.00019999999999999998
+,,6,Title Generation,77,25,102,0.000204
+,,7,Title Generation,77,14,91,0.00018199999999999998
+,,8,Title Generation,78,16,94,0.000188
+,,9,Outline Generation,132,272,404,0.000808
+,,10,Outline Generation,121,281,402,0.0008039999999999999
+,,11,Outline Generation,129,354,483,0.000966
+,,12,Outline Generation,123,309,432,0.000864
+,,13,Outline Generation,123,315,438,0.0008759999999999999
+NexMind,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,53,134,0.000268
+,,4,Title Generation,75,15,90,0.00017999999999999998
+,,5,Title Generation,76,16,92,0.000184
+,,6,Title Generation,76,13,89,0.000178
+,,7,Title Generation,75,15,90,0.00017999999999999998
+,,8,Title Generation,76,17,93,0.000186
+,,9,Outline Generation,120,187,307,0.000614
+,,10,Outline Generation,124,231,355,0.00071
+,,11,Outline Generation,122,283,405,0.00081
+,,12,Outline Generation,122,269,391,0.0007819999999999999
+,,13,Outline Generation,123,346,469,0.0009379999999999999
+,,14,Content Generation,173,389,562,0.001124
+,,15,HTML Conversion,507,535,1042,0.002084
+,,16,Adding Components,635,3448,4083,0.008166
+,,17,Adding footer,3525,572,4097,0.008194
+,,18,Changing font,108,195,303,0.000606
+,,19,Adding animation,296,365,661,0.001322
+,,20,Compiling files,680,1060,1740,0.00348
+NexMind,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,21,96,0.000192
+,,5,Title Generation,75,16,91,0.00018199999999999998
+,,6,Title Generation,75,16,91,0.00018199999999999998
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,15,90,0.00017999999999999998
+,,9,Outline Generation,122,188,310,0.00062
+,,10,Outline Generation,123,225,348,0.000696
+,,11,Outline Generation,128,234,362,0.0007239999999999999
+,,12,Outline Generation,122,261,383,0.000766
+,,13,Outline Generation,123,327,450,0.0009
+,,14,Content Generation,171,405,576,0.001152
+,,15,HTML Conversion,522,536,1058,0.002116
+,,16,Adding Components,636,3461,4097,0.008194
+,,17,Adding footer,3538,559,4097,0.008194
+,,18,Changing font,108,231,339,0.000678
+,,19,Adding animation,332,454,786,0.0015719999999999998
+NexMind,Video Commercial Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,5,83,0.000166
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,62,144,0.000288
+,,4,Title Generation,77,17,94,0.000188
+,,5,Title Generation,78,16,94,0.000188
+,,6,Title Generation,77,26,103,0.000206
+,,7,Title Generation,77,17,94,0.000188
+,,8,Title Generation,78,20,98,0.000196
+,,9,Outline Generation,123,243,366,0.000732
+,,10,Outline Generation,133,274,407,0.0008139999999999999
+,,11,Outline Generation,124,300,424,0.000848
+,,12,Outline Generation,124,355,479,0.000958
+,,13,Outline Generation,127,380,507,0.001014
+,,14,Content Generation,185,426,611,0.001222
+,,15,HTML Conversion,544,639,1183,0.002366
+,,16,Changing font,108,231,339,0.000678
+,,17,Adding animation,332,399,731,0.001462
+NexMind,Video Commercial Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,5,83,0.000166
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,62,144,0.000288
+,,4,Title Generation,77,18,95,0.00018999999999999998
+,,5,Title Generation,78,18,96,0.000192
+,,6,Title Generation,77,17,94,0.000188
+,,7,Title Generation,77,16,93,0.000186
+,,8,Title Generation,78,20,98,0.000196
+,,9,Outline Generation,125,250,375,0.00075
+,,10,Outline Generation,127,268,395,0.00079
+,,11,Outline Generation,123,297,420,0.0008399999999999999
+,,12,Outline Generation,125,327,452,0.000904
+,,13,Outline Generation,124,293,417,0.000834
+,,14,Content Generation,179,355,534,0.001068
+,,15,HTML Conversion,473,523,996,0.001992
+,,16,Changing font,108,195,303,0.000606
+,,17,Adding animation,296,365,661,0.001322
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,14,89,0.000178
+,,5,Title Generation,75,17,92,0.000184
+,,6,Title Generation,75,16,91,0.00018199999999999998
+,,7,Title Generation,77,15,92,0.000184
+,,8,Title Generation,75,16,91,0.00018199999999999998
+,,9,Outline Generation,123,150,273,0.0005459999999999999
+,,10,Outline Generation,123,178,301,0.000602
+,,11,Outline Generation,121,240,361,0.000722
+,,12,Outline Generation,124,184,308,0.000616
+,,13,Outline Generation,122,345,467,0.0009339999999999999
+,,14,Content Generation,173,456,629,0.001258
+,,15,HTML Conversion,574,658,1232,0.002464
+,,16,Adding Components,764,929,1693,0.0033859999999999997
+,,17,Adding footer,1006,1073,2079,0.004158
+,,18,Changing font,112,362,474,0.000948
+,,19,Adding animation,468,440,908,0.001816

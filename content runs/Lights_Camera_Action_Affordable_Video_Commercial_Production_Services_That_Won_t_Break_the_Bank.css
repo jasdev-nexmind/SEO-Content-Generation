@@ -1,0 +1,54 @@
+Sure, here's an example of how you can add animations to your website using the AOS and Animate.css libraries:
+
+```css
+/* Import the AOS and Animate.css libraries */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Set the animation for a specific tag */
+h1 {
+  animation: animate__animated animate__bounceInLeft;
+}
+
+/* Set the animation duration and delay */
+h1 {
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+/* Set the animation for multiple tags */
+h2, p {
+  animation: animate__animated animate__fadeIn;
+}
+
+/* Set the animation duration and delay for multiple tags */
+h2, p {
+  animation-duration: 1s;
+  animation-delay: 1s;
+}
+
+/* Set the animation for a tag using AOS */
+div {
+  opacity: 0;
+  animation: none;
+}
+
+div[data-aos="fade-up"] {
+  opacity: 1;
+  animation: fade-up 1s ease-in-out;
+}
+
+/* Define the fade-up animation */
+@keyframes fade-up {
+  from {
+    transform: translateY(50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+```
+
+In this example, we're importing the AOS and Animate.css libraries to add animations to our website. We're setting the animation for specific tags, such as h1, h2, and p, using the Animate.css classes. We're also setting the animation duration and delay to control the timing of the animations.
+
+We're also using AOS to set the animation for a specific tag, in this case, a div. We're defining a custom animation using keyframes and applying it to the div using the data-aos attribute. This allows us to add more complex animations to our website and control the timing and behavior of the animations.

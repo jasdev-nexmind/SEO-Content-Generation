@@ -1,0 +1,47 @@
+Sure, here's an example of how you can add animations to your website using the AOS and Animate.css libraries:
+
+```css
+/* Import the AOS and Animate.css libraries */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Set the animation for each tag */
+h1 {
+  animation: animate__fadeInDown;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+h2 {
+  animation: animate__fadeInLeft;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+p {
+  animation: animate__fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+/* Initialize the AOS library */
+[data-aos] {
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+/* Set the animation for each tag using the AOS library */
+h1[data-aos="fade-down"] {
+  animation: none;
+}
+
+h2[data-aos="fade-left"] {
+  animation: none;
+}
+
+p[data-aos="fade-up"] {
+  animation: none;
+}
+```
+
+In this example, we're importing the AOS and Animate.css libraries to add animations to our website. We're setting different animations for each tag using the `animation` property and specifying the duration and delay using the `animation-duration` and `animation-delay` properties. We're also initializing the AOS library and setting the opacity and transition duration for each tag using the `[data-aos]` selector. Finally, we're setting the animation for each tag using the AOS library by specifying the animation type using the `data-aos` attribute. These styles will help make the website more engaging and interactive for users.
