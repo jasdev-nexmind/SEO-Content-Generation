@@ -1,0 +1,33 @@
+
+/* Set the font family for the entire website */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Set the background color for the entire website */
+body {
+
+  background: linear-gradient(rgb(93, 26, 250), rgb(145, 78, 248), rgb(183, 121, 245), rgb(215, 162, 242), rgb(243, 203, 237));
+}
+
+/* Set the color for all headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  animation: fadeInUp;
+  animation-duration: 1s;
+}
+
+/* Set the font size and color for all links */
+a {
+  font-size: 16px;
+  color: #007bff;
+  animation: bounceIn;
+  animation-duration: 1s;
+}
+
+/* Set the hover color for all links */
+a:hover {
+  color: #0056b3;
+  animation: pulse;
+  animation-duration: 1s;
+}
