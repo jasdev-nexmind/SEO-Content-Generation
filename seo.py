@@ -131,7 +131,7 @@ def generate_outline(company_name: str,
                      title: str) -> str:
     prompt = f"""
     Generate a content outline of a landing page for {company_name} based on this topic: '{title}'
-    Maximum of 5 bullet points.
+    Maximum of 5 bullet points, use "-" as the bullet points.
     """
     outline = chat_with_gpt3("Outline Generation", prompt, temp=0.7, p=0.8)
     filename = sanitize_filename(title)  # use the first keyword as the filename
@@ -140,6 +140,77 @@ def generate_outline(company_name: str,
     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
         f.write(outline)
 
+def generate_html():
+    website = create_template()
+    directory_path = "test"
+    os.makedirs(directory_path, exist_ok=True)
+    start_index = website.find('<!DOCTYPE html>')
+    end_index = website.find('</html>', start_index+1)
+    if start_index == -1 and end_index == -1:
+        pass
+    
+    new_website = website[start_index:end_index+7]      
+    with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
+        f.write(new_website)
+
+def create_template(company_name: str, filename: str) -> str:
+    print("Creating template...")
+    prompt= f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dynamic Brands</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS stylesheets -->
+        <link rel="stylesheet" href="{filename}.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid shadow-2xl">
+                    <a class="navbar-brand flex items-center" href="#">
+                        <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
+
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
+                    </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/dfjljsxr.json"
+                        trigger="morph"
+                        colors="outline:#121331,primary:#ffffff"
+                        style="width:50px;height:50px">
+                    </lord-icon>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+   
+        </body>
+    </html>	
+    """
+    website = chat_with_gpt3("Adding navbar", prompt, temp=0.2, p=0.1)
+    
+    return website
+
 def generate_content(company_name: str,
                      topic: str,
                      industry: List[str],
@@ -147,15 +218,19 @@ def generate_content(company_name: str,
                      title: str,
                      html_output: bool,
                      add_style: bool,
-                     outline: str) -> str:
+                     outline: List[str],
+                     section: List[str]) -> str:
     
     print("Generating Content...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     prompt = f"""
-    Create a 500 word landing page content using this outline: {outline}, include the company name:{company_name}, the title:{title}, the core keywords:{topic}, the long-tail keywords {keyword}, headers and subheaders.
-    Specify the title, headers and subheaders. Conclusion is not needed.
+    Generate a paragraph of content for a website for a company that provides services related to these {topic}
+    This is the main point of the paragraph: {outline}
     """
+    # Create a 500 word landing page content using this outline: {outline}, include the company name:{company_name}, the title:{title}, the core keywords:{topic}, the long-tail keywords {keyword}, headers and subheaders.
+    # Specify the title, headers and subheaders. Conclusion is not needed.
+    
     # Template 1
     # Generate a website with 1500 words of content in HTML format for a company that provides services related to these {topic}
     # The keywords should be incorporated into the headings, subheadings, meta descriptions, and spread evenly throughout the website. The website should be engaging and unique.
@@ -186,48 +261,42 @@ def generate_content(company_name: str,
     # 5) Content should be SEO optimized.
     # 6) Conclusion is not needed
     
+    
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8)
     print(content)
-    filename = sanitize_filename(title)  # use the first keyword as the filename
+    print("Done")
     if html_output:
-        website = generate_html(content)
-    if add_style:
-            website = add_styles_and_components(website, filename)          
-    with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
-        f.write(website)
+        website = convert_to_html(content)
+    # if add_style:
+    #         website = add_styles_and_components(website, filename)    
+    section.append(website)
     
-    print ("Finished file for " + title)
+    # print ("Finished file for " + title)
 
-def generate_html(content: str) -> str:
+def convert_to_html(content: str) -> str:
     # Generate HTML code for the website
     print("Generating HTML code for the website...")
     prompt = f"""
-    Convert the following content into website in a HTML file. The generated HTML should be properly structured, starting with a <!DOCTYPE html> declaration, followed by a <html> element, meta description and then the <head> and <body> elements:
+    Convert the following content into HTML container.:
     {content}
     """
     website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
-    start_index = website.find('<!DOCTYPE html>')
-    end_index = website.find('</html>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        pass
-    
-    new_css = website[start_index+6:end_index]
     return website
 
 def add_styles_and_components(website: str, filename: str) -> str:
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     website = add_components(website)
-    website = add_navbar(website)
+    # website = add_navbar(website)
     styles_file = add_styles(filename)
-    website = compile_files(website, filename)
+    # website = compile_files(website, filename)
     
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
     return website
 
 def add_components(website: str) -> str:
-    print("Adding components...")
+    print("Addi                 ng components...")
     prompt= f""" 
     Edit this HTML code directly by adding components such as navbar and logo placeholder to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top)
     Use lordicon.com to generate animated icons and add them to the website.:
@@ -236,22 +305,13 @@ def add_components(website: str) -> str:
     website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
     return website
 
-def add_navbar(website: str) -> str:
-    print("Adding footer...")
-    prompt= f""" 
-    Add a navbar in this website:
-    {website}
-    """
-    website = chat_with_gpt3("Adding navbar", prompt, temp=0.2, p=0.1)
-    return website
-
 def add_styles(filename: str) -> str:
     print("Adding styles...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     styles_file = change_font()
     styles_file = add_animation(styles_file)
-    styles_file = change_alignment(styles_file)
+    # styles_file = change_alignment(styles_file)
     start_index = styles_file.find('```css')
     end_index = styles_file.find('```', start_index+1)
     if start_index == -1 and end_index == -1:
@@ -289,26 +349,22 @@ def change_alignment(styles_file: str) -> str:
     styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
     return styles_file
 
-def compile_files(website: str, styles_file: str) -> str:
+def compile_files(website: str, section: List[str]) -> str:
     print("Compiling files...")
-    line_to_insert = f"""   
-    <link rel="stylesheet" href="{styles_file}.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.0/tailwind.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    """
-    
-    head_end_index = website.find('</head>')
-    if head_end_index == -1:
-        raise ValueError(f"Cannot find </head> in {website}")
-
-    new_website = website[:head_end_index] + line_to_insert + '\n' + website[head_end_index:]
+    new_website = website
+    for content in section:
+        end_index = website.find('</body>')
+        if end_index == -1:
+            raise ValueError(f"Cannot find </body> in file")
+        new_website = website[:end_index] + content + '\n' + website[end_index:] 
     return new_website
-    
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
     return re.sub(r'[^A-Za-z0-9]+', '_', filename)
+
+
+
 
 def main():
     company_name = input("Company Name: ")
@@ -336,17 +392,43 @@ def main():
         t = Thread(target=generate_outline, args=(company_name, topic, industry, audience, keyword, title))
         threads.append(t)
         t.start()
-
     for thread in threads:
         thread.join()
     print("Outlines generated")
     
     outline_choice = int(input("Choose an outline: "))
-    outline_title = sanitize_filename(titles[outline_choice-1])
+    filename = sanitize_filename(titles[outline_choice-1])
     directory_path = "outline"
-    with open(os.path.join(directory_path, f'{outline_title}.txt'), 'r') as outline:
-        outline.read()
-    generate_content(company_name, topic, industry, keyword, title, True, True, outline)
+    outlines = []
+    with open(os.path.join(directory_path, f'{filename}.txt'), 'r', encoding='utf-8-sig') as f:
+        outline = f.read().splitlines()
+    print(outline)
+
+    website = create_template(company_name, filename)
+    section = []
+    threads2 = []
+    
+    for number, content in enumerate(outline):
+        t = Thread(target=generate_content, args=(company_name, topic, industry, keyword, title, True, False, content, section))
+        threads2.append(t)
+        t.start()
+    for thread in threads2:
+        thread.join()
+     
+    print (section)
+    
+    compiled_html = compile_files(website, section)
+    
+    directory_path = "content"
+    os.makedirs(directory_path, exist_ok=True)
+    start_index = compiled_html.find('<!DOCTYPE html>')
+    end_index = compiled_html.find('</html>', start_index+1)
+    if start_index == -1 and end_index == -1:
+        pass
+    new_website = compiled_html[start_index:end_index+7]      
+    with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
+        f.write(new_website)
+        
     with open('token_usage.csv', 'a', newline='') as csvfile:
         fieldnames = ['Company Name', 'Keyword', 'Iteration', 'Stage', 'Prompt Tokens', 'Completion Tokens', 'Total Tokens', 'Price']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
