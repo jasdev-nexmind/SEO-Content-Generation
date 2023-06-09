@@ -1720,3 +1720,64 @@ Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
 ,,11,Outline Generation,110,84,194,0.000388
 ,,12,Outline Generation,111,155,266,0.000532
 ,,13,Outline Generation,110,160,270,0.00054
+,,14,Adding navbar,737,102,839,0.001678
+,,15,Content Generation,115,96,211,0.00042199999999999996
+,,16,Content Generation,116,127,243,0.000486
+,,17,Content Generation,113,132,245,0.00049
+,,18,Content Generation,113,147,260,0.00052
+,,19,Content Generation,119,148,267,0.000534
+,,20,HTML Conversion,170,107,277,0.000554
+,,21,HTML Conversion,206,143,349,0.0006979999999999999
+,,22,HTML Conversion,201,144,345,0.00069
+,,23,HTML Conversion,221,158,379,0.000758
+,,24,HTML Conversion,222,158,380,0.0007599999999999999
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,57,139,0.000278
+,,4,Title Generation,76,16,92,0.000184
+,,5,Title Generation,76,18,94,0.000188
+,,6,Title Generation,78,15,93,0.000186
+,,7,Title Generation,76,14,90,0.00017999999999999998
+,,8,Title Generation,76,17,93,0.000186
+,,9,Outline Generation,112,74,186,0.000372
+,,10,Outline Generation,111,68,179,0.000358
+,,11,Outline Generation,109,111,220,0.00043999999999999996
+,,12,Outline Generation,110,114,224,0.000448
+,,13,Outline Generation,113,136,249,0.000498
+,,14,Content Generation,124,119,243,0.000486
+,,15,Content Generation,124,125,249,0.000498
+,,16,Content Generation,116,144,260,0.00052
+,,17,Content Generation,115,151,266,0.000532
+,,18,Content Generation,120,157,277,0.000554
+,,19,HTML Conversion,193,129,322,0.0006439999999999999
+,,20,HTML Conversion,199,136,335,0.00067
+,,21,HTML Conversion,218,173,391,0.0007819999999999999
+,,22,HTML Conversion,225,162,387,0.000774
+,,23,HTML Conversion,231,178,409,0.0008179999999999999
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,57,139,0.000278
+,,4,Title Generation,76,15,91,0.00018199999999999998
+,,5,Title Generation,76,13,89,0.000178
+,,6,Title Generation,78,20,98,0.000196
+,,7,Title Generation,76,13,89,0.000178
+,,8,Title Generation,76,18,94,0.000188
+,,9,Outline Generation,110,73,183,0.000366
+,,10,Outline Generation,115,100,215,0.00043
+,,11,Outline Generation,108,115,223,0.000446
+,,12,Outline Generation,108,121,229,0.00045799999999999997
+,,13,Outline Generation,113,131,244,0.000488
+,,14,Content Generation,117,125,242,0.000484
+,,15,Content Generation,126,126,252,0.000504
+,,16,Content Generation,119,162,281,0.000562
+,,17,Content Generation,128,162,290,0.00058
+,,18,Content Generation,126,160,286,0.000572
+,,19,HTML Conversion,200,137,337,0.000674
+,,20,HTML Conversion,199,147,346,0.000692
+,,21,HTML Conversion,236,185,421,0.000842
+,,22,HTML Conversion,236,172,408,0.000816
+,,23,HTML Conversion,234,183,417,0.000834
+,,,Complete,0,0,0,0

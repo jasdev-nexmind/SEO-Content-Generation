@@ -155,7 +155,7 @@ def generate_html():
 
 def create_template(company_name: str, filename: str) -> str:
     print("Creating template...")
-    prompt= f"""
+    website= f"""
     <!DOCTYPE html>
     <html>
     <head>
@@ -206,9 +206,7 @@ def create_template(company_name: str, filename: str) -> str:
    
         </body>
     </html>	
-    """
-    website = chat_with_gpt3("Adding navbar", prompt, temp=0.2, p=0.1)
-    
+    """    
     return website
 
 def generate_content(company_name: str,
@@ -271,7 +269,6 @@ def generate_content(company_name: str,
     #         website = add_styles_and_components(website, filename)    
     section.append(website)
     
-    # print ("Finished file for " + title)
 
 def convert_to_html(content: str) -> str:
     # Generate HTML code for the website
@@ -357,13 +354,12 @@ def compile_files(website: str, section: List[str]) -> str:
         if end_index == -1:
             raise ValueError(f"Cannot find </body> in file")
         new_website = website[:end_index] + content + '\n' + website[end_index:] 
+        
     return new_website
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
     return re.sub(r'[^A-Za-z0-9]+', '_', filename)
-
-
 
 
 def main():
@@ -414,9 +410,7 @@ def main():
         t.start()
     for thread in threads2:
         thread.join()
-     
     print (section)
-    
     compiled_html = compile_files(website, section)
     
     directory_path = "content"
@@ -428,7 +422,7 @@ def main():
     new_website = compiled_html[start_index:end_index+7]      
     with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
         f.write(new_website)
-        
+     
     with open('token_usage.csv', 'a', newline='') as csvfile:
         fieldnames = ['Company Name', 'Keyword', 'Iteration', 'Stage', 'Prompt Tokens', 'Completion Tokens', 'Total Tokens', 'Price']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
