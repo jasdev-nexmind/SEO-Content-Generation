@@ -17,13 +17,14 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 openai.api_key = openai_api_key
 openai.Model.list()
 
+
 def generate_response(prompt: str,
                       temp: float, 
                       p: float,
                       freq: float,
                       presence: float,
                       retries: int,
-                      max_retries: int) -> List[str]:
+                      max_retries: int):
     try:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -37,7 +38,7 @@ def generate_response(prompt: str,
             frequency_penalty=freq,
             presence_penalty=presence,
         )
-        #print (response)
+        # print (response)
         return response.choices[0].message['content'], response['usage']['prompt_tokens'], response['usage']['completion_tokens'], response['usage']['total_tokens']
     
     except openai.error.RateLimitError as e:  # rate limit error
@@ -56,12 +57,13 @@ def generate_response(prompt: str,
     time.sleep(60)  # wait for 60 seconds before retrying
     return None, None, None, None  # return None if an exception was caught
 
+
 def chat_with_gpt3(stage: str,
                    prompt: str,
-                   temp: float=0.5,
-                   p: float=0.5,
-                   freq: float=0,
-                   presence: float=0) -> str:
+                   temp: float = 0.5,
+                   p: float = 0.5,
+                   freq: float = 0,
+                   presence: float = 0) -> str:
     max_retries = 5
     for retries in range(max_retries):
         response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries)
@@ -69,6 +71,7 @@ def chat_with_gpt3(stage: str,
             write_to_csv((stage, prompt_tokens, completion_tokens, total_tokens))
             return response
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
+
 
 def write_to_csv(data: tuple):
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
@@ -84,12 +87,14 @@ def write_to_csv(data: tuple):
             iteration = int(last_row['Iteration']) + 1 if last_row else 1  # If there is a last row, increment its 'Iteration' value by 1. Otherwise, start at 1
         price = 0.000002 * data[3]  # Calculate the price of the request
         writer.writerow({'Iteration': iteration, 'Stage': data[0], 'Prompt Tokens': data[1], 'Completion Tokens': data[2], 'Total Tokens': data[3], 'Price': float(price)})
-        
+
+
 def get_industry(topic) -> str:
     prompt = f"Generate an industry for these keywords, no explanation is needed: {topic}"
     industry = chat_with_gpt3("Industry Identification", prompt, temp=0.2, p=0.1)
     print("Industry Found")
     return industry
+
 
 def get_target(topic: str) -> List[str]:
     audienceList = []
@@ -100,7 +105,8 @@ def get_target(topic: str) -> List[str]:
     audiences = [re.sub(r'^\d+\.\s*', '', target) for target in audiences]
     audienceList.extend(audiences)
     print("Target Audience Generated")
-    return (audienceList)
+    return audienceList
+
 
 def generate_keyword_clusters(topic: str) -> List[str]:
     keyword_clusters = []
@@ -113,7 +119,8 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     print("Keywords Generated")
     return keyword_clusters
 
-def generate_title(keyword_clusters: str) -> List[str]:
+
+def generate_title(keyword_clusters: List[str]) -> List[str]:
     titles = []
     for keywords in keyword_clusters:
         prompt = f"Suggest a catchy headline for '{keywords}'"
@@ -123,12 +130,13 @@ def generate_title(keyword_clusters: str) -> List[str]:
     print("Titles Generated")
     return titles
 
+
 def generate_outline(company_name: str,
                      topic: str,
                      industry: str,
                      audience: List[str],
-                     keyword: List[str],
-                     title: str) -> str:
+                     keyword: str,
+                     title: str) -> None:
     prompt = f"""
     Generate a content outline for a home web page for {company_name} based on this topic, don't include conclusion: '{title}'
     Use this website as reference: https://milanote.com/templates/website-design/website-content
@@ -142,14 +150,15 @@ def generate_outline(company_name: str,
         f.write(outline)
     generate_content(company_name, topic, industry, keyword, title, True, True, outline)
 
+
 def generate_content(company_name: str,
                      topic: str,
-                     industry: List[str],
+                     industry: str,
                      keyword: str,
                      title: str,
                      html_output: bool,
                      add_style: bool,
-                     outline: str) -> str:
+                     outline: str) -> None:
     
     print("Generating Content...")
     directory_path = "content"
@@ -195,10 +204,11 @@ def generate_content(company_name: str,
             content = add_styles_and_components(content, filename)
     with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
         f.write(content)
-    print ("Finished file for " + title)
+    print("Finished file for " + title)
+
 
 def generate_html(content: str) -> str:
-    # Generate HTML code for the website
+    # Generate HTML codes for the website
     print("Generating HTML code for the website...")
     prompt = f"""
     Generate a website in HTML format for a company using the following content. The generated HTML should be properly structured, starting with a <!DOCTYPE html> declaration, followed by a <html> element, meta description and then the <head> and <body> elements:
@@ -207,37 +217,41 @@ def generate_html(content: str) -> str:
     website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
     return website
 
+
 def add_styles_and_components(website: str, filename: str) -> str:
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     website = add_components(website)
     website = add_footer(website)
-    styles_file = add_styles(filename)    
+    add_styles(filename)
     website = compile_files(website, filename)
     
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
     return website
 
+
 def add_components(website: str) -> str:
     print("Adding components...")
-    prompt= f""" 
+    prompt = f""" 
     Add components to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top):
     {website}
     """
     website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
     return website
 
+
 def add_footer(website: str) -> str:
     print("Adding footer...")
-    prompt= f""" 
-    Add a footer to this HTML file with proper alignement:
+    prompt = f""" 
+    Add a footer to this HTML file with proper alignment:
     {website}
     """
     website = chat_with_gpt3("Adding footer", prompt, temp=0.2, p=0.1)
     return website
 
-def add_styles(filename: str) -> str:
+
+def add_styles(filename: str) -> None:
     print("Adding styles...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
@@ -245,37 +259,42 @@ def add_styles(filename: str) -> str:
     styles_file = add_animation(styles_file)
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
         f.write(styles_file)
-    print ("Finished adding styles ")
-    
+    print("Finished adding styles ")
+
+
 def change_font() -> str:
     print("Changing font...")
-    prompt= f""" 
+    prompt = f""" 
     Add a unique font family, color and background color CSS style for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
     """
     styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return styles_file
 
+
 def add_animation(styles_file: str) -> str:
     print("Adding animation...")
-    prompt= f""" 
+    prompt = f""" 
     Add animations for each tag to the CSS file. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
     {styles_file}
     """
     styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
     return styles_file
 
+
 def compile_files(website: str, styles_file: str) -> str:
     print("Compiling files...")
-    prompt= f""" 
+    prompt = f""" 
     Add a reference to the styles file "{styles_file}.css" in the HTML file:
     {website}
     """
     website = chat_with_gpt3("Compiling files", prompt, temp=0.2, p=0.1)
     return website
 
+
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
     return re.sub(r'[^A-Za-z0-9]+', '_', filename)
+
 
 def main():
     company_name = input("Company Name: ")
@@ -303,5 +322,6 @@ def main():
     for thread in threads:
         thread.join()    
 
-if __name__ == "__main__" :
+
+if __name__ == "__main__":
     main()
