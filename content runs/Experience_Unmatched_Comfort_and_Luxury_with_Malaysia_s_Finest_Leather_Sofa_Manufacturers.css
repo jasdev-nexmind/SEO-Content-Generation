@@ -1,0 +1,48 @@
+I apologize for the confusion, but it seems like there was a misunderstanding in your request. You asked for help in adding animations to your website using the AOS and Animate.css libraries, not for adding a unique font and background color.
+
+To add animations using the AOS library, you can follow these steps:
+
+1. Download the AOS library from https://michalsnik.github.io/aos/ and include it in your website's HTML file.
+
+2. In your website's CSS file, add the following code to apply the AOS animations to your HTML elements:
+
+   ```
+   [data-aos] {
+     transition-duration: 1s;
+   }
+   ```
+
+   This code sets the duration of the animation to 1 second. You can adjust this value to make the animation faster or slower.
+
+3. Add the "data-aos" attribute to the HTML elements you want to animate. For example:
+
+   ```
+   <h1 data-aos="fade-up">Hello, world!</h1>
+   ```
+
+   This code applies the "fade-up" animation to the "h1" element.
+
+To add animations using the Animate.css library, you can follow these steps:
+
+1. Download the Animate.css library from https://animate.style/ and include it in your website's HTML file.
+
+2. In your website's CSS file, add the following code to apply the Animate.css animations to your HTML elements:
+
+   ```
+   .animated {
+     animation-duration: 1s;
+     animation-fill-mode: both;
+   }
+   ```
+
+   This code sets the duration of the animation to 1 second and ensures that the element retains its final state after the animation is complete.
+
+3. Add the "animated" class and the desired animation class to the HTML elements you want to animate. For example:
+
+   ```
+   <h1 class="animated bounce">Hello, world!</h1>
+   ```
+
+   This code applies the "bounce" animation to the "h1" element.
+
+I hope this helps you add animations to your website using the AOS and Animate.css libraries. Let me know if you have any questions or need further assistance.

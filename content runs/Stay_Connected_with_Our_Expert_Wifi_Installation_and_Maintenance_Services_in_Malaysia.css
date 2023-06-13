@@ -1,0 +1,37 @@
+Sure, here's an updated CSS file with animations added using the AOS and Animate.css libraries:
+
+```css
+/* Set the font family for the entire website */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Set the background color for the entire website */
+body {
+  background-color: #f5f5f5;
+}
+
+/* Set the color for all headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  animation: fadeInUp;
+  animation-duration: 1s;
+}
+
+/* Set the font size and color for all links */
+a {
+  font-size: 16px;
+  color: #007bff;
+  animation: bounceIn;
+  animation-duration: 1s;
+}
+
+/* Set the hover color for all links */
+a:hover {
+  color: #0056b3;
+  animation: pulse;
+  animation-duration: 1s;
+}
+```
+
+In this updated example, we've added animations to the headings and links using the AOS and Animate.css libraries. The headings will now fade in from the bottom of the screen, while the links will bounce in when they first appear. When a link is hovered over, it will pulse with a darker blue color. These animations can help make the website more engaging and visually appealing to visitors.
