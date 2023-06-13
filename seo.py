@@ -232,8 +232,9 @@ def generate_content(company_name: str,
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     prompt = f"""
-    Generate a paragraph of content for a website for a company that provides services related to these {topic}
-    This is the main point of the paragraph: {outline}
+    Generate a website content for a company that provides services related to these {topic}.
+    Write about 100 words.
+    Use this as the main point of the paragraph: {outline}
     """
     # Create a 500 word landing page content using this outline: {outline}, include the company name:{company_name}, the title:{title}, the core keywords:{topic}, the long-tail keywords {keyword}, headers and subheaders.
     # Specify the title, headers and subheaders. Conclusion is not needed.
@@ -283,7 +284,7 @@ def convert_to_html(content: str) -> str:
     # Generate HTML code for the website
     print("Generating HTML code for the website...")
     prompt = f"""
-    Convert the following content into HTML container.:
+    Convert the following content into HTML container with header and/or subheaders.:
     {content}
     """
     website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
@@ -304,7 +305,7 @@ def add_styles_and_components(website: str, filename: str) -> str:
 
 
 def add_components(website: str) -> str:
-    print("Addi                 ng components...")
+    print("Adding components...")
     prompt= f""" 
     Edit this HTML code directly by adding components such as navbar and logo placeholder to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top)
     Use lordicon.com to generate animated icons and add them to the website.:

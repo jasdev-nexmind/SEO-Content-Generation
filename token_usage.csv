@@ -1781,3 +1781,28 @@ Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
 ,,22,HTML Conversion,236,172,408,0.000816
 ,,23,HTML Conversion,234,183,417,0.000834
 ,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,57,139,0.000278
+,,4,Title Generation,76,17,93,0.000186
+,,5,Title Generation,76,13,89,0.000178
+,,6,Title Generation,78,20,98,0.000196
+,,7,Title Generation,76,17,93,0.000186
+,,8,Title Generation,76,15,91,0.00018199999999999998
+,,9,Outline Generation,112,61,173,0.000346
+,,10,Outline Generation,112,75,187,0.000374
+,,11,Outline Generation,110,88,198,0.000396
+,,12,Outline Generation,115,82,197,0.000394
+,,13,Outline Generation,108,90,198,0.000396
+,,14,Content Generation,113,124,237,0.000474
+,,15,Content Generation,117,137,254,0.000508
+,,16,Content Generation,111,136,247,0.000494
+,,17,Content Generation,114,163,277,0.000554
+,,18,Content Generation,112,148,260,0.00052
+,,19,HTML Conversion,198,146,344,0.0006879999999999999
+,,20,HTML Conversion,211,147,358,0.000716
+,,21,HTML Conversion,210,147,357,0.000714
+,,22,HTML Conversion,222,159,381,0.000762
+,,23,HTML Conversion,237,186,423,0.000846
+,,,Complete,0,0,0,0
