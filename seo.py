@@ -366,7 +366,7 @@ def compile_files(website: str, section: List[str]) -> str:
         end_index = website.find('</body>')
         if end_index == -1:
             raise ValueError(f"Cannot find </body> in file")
-        new_website = website[:end_index] + content + '\n' + website[end_index:] 
+        new_website = new_website[:end_index] + content + '\n' + new_website[end_index:] 
         
     return new_website
 
