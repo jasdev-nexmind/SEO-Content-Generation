@@ -297,7 +297,7 @@ def add_styles_and_components(website: str, filename: str) -> str:
     website = add_components(website)
     # website = add_navbar(website)
     styles_file = add_styles(filename)
-    website = compile_files(website, filename)
+    # website = compile_files(website, filename)
     
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
