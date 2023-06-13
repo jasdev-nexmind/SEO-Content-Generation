@@ -17,13 +17,14 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 openai.api_key = openai_api_key
 openai.Model.list()
 
+
 def generate_response(prompt: str,
                       temp: float, 
                       p: float,
                       freq: float,
                       presence: float,
                       retries: int,
-                      max_retries: int) -> List[str]:
+                      max_retries: int):
     try:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -37,7 +38,7 @@ def generate_response(prompt: str,
             frequency_penalty=freq,
             presence_penalty=presence,
         )
-        #print (response)
+        # print (response)
         return response.choices[0].message['content'], response['usage']['prompt_tokens'], response['usage']['completion_tokens'], response['usage']['total_tokens']
     
     except openai.error.RateLimitError as e:  # rate limit error
@@ -56,12 +57,13 @@ def generate_response(prompt: str,
     time.sleep(60)  # wait for 60 seconds before retrying
     return None, None, None, None  # return None if an exception was caught
 
+
 def chat_with_gpt3(stage: str,
                    prompt: str,
-                   temp: float=0.5,
-                   p: float=0.5,
-                   freq: float=0,
-                   presence: float=0) -> str:
+                   temp: float = 0.5,
+                   p: float = 0.5,
+                   freq: float = 0,
+                   presence: float = 0) -> str:
     max_retries = 5
     for retries in range(max_retries):
         response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries)
@@ -69,6 +71,7 @@ def chat_with_gpt3(stage: str,
             write_to_csv((stage, prompt_tokens, completion_tokens, total_tokens))
             return response
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
+
 
 def write_to_csv(data: tuple):
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
@@ -84,12 +87,14 @@ def write_to_csv(data: tuple):
             iteration = int(last_row['Iteration']) + 1 if last_row else 1  # If there is a last row, increment its 'Iteration' value by 1. Otherwise, start at 1
         price = 0.000002 * data[3]  # Calculate the price of the request
         writer.writerow({'Iteration': iteration, 'Stage': data[0], 'Prompt Tokens': data[1], 'Completion Tokens': data[2], 'Total Tokens': data[3], 'Price': float(price)})
-        
+
+
 def get_industry(topic) -> str:
     prompt = f"Generate an industry for these keywords, no explanation is needed: {topic}"
     industry = chat_with_gpt3("Industry Identification", prompt, temp=0.2, p=0.1)
     print("Industry Found")
     return industry
+
 
 def get_target(topic: str) -> List[str]:
     audienceList = []
@@ -100,7 +105,8 @@ def get_target(topic: str) -> List[str]:
     audiences = [re.sub(r'^\d+\.\s*', '', target) for target in audiences]
     audienceList.extend(audiences)
     print("Target Audience Generated")
-    return (audienceList)
+    return audienceList
+
 
 def generate_keyword_clusters(topic: str) -> List[str]:
     keyword_clusters = []
@@ -113,7 +119,8 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     print("Keywords Generated")
     return keyword_clusters
 
-def generate_title(keyword_clusters: str) -> List[str]:
+
+def generate_title(keyword_clusters: List[str]) -> List[str]:
     titles = []
     for keywords in keyword_clusters:
         prompt = f"Suggest a catchy headline for '{keywords}'"
@@ -123,12 +130,13 @@ def generate_title(keyword_clusters: str) -> List[str]:
     print("Titles Generated")
     return titles
 
+
 def generate_outline(company_name: str,
                      topic: str,
                      industry: str,
                      audience: List[str],
-                     keyword: List[str],
-                     title: str) -> str:
+                     keyword: str,
+                     title: str) -> None:
     prompt = f"""
     Generate a content outline of a landing page for {company_name} based on this topic: '{title}'
     Maximum of 5 bullet points, use "-" as the bullet points.
@@ -209,9 +217,10 @@ def create_template(company_name: str, filename: str) -> str:
     """    
     return website
 
+
 def generate_content(company_name: str,
                      topic: str,
-                     industry: List[str],
+                     industry: str,
                      keyword: str,
                      title: str,
                      html_output: bool,
@@ -280,6 +289,7 @@ def convert_to_html(content: str) -> str:
     website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
     return website
 
+
 def add_styles_and_components(website: str, filename: str) -> str:
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
@@ -291,6 +301,7 @@ def add_styles_and_components(website: str, filename: str) -> str:
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
     return website
+
 
 def add_components(website: str) -> str:
     print("Addi                 ng components...")
@@ -328,6 +339,7 @@ def change_font() -> str:
     styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return styles_file
 
+
 def add_animation(styles_file: str) -> str:
     print("Adding animation...")
     prompt= f""" 
@@ -356,6 +368,7 @@ def compile_files(website: str, section: List[str]) -> str:
         new_website = website[:end_index] + content + '\n' + website[end_index:] 
         
     return new_website
+
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
@@ -430,5 +443,6 @@ def main():
             writer.writeheader()
         writer.writerow({'Stage': 'Complete', 'Prompt Tokens': 0, 'Completion Tokens': 0, 'Total Tokens': 0, 'Price': 0})
 
-if __name__ == "__main__" :
+
+if __name__ == "__main__":
     main()
