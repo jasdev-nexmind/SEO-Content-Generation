@@ -1820,3 +1820,492 @@ Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
 ,,11,Outline Generation,111,132,243,0.000486
 ,,12,Outline Generation,108,141,249,0.000498
 ,,13,Outline Generation,115,86,201,0.00040199999999999996
+,,14,Content Generation,129,123,252,0.000504
+,,15,Content Generation,126,124,250,0.0005
+,,16,Content Generation,132,135,267,0.000534
+,,17,Content Generation,130,132,262,0.0005239999999999999
+,,18,Content Generation,120,134,254,0.000508
+,,19,HTML Conversion,204,167,371,0.0007419999999999999
+,,20,HTML Conversion,203,172,375,0.00075
+,,21,HTML Conversion,212,158,370,0.00074
+,,22,HTML Conversion,215,166,381,0.000762
+,,23,HTML Conversion,214,170,384,0.000768
+,,,Complete,0,0,0,0
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,15,90,0.00017999999999999998
+,,5,Title Generation,75,17,92,0.000184
+,,6,Title Generation,75,16,91,0.00018199999999999998
+,,7,Title Generation,77,20,97,0.000194
+,,8,Title Generation,75,14,89,0.000178
+,,9,Outline Generation,112,61,173,0.000346
+,,10,Outline Generation,109,84,193,0.000386
+,,11,Outline Generation,115,74,189,0.00037799999999999997
+,,12,Outline Generation,111,73,184,0.000368
+,,13,Outline Generation,110,94,204,0.000408
+,,14,Content Generation,112,114,226,0.000452
+,,15,Content Generation,113,144,257,0.000514
+,,16,Content Generation,115,124,239,0.00047799999999999996
+,,17,Content Generation,116,121,237,0.000474
+,,18,HTML Conversion,201,145,346,0.000692
+,,19,HTML Conversion,194,164,358,0.000716
+,,20,HTML Conversion,204,153,357,0.000714
+,,21,HTML Conversion,224,216,440,0.0008799999999999999
+,,22,Content Generation,117,121,238,0.00047599999999999997
+,,23,HTML Conversion,201,144,345,0.00069
+,,,Complete,0,0,0,0
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,70,26,96,0.000192
+,,5,Title Generation,70,34,104,0.000208
+,,6,Title Generation,70,25,95,0.00018999999999999998
+,,7,Title Generation,70,15,85,0.00016999999999999999
+,,8,Title Generation,70,20,90,0.00017999999999999998
+,,9,Title Generation,70,29,99,0.000198
+,,10,Title Generation,70,51,121,0.000242
+,,11,Title Generation,70,31,101,0.000202
+,,12,Title Generation,70,30,100,0.00019999999999999998
+,,13,Title Generation,70,15,85,0.00016999999999999999
+,,14,Title Generation,69,20,89,0.000178
+,,15,Title Generation,70,33,103,0.000206
+,,16,Title Generation,70,16,86,0.00017199999999999998
+,,17,Title Generation,70,35,105,0.00020999999999999998
+,,18,Title Generation,70,32,102,0.000204
+,,19,Title Generation,69,27,96,0.000192
+,,20,Title Generation,70,21,91,0.00018199999999999998
+,,21,Title Generation,70,29,99,0.000198
+,,22,Title Generation,70,36,106,0.000212
+,,23,Title Generation,70,23,93,0.000186
+,,24,Title Generation,70,32,102,0.000204
+,,25,Title Generation,70,34,104,0.000208
+,,26,Title Generation,70,27,97,0.000194
+,,27,Title Generation,70,36,106,0.000212
+,,28,Title Generation,70,19,89,0.000178
+,,29,Title Generation,70,17,87,0.000174
+,,30,Title Generation,70,20,90,0.00017999999999999998
+,,31,Title Generation,70,34,104,0.000208
+,,32,Title Generation,70,34,104,0.000208
+,,33,Title Generation,69,20,89,0.000178
+,,34,Title Generation,70,24,94,0.000188
+,,35,Title Generation,70,32,102,0.000204
+,,36,Title Generation,69,16,85,0.00016999999999999999
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,16,91,0.00018199999999999998
+,,5,Outline Generation,111,120,231,0.00046199999999999995
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,75,16,91,0.00018199999999999998
+,,5,Outline Generation,111,55,166,0.000332
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Target Search,80,72,152,0.00030399999999999996
+,,3,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,4,Title Generation,77,15,92,0.000184
+,,5,Outline Generation,111,83,194,0.000388
+,,6,Outline Generation,111,87,198,0.000396
+,,7,Outline Generation,111,100,211,0.00042199999999999996
+,,8,Outline Generation,111,105,216,0.000432
+,,9,Outline Generation,111,101,212,0.000424
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,4,Title Generation,78,18,96,0.000192
+,,5,Outline Generation,113,85,198,0.000396
+,,6,Outline Generation,113,98,211,0.00042199999999999996
+,,7,Outline Generation,113,110,223,0.000446
+,,8,Outline Generation,113,129,242,0.000484
+,,9,Outline Generation,113,150,263,0.000526
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,4,Title Generation,76,15,91,0.00018199999999999998
+,,5,Outline Generation,110,70,180,0.00035999999999999997
+,,6,Outline Generation,110,89,199,0.00039799999999999997
+,,7,Outline Generation,110,107,217,0.000434
+,,8,Outline Generation,110,70,180,0.00035999999999999997
+,,9,Outline Generation,110,138,248,0.000496
+,,10,Meta Description Generation,101,47,148,0.000296
+,,11,Content Generation,113,120,233,0.000466
+,,12,Content Generation,113,126,239,0.00047799999999999996
+,,13,Content Generation,118,120,238,0.00047599999999999997
+,,14,Content Generation,115,131,246,0.0004919999999999999
+,,15,Content Generation,117,122,239,0.00047799999999999996
+,,16,HTML Conversion,211,208,419,0.000838
+,,17,HTML Conversion,202,259,461,0.000922
+,,18,HTML Conversion,200,289,489,0.000978
+,,19,HTML Conversion,200,287,487,0.0009739999999999999
+,,20,HTML Conversion,206,295,501,0.0010019999999999999
+,,21,HTML Conversion,80,344,424,0.000848
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,4,Title Generation,76,13,89,0.000178
+,,5,Outline Generation,108,59,167,0.000334
+,,6,Outline Generation,108,57,165,0.00033
+,,7,Outline Generation,108,82,190,0.00037999999999999997
+,,8,Outline Generation,108,89,197,0.000394
+,,9,Outline Generation,108,136,244,0.000488
+,,10,Meta Description Generation,101,45,146,0.000292
+,,11,Content Generation,126,111,237,0.000474
+,,12,Content Generation,117,126,243,0.000486
+,,13,Content Generation,114,129,243,0.000486
+,,14,Content Generation,120,136,256,0.000512
+,,15,Content Generation,117,128,245,0.00049
+,,16,HTML Conversion,706,775,1481,0.002962
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Target Search,81,74,155,0.00031
+,,3,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,4,Title Generation,76,18,94,0.000188
+,,5,Outline Generation,113,78,191,0.00038199999999999996
+,,6,Outline Generation,113,70,183,0.000366
+,,7,Outline Generation,113,81,194,0.000388
+,,8,Outline Generation,113,133,246,0.0004919999999999999
+,,9,Outline Generation,113,78,191,0.00038199999999999996
+,,10,Meta Description Generation,101,44,145,0.00029
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,3,Title Generation,75,16,91,0.00018199999999999998
+,,4,Outline Generation,111,48,159,0.000318
+,,5,Outline Generation,111,57,168,0.000336
+,,6,Outline Generation,111,68,179,0.000358
+,,7,Outline Generation,111,78,189,0.00037799999999999997
+,,8,Outline Generation,111,121,232,0.000464
+Dynamic Brands,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,56,137,0.000274
+,,3,Title Generation,76,12,88,0.000176
+,,4,Outline Generation,107,74,181,0.00036199999999999996
+,,5,Outline Generation,107,84,191,0.00038199999999999996
+,,6,Outline Generation,107,105,212,0.000424
+,,7,Outline Generation,107,122,229,0.00045799999999999997
+,,8,Outline Generation,107,131,238,0.00047599999999999997
+,,9,Meta Description Generation,101,48,149,0.000298
+,,10,Content Generation,231,302,533,0.0010659999999999999
+,,11,HTML Conversion,381,545,926,0.001852
+,,,Complete,0,0,0,0
+Dynamic Brands,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,56,137,0.000274
+,,3,Title Generation,76,15,91,0.00018199999999999998
+,,4,Outline Generation,110,66,176,0.000352
+,,5,Outline Generation,110,68,178,0.000356
+,,6,Outline Generation,110,80,190,0.00037999999999999997
+,,7,Outline Generation,110,99,209,0.00041799999999999997
+,,8,Outline Generation,110,134,244,0.000488
+,,9,Meta Description Generation,101,51,152,0.00030399999999999996
+,,10,Content Generation,213,412,625,0.00125
+,,11,HTML Conversion,492,600,1092,0.0021839999999999997
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,78,18,96,0.000192
+,,4,Outline Generation,113,81,194,0.000388
+,,5,Outline Generation,113,86,199,0.00039799999999999997
+,,6,Outline Generation,113,103,216,0.000432
+,,7,Outline Generation,113,115,228,0.00045599999999999997
+,,8,Outline Generation,113,109,222,0.000444
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,76,14,90,0.00017999999999999998
+,,4,Outline Generation,109,58,167,0.000334
+,,5,Outline Generation,109,70,179,0.000358
+,,6,Outline Generation,109,84,193,0.000386
+,,7,Outline Generation,109,131,240,0.00047999999999999996
+,,8,Outline Generation,109,87,196,0.000392
+,,9,Meta Description Generation,101,44,145,0.00029
+,,10,Content Generation,211,911,1122,0.002244
+,,11,HTML Conversion,991,856,1847,0.003694
+,,,Complete,0,0,0,0
+Dynamic Brands,Chair Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,56,137,0.000274
+,,3,Title Generation,76,14,90,0.00017999999999999998
+,,4,Outline Generation,126,122,248,0.000496
+,,5,Outline Generation,126,129,255,0.0005099999999999999
+,,6,Outline Generation,126,199,325,0.00065
+,,7,Outline Generation,126,208,334,0.000668
+,,8,Outline Generation,126,239,365,0.00073
+,,9,Meta Description Generation,101,32,133,0.000266
+,,10,Content Generation,366,639,1005,0.00201
+,,11,HTML Conversion,719,855,1574,0.0031479999999999998
+,,12,Adding Components,890,836,1726,0.0034519999999999998
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,76,16,92,0.000184
+,,4,Outline Generation,128,100,228,0.00045599999999999997
+,,5,Outline Generation,128,110,238,0.00047599999999999997
+,,6,Outline Generation,128,144,272,0.000544
+,,7,Outline Generation,128,182,310,0.00062
+,,8,Outline Generation,128,204,332,0.000664
+,,9,Meta Description Generation,101,46,147,0.000294
+,,10,Content Generation,272,386,658,0.001316
+,,11,HTML Conversion,466,454,920,0.0018399999999999998
+,,12,Adding Components,1359,1378,2737,0.005474
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,78,17,95,0.00018999999999999998
+,,4,Outline Generation,129,115,244,0.000488
+,,5,Outline Generation,129,213,342,0.0006839999999999999
+,,6,Outline Generation,129,218,347,0.000694
+,,7,Outline Generation,129,246,375,0.00075
+,,8,Outline Generation,129,263,392,0.000784
+,,9,Content Generation,378,888,1266,0.002532
+,,10,HTML Conversion,1002,1203,2205,0.00441
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,78,18,96,0.000192
+,,4,Outline Generation,130,111,241,0.00048199999999999995
+,,5,Outline Generation,130,112,242,0.000484
+,,6,Outline Generation,130,125,255,0.0005099999999999999
+,,7,Outline Generation,130,122,252,0.000504
+,,8,Outline Generation,130,222,352,0.000704
+,,9,Content Generation,244,646,890,0.00178
+,,10,HTML Conversion,760,889,1649,0.0032979999999999997
+,,11,Adding Components,175,1013,1188,0.002376
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,59,141,0.00028199999999999997
+,,3,Title Generation,78,17,95,0.00018999999999999998
+,,4,Outline Generation,129,122,251,0.000502
+,,5,Outline Generation,129,138,267,0.000534
+,,6,Outline Generation,129,138,267,0.000534
+,,7,Outline Generation,129,193,322,0.0006439999999999999
+,,8,Outline Generation,129,209,338,0.000676
+,,9,Content Generation,331,623,954,0.001908
+,,10,HTML Conversion,737,830,1567,0.003134
+,,11,Adding Components,175,1013,1188,0.002376
+,,,Complete,0,0,0,0
+Time ,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,4,82,0.000164
+,,2,Keyword Clusters Search,82,57,139,0.000278
+,,3,Title Generation,78,19,97,0.000194
+,,4,Outline Generation,129,146,275,0.0005499999999999999
+,,5,Outline Generation,129,176,305,0.00061
+,,6,Outline Generation,129,209,338,0.000676
+,,7,Outline Generation,129,179,308,0.000616
+,,8,Outline Generation,129,236,365,0.00073
+,,9,Content Generation,302,608,910,0.00182
+,,10,HTML Conversion,722,866,1588,0.003176
+,,11,Adding Components,175,1013,1188,0.002376
+,,,Complete,0,0,0,0
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,3,Title Generation,75,18,93,0.000186
+,,4,Outline Generation,127,108,235,0.00047
+,,5,Outline Generation,127,130,257,0.000514
+,,6,Outline Generation,127,167,294,0.000588
+,,7,Outline Generation,127,179,306,0.000612
+,,8,Outline Generation,127,168,295,0.0005899999999999999
+,,9,Content Generation,298,632,930,0.0018599999999999999
+,,10,HTML Conversion,746,926,1672,0.0033439999999999998
+,,11,Adding Components,1076,275,1351,0.002702
+,,,Complete,0,0,0,0
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,77,4,81,0.00016199999999999998
+,,2,Keyword Clusters Search,81,42,123,0.00024599999999999996
+,,3,Title Generation,75,19,94,0.000188
+,,4,Outline Generation,128,127,255,0.0005099999999999999
+,,5,Outline Generation,128,139,267,0.000534
+,,6,Outline Generation,128,167,295,0.0005899999999999999
+,,7,Outline Generation,128,185,313,0.0006259999999999999
+,,8,Outline Generation,128,163,291,0.0005819999999999999
+,,9,Content Generation,305,597,902,0.0018039999999999998
+,,10,HTML Conversion,711,872,1583,0.003166
+,,11,Adding Components,1022,276,1298,0.002596
+,,,Complete,0,0,0,0
+Time ,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,16,93,0.000186
+,,4,Outline Generation,127,100,227,0.000454
+,,5,Outline Generation,127,104,231,0.00046199999999999995
+,,6,Outline Generation,127,139,266,0.000532
+,,7,Outline Generation,127,154,281,0.000562
+,,8,Outline Generation,127,145,272,0.000544
+,,9,Content Generation,224,522,746,0.0014919999999999998
+,,10,HTML Conversion,638,694,1332,0.0026639999999999997
+,,,Complete,0,0,0,0
+Time ,TNG RFID Sellers in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,81,7,88,0.000176
+,,2,Keyword Clusters Search,85,57,142,0.00028399999999999996
+,,3,Title Generation,78,16,94,0.000188
+,,4,Outline Generation,128,97,225,0.00045
+,,5,Outline Generation,128,98,226,0.000452
+,,6,Outline Generation,128,122,250,0.0005
+,,7,Outline Generation,128,159,287,0.000574
+,,8,Outline Generation,128,162,290,0.00058
+,,9,Content Generation,222,547,769,0.0015379999999999999
+,,10,HTML Conversion,663,799,1462,0.002924
+,,11,Adding Components,951,192,1143,0.002286
+,,,Complete,0,0,0,0
+American Standard,Toilet Furniture Manufacture in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,81,7,88,0.000176
+,,2,Keyword Clusters Search,85,49,134,0.000268
+,,3,Title Generation,77,17,94,0.000188
+,,4,Outline Generation,128,144,272,0.000544
+,,5,Outline Generation,128,182,310,0.00062
+,,6,Outline Generation,128,218,346,0.000692
+,,7,Outline Generation,128,220,348,0.000696
+,,8,Outline Generation,128,216,344,0.0006879999999999999
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,16,93,0.000186
+,,4,Outline Generation,127,85,212,0.000424
+,,5,Outline Generation,127,96,223,0.000446
+,,6,Outline Generation,127,153,280,0.00056
+,,7,Outline Generation,127,194,321,0.000642
+,,8,Outline Generation,127,195,322,0.0006439999999999999
+,,9,Content Generation,314,469,783,0.001566
+,,10,HTML Conversion,585,717,1302,0.002604
+,,11,Adding Components,830,1350,2180,0.00436
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,280,612,0.001224
+,,,Complete,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,46,129,0.000258
+,,3,Title Generation,81,17,98,0.000196
+,,4,Outline Generation,132,168,300,0.0006
+,,5,Outline Generation,132,185,317,0.000634
+,,6,Outline Generation,132,182,314,0.000628
+,,7,Outline Generation,132,196,328,0.000656
+,,8,Outline Generation,132,208,340,0.0006799999999999999
+,,9,Content Generation,167,541,708,0.001416
+,,10,HTML Conversion,690,937,1627,0.003254
+,,11,Adding Components,1050,1242,2292,0.0045839999999999995
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,272,604,0.0012079999999999999
+,,,Complete,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,15,92,0.000184
+,,4,Outline Generation,126,87,213,0.000426
+,,5,Outline Generation,126,133,259,0.000518
+,,6,Outline Generation,126,169,295,0.0005899999999999999
+,,7,Outline Generation,126,193,319,0.000638
+,,8,Outline Generation,126,206,332,0.000664
+,,9,Content Generation,162,569,731,0.001462
+,,10,HTML Conversion,719,873,1592,0.0031839999999999998
+,,11,Adding Components,1033,192,1225,0.00245
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,278,610,0.00122
+,,,Complete,0,0,0,0
+Dynamic Brands,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,80,4,84,0.000168
+,,2,Keyword Clusters Search,84,57,141,0.00028199999999999997
+,,3,Title Generation,80,17,97,0.000194
+,,4,Outline Generation,129,106,235,0.00047
+,,5,Outline Generation,129,138,267,0.000534
+,,6,Outline Generation,129,215,344,0.0006879999999999999
+,,7,Outline Generation,129,224,353,0.0007059999999999999
+,,8,Outline Generation,129,205,334,0.000668
+,,9,Content Generation,168,499,667,0.001334
+,,10,HTML Template,578,741,1319,0.0026379999999999997
+,,11,HTML Conversion,1369,792,2161,0.0043219999999999995
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,279,611,0.001222
+,,,Complete,0,0,0,0
+Time,Wifi Service Provider in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,80,4,84,0.000168
+,,2,Keyword Clusters Search,84,57,141,0.00028199999999999997
+,,3,Title Generation,78,15,93,0.000186
+,,4,Outline Generation,126,101,227,0.000454
+,,5,Outline Generation,126,106,232,0.000464
+,,6,Outline Generation,126,117,243,0.000486
+,,7,Outline Generation,126,210,336,0.000672
+,,8,Outline Generation,126,232,358,0.000716
+,,9,Content Generation,165,522,687,0.001374
+,,10,HTML Template,602,716,1318,0.002636
+,,11,HTML Conversion,1367,793,2160,0.00432
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,277,609,0.001218
+,,,Complete,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,16,93,0.000186
+,,4,Outline Generation,127,92,219,0.00043799999999999997
+,,5,Outline Generation,127,90,217,0.000434
+,,6,Outline Generation,127,101,228,0.00045599999999999997
+,,7,Outline Generation,127,193,320,0.0006399999999999999
+,,8,Outline Generation,127,210,337,0.000674
+,,9,Content Generation,163,658,821,0.001642
+,,10,HTML Template,738,467,1205,0.00241
+,,11,HTML Conversion,1254,558,1812,0.003624
+,,12,Changing font,123,227,350,0.0007
+,,13,Adding animation,332,279,611,0.001222
+,,,Complete,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,16,93,0.000186
+,,4,Outline Generation,127,78,205,0.00041
+,,5,Outline Generation,127,84,211,0.00042199999999999996
+,,6,Outline Generation,127,85,212,0.000424
+,,7,Outline Generation,127,207,334,0.000668
+,,8,Outline Generation,127,214,341,0.000682
+,,9,Content Generation,163,563,726,0.001452
+,,10,HTML Template,643,1130,1773,0.0035459999999999997
+,,11,HTML Conversion,1822,1112,2934,0.005868
+,,12,Adding Components,1272,299,1571,0.003142
+,,13,Changing font,123,227,350,0.0007
+,,14,Adding animation,332,279,611,0.001222
+,,,Complete,0,0,0,0
+Dynamic Brands,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,79,4,83,0.000166
+,,2,Keyword Clusters Search,83,42,125,0.00025
+,,3,Title Generation,77,17,94,0.000188
+,,4,Outline Generation,128,85,213,0.000426
+,,5,Outline Generation,128,166,294,0.000588
+,,6,Outline Generation,128,179,307,0.000614
+,,7,Outline Generation,128,195,323,0.000646
+,,8,Outline Generation,128,205,333,0.0006659999999999999
+,,9,Content Generation,164,677,841,0.001682
+,,10,HTML Template,755,343,1098,0.002196
+,,11,HTML Conversion,1149,550,1699,0.003398
+,,12,Adding Components,710,294,1004,0.002008
+,,13,Changing font,123,227,350,0.0007
+,,14,Adding animation,332,277,609,0.001218
+,,,Complete,0,0,0,0
+NexMind,Porcelain Manufacturer in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,80,5,85,0.00016999999999999999
+,,2,Keyword Clusters Search,84,50,134,0.000268
+,,3,Title Generation,77,18,95,0.00018999999999999998
+,,4,Outline Generation,129,128,257,0.000514
+,,5,Outline Generation,129,150,279,0.000558
+,,6,Outline Generation,129,168,297,0.000594
+,,7,Outline Generation,129,148,277,0.000554
+,,8,Outline Generation,129,167,296,0.000592
+,,9,Content Generation,169,767,936,0.001872
+,,10,HTML Template,845,483,1328,0.002656
+,,11,HTML Conversion,1380,1001,2381,0.004762
+,,12,Adding Components,1161,184,1345,0.0026899999999999997
+,,,Complete,0,0,0,0

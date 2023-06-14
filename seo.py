@@ -24,12 +24,13 @@ def generate_response(prompt: str,
                       freq: float,
                       presence: float,
                       retries: int,
-                      max_retries: int):
+                      max_retries: int,
+                      model: str) -> str:
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model=f"{model}",
             messages=[
-                    {"role": "system", "content": "You are an AI designed to adeptly identify, generate, and implement search engine optimized long-tail keywords and align pertinent content, with the ultimate goal of enhancing your website's visibility, driving organic traffic, and improving your online business performance."},
+                    {"role": "system", "content": "You are an AI designed to adeptly identify, generate, and implement search engine optimized long-tail keywords and align pertinent content, with the ultimate goal of generating website contents or enhancing website's visibility, driving organic traffic, and improving online business performance."},
                     {"role": "user", "content": prompt}
                 ],
             temperature=temp,
@@ -63,10 +64,11 @@ def chat_with_gpt3(stage: str,
                    temp: float = 0.5,
                    p: float = 0.5,
                    freq: float = 0,
-                   presence: float = 0) -> str:
+                   presence: float = 0,
+                   model: str = "gpt-3.5-turbo") -> str:
     max_retries = 5
     for retries in range(max_retries):
-        response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries)
+        response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries, model)
         if response is not None:   # If a response was successfully received
             write_to_csv((stage, prompt_tokens, completion_tokens, total_tokens))
             return response
@@ -120,35 +122,45 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     return keyword_clusters
 
 
-def generate_title(keyword_clusters: List[str]) -> List[str]:
-    titles = []
-    for keywords in keyword_clusters:
-        prompt = f"Suggest a catchy headline for '{keywords}'"
-        title = chat_with_gpt3("Title Generation", prompt, temp=0.7, p=0.8)
-        titles.append(title)
-    titles = [title.replace('"', '') for title in titles]
+def generate_title(keyword: str) -> List[str]:
+    prompt = f"Suggest a catchy headline for '{keyword}'"
+    title = chat_with_gpt3("Title Generation", prompt, temp=0.7, p=0.8)
+    title = title.replace('"', '')
     print("Titles Generated")
-    return titles
+    return title
 
 
 def generate_outline(company_name: str,
                      topic: str,
                      industry: str,
-                     audience: List[str],
                      keyword: str,
-                     title: str) -> None:
+                     title: str,
+                     index: str) -> None:
     prompt = f"""
-    Generate a content outline of a landing page for {company_name} based on this topic: '{title}'
-    Maximum of 5 bullet points, use "-" as the bullet points.
+    - Generate a content outline of a landing page for {company_name} based on this topic: '{title}' and this keyword: '{keyword}'.
+    - Maximum of 7 bullet points, use "-" as the bullet points.
     """
     outline = chat_with_gpt3("Outline Generation", prompt, temp=0.7, p=0.8)
-    filename = sanitize_filename(title)  # use the first keyword as the filename
+    filename = f"Outline {index+1}"  # use the first keyword as the filename
     directorypath = "outline"
     os.makedirs(directorypath, exist_ok=True)
     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
         f.write(outline)
+        
+        
+def generate_meta_description(company_name: str,
+                              topic: str,
+                              keywords: str) -> str:
+    print("Generating meta description...")
+    prompt = f"""
+    Generate a meta description for {company_name} based on this topic: '{topic}'.
+    Use these keywords in the meta description: {keywords}
+    """
+    meta_description = chat_with_gpt3("Meta Description Generation", prompt, temp=0.7, p=0.8)
+    return meta_description
 
-def generate_html():
+
+def generate_html() -> None:
     website = create_template()
     directory_path = "test"
     os.makedirs(directory_path, exist_ok=True)
@@ -161,7 +173,11 @@ def generate_html():
     with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
         f.write(new_website)
 
-def create_template(company_name: str, filename: str) -> str:
+
+def create_template(company_name: str,
+                    filename: str,
+                    description: str,
+                    title: str) -> str:
     print("Creating template...")
     website= f"""
     <!DOCTYPE html>
@@ -170,6 +186,8 @@ def create_template(company_name: str, filename: str) -> str:
         <title>Dynamic Brands</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{description}">
+        <title>{title}</title>
         <!-- CSS stylesheets -->
         <link rel="stylesheet" href="{filename}.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -211,7 +229,6 @@ def create_template(company_name: str, filename: str) -> str:
                 </div>
                 </div>
             </nav>
-   
         </body>
     </html>	
     """    
@@ -223,27 +240,32 @@ def generate_content(company_name: str,
                      industry: str,
                      keyword: str,
                      title: str,
-                     html_output: bool,
-                     add_style: bool,
-                     outline: List[str],
-                     section: List[str]) -> str:
+                     outline: List[str]) -> str:
     
     print("Generating Content...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     prompt = f"""
-    Generate a website content for a company that provides services related to these {topic}.
-    Write about 100 words.
-    Use this as the main point of the paragraph: {outline}
+    Create website content for a company with the following specifications:
+    Company Name: {company_name}
+    Industry: {industry}
+    Title: {title}.
+    Core Keywords: {topic}
+    Keywords: {keyword}
+    Requirements:
+    1) Make sure the content length is 500 words.
+    2) Include headers and subheaders
+    4) The content should be engaging and unique.
     """
-    # Create a 500 word landing page content using this outline: {outline}, include the company name:{company_name}, the title:{title}, the core keywords:{topic}, the long-tail keywords {keyword}, headers and subheaders.
-    # Specify the title, headers and subheaders. Conclusion is not needed.
     
+    # - Create a 500 word landing page content about {topic} using this outline: {outline}
+    # - Include the company name:{company_name}, the title:{title} and the keywords {keyword}.
     # Template 1
     # Generate a website with 1500 words of content in HTML format for a company that provides services related to these {topic}
     # The keywords should be incorporated into the headings, subheadings, meta descriptions, and spread evenly throughout the website. The website should be engaging and unique.
     # Use styles such fonts, colors, and animations. Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) for HTML components and styling. Ensure the CSS styles are properly formatted and included in the <style> tag inside the HTML file.
     # Include placeholders for brands and logos if none is provided. Make sure to replace � with proper characters or punctuation
+    # 3) The keywords should be incorporated into the headings, subheadings and spread evenly throughout the content. 
 
     # Template 2
     # Company Name:
@@ -254,65 +276,72 @@ def generate_content(company_name: str,
     # Content Preferences: Specify if there are certain content types or topics on which you would like the site to focus, such as blog articles, case studies, product descriptions, etc.
     # Additional Features: Indicate if there are any additional features that should be incorporated into the site (e.g., social media integration, e-commerce functionality, multimedia elements).
 
-    # Template 3
-    # Please create website advertisement for a company with the following specifications:
-    # Company Name: {company_name}
-    # Industry: {industry}
-    # Title: {title}.
-    # Core Keywords: {topic}
-    # Long-Tail Keywords: {keyword}
-    # Requirements:
-    # 1) Make sure the content length is 500 words.
-    # 2) Include headers and subheaders
-    # 3) The keywords should be incorporated into the headings, subheadings and spread evenly throughout the content. 
-    # 4) The content should be engaging and unique.
-    # 5) Content should be SEO optimized.
-    # 6) Conclusion is not needed
+
     
+    # Template 4
+    # Generate a website content for a company that provides services related to these {topic}.
+    # Write about 100 words.
+    # Use this as the an outline for the content: {outline}
     
-    content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8)
+    content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8, model="gpt-3.5-turbo-16k")
     print(content)
     print("Done")
-    if html_output:
-        website = convert_to_html(content)
-    # if add_style:
-    #         website = add_styles_and_components(website, filename)    
-    section.append(website)
+    return content
     
 
-def convert_to_html(content: str) -> str:
+def convert_to_html(content: str, template: str) -> str:
     # Generate HTML code for the website
     print("Generating HTML code for the website...")
     prompt = f"""
-    Convert the following content into HTML container with header and/or subheaders.:
+    - Convert the following content into HTML code.
+    - Use the following template: {template}
+    - Seperate the contents into sections and add a <div> tag for each section.
+    - Space the contents out s that they are not tightly packed together.
+    - Include a meta description as well as a meta keywords tag:
     {content}
     """
-    website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1)
+    website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     return website
 
 
-def add_styles_and_components(website: str, filename: str) -> str:
+def add_styles_and_components(website: str,
+                              filename: str) -> str:
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
+    
     website = add_components(website)
     # website = add_navbar(website)
-    styles_file = add_styles(filename)
-    website = compile_files(website, filename)
+    # styles_file = add_styles(filename)
+    website = compile_css(website, filename)
     
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
     return website
 
+def generate_html_template(content) -> str:
+    print("Generating HTML template...")
+    prompt = f"""
+    - Generate an outline for a HTML based on the following content:
+    {content}
+    """
+    template = chat_with_gpt3("HTML Template", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
+    return template
 
 def add_components(website: str) -> str:
     print("Adding components...")
-    prompt= f""" 
-    Edit this HTML code directly by adding components such as navbar and logo placeholder to the website with proper alignment. Use components from Tailwind libraries (https://tailwindcss.com/) or (https://tailwindui.com/?ref=top)
-    Use lordicon.com to generate animated icons and add them to the website.:
+    prompt= f"""     
+    Let's go through this step by step. Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) or from Tailwind libraries (https://tailwindcss.com/)
+    - Add a navbar to the HTML code 
+    - Add an image carousel to the HTML code
+    - Add buttons, cards, and forms to the HTML code
+    - Add a footer to the HTML code
+    - Add a contact form to the HTML code
+    
     {website}
     """
-    website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1)
+    website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     return website
+
 
 def add_styles(filename: str) -> str:
     print("Adding styles...")
@@ -324,12 +353,13 @@ def add_styles(filename: str) -> str:
     start_index = styles_file.find('```css')
     end_index = styles_file.find('```', start_index+1)
     if start_index == -1 and end_index == -1:
-        pass
-    
-    new_css = styles_file[start_index+6:end_index]
+        new_css = styles_file
+    else:
+        new_css = styles_file[start_index+6:end_index]
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
         f.write(new_css)
     print ("Finished adding styles")
+    
     
 def change_font() -> str:
     print("Changing font...")
@@ -350,26 +380,45 @@ def add_animation(styles_file: str) -> str:
     styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
     return styles_file
 
+
 def change_alignment(styles_file: str) -> str:
     print("Changing alignment...")
     prompt= f"""
-    Change the alignment of the website to make it center aligned:
+    Change the alignment of the website to make it properly aligned:
     {styles_file}
     """
     styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
     return styles_file
 
-def compile_files(website: str, section: List[str]) -> str:
-    print("Compiling files...")
-    new_website = website
-    for content in section:
-        end_index = website.find('</body>')
-        if end_index == -1:
-            raise ValueError(f"Cannot find </body> in file")
-        new_website = new_website[:end_index] + content + '\n' + new_website[end_index:] 
-        
-    return new_website
 
+# def compile_files(website: str,
+#                   content: str,
+#                   filename: str,
+#                   add_style: bool) -> str:
+#     print("Compiling files...")
+    
+    
+#     end_index = website.find('</body>')
+#     if end_index == -1:
+#         new_website = website
+#     else:
+#         new_website = website[:end_index] + content + '\n' + website[end_index:]
+#     if add_style:
+#         new_website = add_styles_and_components(new_website, filename)    
+#     return new_website
+
+
+def compile_css(website: str, filename: str) -> str:
+    print("Compiling CSS...")
+    start_index = website.find('</head>')
+    a_style = f'<link rel="stylesheet" href="{filename}.css">'
+    if start_index == -1:
+        new_website = website
+    else:
+        new_website = website[:start_index] + a_style + '\n' + website[start_index:]
+    return new_website
+    
+        
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
@@ -377,8 +426,11 @@ def sanitize_filename(filename: str) -> str:
 
 
 def main():
+    # Get the company name and topic from the user
     company_name = input("Company Name: ")
     topic = input("Your Keywords: ")
+    
+    # Open token.csv to track token usage
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
     with open('token_usage.csv', 'a', newline='') as csvfile:
         fieldnames = ['Company Name', 'Keyword', 'Iteration', 'Stage', 'Prompt Tokens', 'Completion Tokens', 'Total Tokens', 'Price']
@@ -386,57 +438,73 @@ def main():
         if not file_exists:
             writer.writeheader()
         writer.writerow({'Company Name': company_name, 'Keyword': topic, 'Iteration': 0, 'Stage': 'Initial', 'Prompt Tokens': 0, 'Completion Tokens': 0, 'Total Tokens': 0, 'Price': 0})
+        
+    # Generate industry 
     industry = get_industry(topic)
     print(industry)
-    audience = get_target(topic)
-    for number, aud in enumerate(audience):
-        print(f"{number+1}. {aud}")
+    
+    # Generate target audience
+    # audience = get_target(topic)
+    # for number, aud in enumerate(audience):
+    #     print(f"{number+1}. {aud}")
+    
+    # Generate SEO keywords
     keyword_clusters = generate_keyword_clusters(topic)
     for number, keyword in enumerate(keyword_clusters):
         print(f"{number+1}. {keyword}")
-    titles = generate_title(keyword_clusters)
-    for number, title in enumerate(titles):
-        print(f"{number+1}. {title}")
+            
+    # Generate title from keyword
+    keyword_choice = int(input("Choose a keyword: "))
+    titles = generate_title(keyword_clusters[keyword_choice-1])
+    print (titles)
+    
+    # Generate an 5 outlines
     threads = []
-    for keyword, title in zip(keyword_clusters, titles):
-        t = Thread(target=generate_outline, args=(company_name, topic, industry, audience, keyword, title))
+    for i in range (5):
+        t = Thread(target=generate_outline, args=(company_name, topic, industry, keyword, titles, i))
         threads.append(t)
         t.start()
     for thread in threads:
         thread.join()
     print("Outlines generated")
     
+    # Generate meta description and template
     outline_choice = int(input("Choose an outline: "))
-    filename = sanitize_filename(titles[outline_choice-1])
+    filename = f"Outline {outline_choice}"
     directory_path = "outline"
-    outlines = []
+    # outlines = []
     with open(os.path.join(directory_path, f'{filename}.txt'), 'r', encoding='utf-8-sig') as f:
-        outline = f.read().splitlines()
-    print(outline)
-
-    website = create_template(company_name, filename)
-    section = []
-    threads2 = []
+        outline = f.read()
+    # description = generate_meta_description(company_name, topic, keyword)
+    # print (description)
+    # website = create_template(company_name, filename, description, titles)
     
-    for number, content in enumerate(outline):
-        t = Thread(target=generate_content, args=(company_name, topic, industry, keyword, title, True, False, content, section))
-        threads2.append(t)
-        t.start()
-    for thread in threads2:
-        thread.join()
-    print (section)
-    compiled_html = compile_files(website, section)
+    # Generate content
+    content = generate_content(company_name, topic, industry, keyword, titles, outline)
+    print (content)
     
+    template = generate_html_template(content)
+    print(template)
+    
+    # Comvert content into HTML
+    htmlcode = convert_to_html(content, template)
+    
+    # Combine HTML template with content HTML
+    website = ""
+    compiled_html = add_styles_and_components(htmlcode, sanitize_filename(company_name))
+    
+    # Write into file
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
-    start_index = compiled_html.find('<!DOCTYPE html>')
-    end_index = compiled_html.find('</html>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        pass
-    new_website = compiled_html[start_index:end_index+7]      
-    with open(os.path.join(directory_path, f'{filename}.html'), 'w', encoding='utf-8') as f:
-        f.write(new_website)
-     
+    # start_index = compiled_html.find('<!DOCTYPE html>')
+    # end_index = compiled_html.find('</html>', start_index+1)
+    # if start_index == -1 and end_index == -1:
+    #     pass
+    # new_website = compiled_html[start_index:end_index+7]      
+    with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
+        f.write(compiled_html)
+    
+    # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
         fieldnames = ['Company Name', 'Keyword', 'Iteration', 'Stage', 'Prompt Tokens', 'Completion Tokens', 'Total Tokens', 'Price']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
