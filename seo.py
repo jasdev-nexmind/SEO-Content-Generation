@@ -65,7 +65,7 @@ def chat_with_gpt3(stage: str,
                    p: float = 0.5,
                    freq: float = 0,
                    presence: float = 0,
-                   model: str = "gpt-3.5-turbo") -> str:
+                   model: str = "gpt-3.5-turbo-16k") -> str:
     max_retries = 5
     for retries in range(max_retries):
         response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries, model)
@@ -122,8 +122,8 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     return keyword_clusters
 
 
-def generate_title(keyword: str) -> List[str]:
-    prompt = f"Suggest a catchy headline for '{keyword}'"
+def generate_title(company_name: str, keyword: str) -> List[str]:
+    prompt = f"Suggest 1 catchy headline about '{keyword}' for the company {company_name}"
     title = chat_with_gpt3("Title Generation", prompt, temp=0.7, p=0.8)
     title = title.replace('"', '')
     print("Titles Generated")
@@ -160,78 +160,78 @@ def generate_meta_description(company_name: str,
     return meta_description
 
 
-def generate_html() -> None:
-    website = create_template()
-    directory_path = "test"
-    os.makedirs(directory_path, exist_ok=True)
-    start_index = website.find('<!DOCTYPE html>')
-    end_index = website.find('</html>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        pass
-    new_website = website[start_index:end_index+7]      
-    with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
-        f.write(new_website)
+# def generate_html() -> None:
+#     # website = create_template()
+#     directory_path = "test"
+#     os.makedirs(directory_path, exist_ok=True)
+#     start_index = website.find('<!DOCTYPE html>')
+#     end_index = website.find('</html>', start_index+1)
+#     if start_index == -1 and end_index == -1:
+#         pass
+#     new_website = website[start_index:end_index+7]      
+#     with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
+#         f.write(new_website)
 
 
-def create_template(company_name: str,
-                    filename: str,
-                    description: str,
-                    title: str) -> str:
-    print("Creating template...")
-    website= f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Dynamic Brands</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="{description}">
-        <title>{title}</title>
-        <!-- CSS stylesheets -->
-        <link rel="stylesheet" href="{filename}.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    </head>
-    <body>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid shadow-2xl">
-                    <a class="navbar-brand flex items-center" href="#">
-                        <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
+# def create_template(company_name: str,
+#                     filename: str,
+#                     description: str,
+#                     title: str) -> str:
+#     print("Creating template...")
+#     website= f"""
+#     <!DOCTYPE html>
+#     <html>
+#     <head>
+#         <title>Dynamic Brands</title>
+#         <meta charset="UTF-8">
+#         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#         <meta name="description" content="{description}">
+#         <title>{title}</title>
+#         <!-- CSS stylesheets -->
+#         <link rel="stylesheet" href="{filename}.css">
+#         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+#         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+#         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+#         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+#     </head>
+#     <body>
+#             <nav class="navbar navbar-expand-lg bg-body-tertiary">
+#                 <div class="container-fluid shadow-2xl">
+#                     <a class="navbar-brand flex items-center" href="#">
+#                         <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
 
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
-                    </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <lord-icon
-                        src="https://cdn.lordicon.com/dfjljsxr.json"
-                        trigger="morph"
-                        colors="outline:#121331,primary:#ffffff"
-                        style="width:50px;height:50px">
-                    </lord-icon>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    </ul>
-                </div>
-                </div>
-            </nav>
-        </body>
-    </html>	
-    """    
-    return website
+#                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
+#                     </a>
+#                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+#                     <lord-icon
+#                         src="https://cdn.lordicon.com/dfjljsxr.json"
+#                         trigger="morph"
+#                         colors="outline:#121331,primary:#ffffff"
+#                         style="width:50px;height:50px">
+#                     </lord-icon>
+#                 </button>
+#                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+#                     <ul class="navbar-nav">
+#                     <li class="nav-item">
+#                         <a class="nav-link active" aria-current="page" href="#">Home</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">Products</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">About Us</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">Contact Us</a>
+#                     </li>
+#                     </ul>
+#                 </div>
+#                 </div>
+#             </nav>
+#         </body>
+#     </html>	
+#     """    
+#     return website
 
 
 def generate_content(company_name: str,
@@ -252,9 +252,10 @@ def generate_content(company_name: str,
     Core Keywords: {topic}
     Keywords: {keyword}
     Requirements:
-    1) Make sure the content length is 500 words.
+    1) Make sure the content length is 700 words.
     2) Include headers and subheaders
-    4) The content should be engaging and unique.
+    3) The content should be engaging and unique.
+    4) Don't include any conclusion
     """
     
     # - Create a 500 word landing page content about {topic} using this outline: {outline}
@@ -281,17 +282,14 @@ def generate_content(company_name: str,
     # Use this as the an outline for the content: {outline}
     
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8, model="gpt-3.5-turbo-16k")
-    print(content)
-    print("Done")
     return content
     
 
-def convert_to_html(content: str, template: str) -> str:
+def convert_to_html(content: str) -> str:
     # Generate HTML code for the website
     print("Generating HTML code for the website...")
     prompt = f"""
     - Convert the following content into HTML code.
-    - Use the following template: {template}
     - Seperate the contents into sections and add a <div> tag for each section.
     - Space the contents out s that they are not tightly packed together.
     - Include a meta description as well as a meta keywords tag:
@@ -306,39 +304,46 @@ def add_styles_and_components(website: str,
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     
+    styles_file = add_styles(filename)
     website = add_components(website)
-    # website = add_navbar(website)
-    # styles_file = add_styles(filename)
     website = compile_css(website, filename)
-    
+    # threads = []
+    # t1 = Thread(target=add_styles, args=(filename))
+    # threads.append(t1)
+    # t1.start()
+    # t2 = Thread(target=add_components, args=(website))
+    # threads.append(t2)
+    # t2.start()
+    # for thread in threads:
+    #     thread.join()
+    print("Outlines generated")
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
     return website
 
-def generate_html_template(content) -> str:
-    print("Generating HTML template...")
-    prompt = f"""
-    - Generate an outline for a HTML based on the following content:
-    {content}
-    """
-    template = chat_with_gpt3("HTML Template", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
-    return template
+# def generate_html_template(content) -> str:
+#     print("Generating HTML template...")
+#     prompt = f"""
+#     - Generate an outline for a HTML based on the following content:
+#     {content}
+#     """
+#     template = chat_with_gpt3("HTML Template", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
+#     return template
 
 def add_components(website: str) -> str:
     print("Adding components...")
     website = add(website, "navbar")
-    # website = add(website, "image carousel")
+    website = add(website, "image carousel")
+    website = add(website, "contact form")
+    website = add(website, "footer")
     # website = add(website, "buttons")
-    # website = add(website, "cards")
-    # website = add(website, "contact form")
-    # website = add(website, "footer")
     return website
 
 def add(website: str, component: str) -> str:
     print(f"Adding {component}...")
     prompt = f"""
-    - Add a {component} to the HTML code.
-    - Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) or the Tailwind libraries (https://tailwindcss.com/)
+    - Analyze this HTML code
+    - Add a {component} in this HTML code:
     
     {website}
     """
@@ -353,22 +358,22 @@ def add_styles(filename: str) -> str:
     styles_file = change_font()
     styles_file = add_animation(styles_file)
     # styles_file = change_alignment(styles_file)
-    start_index = styles_file.find('```css')
-    end_index = styles_file.find('```', start_index+1)
+    start_index = styles_file.find('```')
+    end_index = styles_file.find('```', start_index+2)
     if start_index == -1 and end_index == -1:
         new_css = styles_file
     else:
         new_css = styles_file[start_index+6:end_index]
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
-        f.write(new_css)
+        f.write(styles_file)
     print ("Finished adding styles")
     
     
 def change_font() -> str:
     print("Changing font...")
     prompt= f""" 
-    Add a unique style to the website such as font family, color and background color for a website to make it stand out from other websites. Use the Google Fonts library (https://fonts.google.com/) to find a suitable font for this
-    Only respond with the CSS file. 
+    - Generate a CSS file with a font-family, font-size, font-weight, and font-style for each tag
+    - Add a background color for each tag
     """
     styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return styles_file
@@ -377,7 +382,7 @@ def change_font() -> str:
 def add_animation(styles_file: str) -> str:
     print("Adding animation...")
     prompt= f""" 
-    Edit this CSS file directly by adding animations for each tag. Use animations from these styles_files (https://michalsnik.github.io/aos/) and (https://animate.style/):
+    Add animations for each tag using animations from these website (https://michalsnik.github.io/aos/) and (https://animate.style/) in this CSS code:
     {styles_file}
     """
     styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
@@ -403,9 +408,7 @@ def fail_safe(website: str) -> str:
 #                   content: str,
 #                   filename: str,
 #                   add_style: bool) -> str:
-#     print("Compiling files...")
-    
-    
+#     print("Compiling files...")    
 #     end_index = website.find('</body>')
 #     if end_index == -1:
 #         new_website = website
@@ -425,7 +428,6 @@ def compile_css(website: str, filename: str) -> str:
     else:
         new_website = website[:start_index] + a_style + '\n' + website[start_index:]
     return new_website
-    
         
 
 def sanitize_filename(filename: str) -> str:
@@ -463,7 +465,7 @@ def main():
             
     # Generate title from keyword
     keyword_choice = int(input("Choose a keyword: "))
-    titles = generate_title(keyword_clusters[keyword_choice-1])
+    titles = generate_title(company_name, keyword_clusters[keyword_choice-1])
     print (titles)
     
     # Generate an 5 outlines
@@ -489,12 +491,12 @@ def main():
     content = generate_content(company_name, topic, industry, keyword, titles, outline)
     print (content)
     
-    template = generate_html_template(content)
-    print(template)
+    # template = generate_html_template(content)
+    # print(template)
     
     # Comvert content into HTML
     global htmlcode 
-    htmlcode = convert_to_html(content, template)
+    htmlcode = convert_to_html(content)
     
     # Combine HTML template with content HTML
     website = ""
@@ -503,13 +505,16 @@ def main():
     # Write into file
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
-    # start_index = compiled_html.find('<!DOCTYPE html>')
-    # end_index = compiled_html.find('</html>', start_index+1)
-    # if start_index == -1 and end_index == -1:
-    #     pass
-    # new_website = compiled_html[start_index:end_index+7]      
+    start_index = compiled_html.find('<!DOCTYPE html>')
+    end_index = compiled_html.find('</html>', start_index+1)
+    if start_index == -1 and end_index == -1:
+        new_website = compiled_html
+    else:
+        new_website = compiled_html[start_index:end_index+7]      
     with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
-        f.write(compiled_html)
+        f.write(new_website)
+        
+    print(f"Finish file for {titles}")
     
     # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
