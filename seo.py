@@ -168,7 +168,6 @@ def generate_html() -> None:
     end_index = website.find('</html>', start_index+1)
     if start_index == -1 and end_index == -1:
         pass
-    
     new_website = website[start_index:end_index+7]      
     with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
         f.write(new_website)
@@ -275,8 +274,6 @@ def generate_content(company_name: str,
     # Long-Tail Keywords: Provide any number of desired long-tail keywords or simply ask me to generate them for you based on the core keywords you've provided.
     # Content Preferences: Specify if there are certain content types or topics on which you would like the site to focus, such as blog articles, case studies, product descriptions, etc.
     # Additional Features: Indicate if there are any additional features that should be incorporated into the site (e.g., social media integration, e-commerce functionality, multimedia elements).
-
-
     
     # Template 4
     # Generate a website content for a company that provides services related to these {topic}.
@@ -329,19 +326,25 @@ def generate_html_template(content) -> str:
 
 def add_components(website: str) -> str:
     print("Adding components...")
-    prompt= f"""     
-    Let's go through this step by step. Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) or from Tailwind libraries (https://tailwindcss.com/)
-    - Add a navbar to the HTML code 
-    - Add an image carousel to the HTML code
-    - Add buttons, cards, and forms to the HTML code
-    - Add a footer to the HTML code
-    - Add a contact form to the HTML code
+    website = add(website, "navbar")
+    # website = add(website, "image carousel")
+    # website = add(website, "buttons")
+    # website = add(website, "cards")
+    # website = add(website, "contact form")
+    # website = add(website, "footer")
+    return website
+
+def add(website: str, component: str) -> str:
+    print(f"Adding {component}...")
+    prompt = f"""
+    - Add a {component} to the HTML code.
+    - Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) or the Tailwind libraries (https://tailwindcss.com/)
     
     {website}
     """
-    website = chat_with_gpt3("Adding Components", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
-    return website
-
+    website = fail_safe(website)
+    website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
+    return website    
 
 def add_styles(filename: str) -> str:
     print("Adding styles...")
@@ -390,6 +393,11 @@ def change_alignment(styles_file: str) -> str:
     styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
     return styles_file
 
+def fail_safe(website: str) -> str:
+    start_index = website.find('<!DOCTYPE html>')
+    if website.find('<!DOCTYPE html>') == -1:
+        website = htmlcode
+    return website
 
 # def compile_files(website: str,
 #                   content: str,
@@ -478,8 +486,6 @@ def main():
     # description = generate_meta_description(company_name, topic, keyword)
     # print (description)
     # website = create_template(company_name, filename, description, titles)
-    
-    # Generate content
     content = generate_content(company_name, topic, industry, keyword, titles, outline)
     print (content)
     
@@ -487,6 +493,7 @@ def main():
     print(template)
     
     # Comvert content into HTML
+    global htmlcode 
     htmlcode = convert_to_html(content, template)
     
     # Combine HTML template with content HTML
