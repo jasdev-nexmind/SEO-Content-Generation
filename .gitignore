@@ -13,6 +13,7 @@ outline/
 *.html
 *.htm
 content runs/
+test 2/
 
 # Distribution / packaging
 .Python

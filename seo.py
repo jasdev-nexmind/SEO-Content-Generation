@@ -140,6 +140,7 @@ def generate_outline(company_name: str,
     prompt = f"""
     - Generate a content outline of a landing page for {company_name} based on this topic: '{title}' and this keyword: '{keyword}'.
     - Maximum of 7 bullet points, use "-" as the bullet points.
+    - Don't include any conclusion in the outline.
     """
     outline = chat_with_gpt3("Outline Generation", prompt, temp=0.7, p=0.8)
     filename = f"Outline {index+1}"  # use the first keyword as the filename
@@ -174,65 +175,64 @@ def generate_meta_description(company_name: str,
 #         f.write(new_website)
 
 
-# def create_template(company_name: str,
-#                     filename: str,
-#                     description: str,
-#                     title: str) -> str:
-#     print("Creating template...")
-#     website= f"""
-#     <!DOCTYPE html>
-#     <html>
-#     <head>
-#         <title>Dynamic Brands</title>
-#         <meta charset="UTF-8">
-#         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-#         <meta name="description" content="{description}">
-#         <title>{title}</title>
-#         <!-- CSS stylesheets -->
-#         <link rel="stylesheet" href="{filename}.css">
-#         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-#         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-#         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-#         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-#     </head>
-#     <body>
-#             <nav class="navbar navbar-expand-lg bg-body-tertiary">
-#                 <div class="container-fluid shadow-2xl">
-#                     <a class="navbar-brand flex items-center" href="#">
-#                         <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
-
-#                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
-#                     </a>
-#                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-#                     <lord-icon
-#                         src="https://cdn.lordicon.com/dfjljsxr.json"
-#                         trigger="morph"
-#                         colors="outline:#121331,primary:#ffffff"
-#                         style="width:50px;height:50px">
-#                     </lord-icon>
-#                 </button>
-#                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-#                     <ul class="navbar-nav">
-#                     <li class="nav-item">
-#                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-#                     </li>
-#                     <li class="nav-item">
-#                         <a class="nav-link" href="#">Products</a>
-#                     </li>
-#                     <li class="nav-item">
-#                         <a class="nav-link" href="#">About Us</a>
-#                     </li>
-#                     <li class="nav-item">
-#                         <a class="nav-link" href="#">Contact Us</a>
-#                     </li>
-#                     </ul>
-#                 </div>
-#                 </div>
-#             </nav>
-#         </body>
-#     </html>	
-#     """    
-#     return website
+def create_template(company_name: str,
+                    filename: str,
+                    description: str,
+                    title: str) -> str:
+    print("Creating template...")
+    website= f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dynamic Brands</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{description}">
+        <title>{title}</title>
+        <!-- CSS stylesheets -->
+        <link rel="stylesheet" href="{filename}.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid shadow-2xl">
+                    <a class="navbar-brand flex items-center" href="#">
+                        <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
+                    </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/dfjljsxr.json"
+                        trigger="morph"
+                        colors="outline:#121331,primary:#ffffff"
+                        style="width:50px;height:50px">
+                    </lord-icon>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+        </body>
+    </html>	
+    """    
+    return website
 
 
 def generate_content(company_name: str,
@@ -248,14 +248,17 @@ def generate_content(company_name: str,
     prompt = f"""
     Create website content for a company with the following specifications:
     Company Name: {company_name}
-    Title: {title}.
+    Title: {title}
+    Industry: {industry}
     Core Keywords: {topic}
     Keywords: {keyword}
+    Outline: {outline}
     Requirements:
     1) Make sure the content length is 700 words.
-    2) Include headers and subheaders
-    3) The content should be engaging and unique.
+    2) The content should be engaging and unique.
+    3) Include headers and subheaders.
     4) Don't include any conclusion
+    5) Generate it in a JSON format for each section.
     """
     
     # - Create a 500 word landing page content about {topic} using this outline: {outline}
@@ -307,16 +310,6 @@ def add_styles_and_components(website: str,
     styles_file = add_styles(filename)
     website = add_components(website)
     website = compile_css(website, filename)
-    # print(type(website))
-    # threads = []
-    # t2 = Thread(target=add_components, args=(website))
-    # threads.append(t2)
-    # t2.start()
-    # t1 = Thread(target=add_styles, args=(filename))
-    # threads.append(t1)
-    # t1.start()
-    # for thread in threads:
-    #     thread.join()
     print("Outlines generated")
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
@@ -337,6 +330,7 @@ def add_components(website: str) -> str:
     website = add(website, "image carousel using image from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")
+    print("Finished adding components to the website")
     return website
 
 def add(website: str, component: str) -> str:
@@ -344,10 +338,8 @@ def add(website: str, component: str) -> str:
     prompt = f"""
     - Analyze this HTML code
     - Add a {component} in this HTML code:
-    
     {website}
     """
-    
     website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     website = fail_safe(website)
     htmlcode = website
@@ -394,7 +386,8 @@ def add_animation(styles_file: str) -> str:
 def change_alignment(styles_file: str) -> str:
     print("Changing alignment...")
     prompt= f"""
-    Change the alignment of the website to make it properly aligned:
+    -Change the alignment of each tag the website to make it properly aligned
+    -Add a background color:
     {styles_file}
     """
     styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
@@ -441,14 +434,14 @@ def main():
     # Get the company name and topic from the user
     keychoice = True
     outchoice = True
-    if len(sys.argv) < 1:
+    try:
+        company_name = sys.argv[1]
+        topic = sys.argv[2]
+    except(IndexError):
         company_name = input("Company Name: ")
         topic = input("Your Keywords: ")
         keychoice = False
         outchoice = False
-    else:
-        company_name = sys.argv[1]
-        topic = sys.argv[2]
         
     # Open token.csv to track token usage
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists

@@ -1,6 +1,4 @@
-Sure! Here's the updated CSS code with animations from the websites you provided:
 
-```css
 /* Import AOS animations */
 @import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
 
@@ -26,67 +24,8 @@ a {
 
 /* Add more animations for other tags as needed */
 
-/* AOS animations initialization */
-[data-aos] {
-  opacity: 0;
-  transition-duration: 1s;
-}
-
-[data-aos].aos-animate {
-  opacity: 1;
-}
-
-/* Animate.css animations initialization */
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-```
-
-Make sure to include the necessary JavaScript code to initialize the AOS animations on your website. Additionally, apply the appropriate classes from Animate.css to the HTML elements you want to animate.
-
-By incorporating these animations into your website, you can enhance user experience and make your content more engaging. Remember to optimize your website's content with relevant long-tail keywords to improve its visibility and attract organic traffic.
+/* AOS initialization */
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>

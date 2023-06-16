@@ -1,6 +1,4 @@
-Sure! Here's the updated CSS code with animations from the websites you provided:
 
-```css
 /* Import AOS animations */
 @import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
 
@@ -9,24 +7,26 @@ Sure! Here's the updated CSS code with animations from the websites you provided
 
 /* CSS code with animations for each tag */
 body {
-  animation: fadeInDown 1s;
+  animation: animate__fadeIn animate__delay-1s;
 }
 
 h1 {
-  animation: fadeInLeft 1s;
+  animation: animate__bounceInLeft animate__delay-2s;
 }
 
 p {
-  animation: fadeInRight 1s;
+  animation: animate__fadeInUp animate__delay-3s;
 }
 
 a {
-  animation: fadeInUp 1s;
+  animation: animate__heartBeat animate__delay-4s;
 }
 
-/* Add more animations for other tags as needed */
+button {
+  animation: animate__rubberBand animate__delay-5s;
+}
 
-/* AOS animations initialization */
+/* Initialize AOS library */
 [data-aos] {
   opacity: 0;
   transition-duration: 1s;
@@ -35,58 +35,3 @@ a {
 [data-aos].aos-animate {
   opacity: 1;
 }
-
-/* Animate.css animations initialization */
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-```
-
-Make sure to include the necessary JavaScript code to initialize the AOS animations on your website. Additionally, apply the appropriate classes and data attributes to the HTML elements you want to animate.
-
-Remember to optimize your website's content with relevant long-tail keywords to improve its visibility and attract organic traffic.
