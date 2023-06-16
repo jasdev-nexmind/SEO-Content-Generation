@@ -1,0 +1,32 @@
+@echo off
+set "CompanyName[0]=NexMind"
+set "CompanyName[1]=Dynamic Brands"
+set "CompanyName[2]=Time"
+set "CompanyName[3]=Oreo"
+set "CompanyName[4]=Taj"
+set "CompanyName[5]=Hertz"
+set "CompanyName[6]=Apple"
+
+set "Keyword[0]=Sofa Manufacturing Company in Malaysia"
+set "Keyword[1]=Wifi Service Provider in Malaysia"
+set "Keyword[2]=Best Biscuit Company in Malaysia"
+set "Keyword[3]=Best Hotel in Malaysia"
+set "Keyword[4]=Car Rental Company in Malaysia"
+set "Keyword[5]=Best Ice Cream in Malaysia"
+set "Keyword[6]=Top Tech Company in Malaysia"
+
+:: Path to your Python script, modify if needed
+set "ScriptPath=.\seo.py"
+
+set /A "index1=(%RANDOM% %% 7)"
+set /A "index2=(%RANDOM% %% 7)"
+:: These are the predefined inputs
+
+set "Keyword=Sofa Manufacturing Company in Malaysia"
+set /A "RandomNumber1=(%RANDOM% %% 5) + 1"
+set /A "RandomNumber2=(%RANDOM% %% 5) + 1"
+
+:: This is where you run the Python script with the inputs
+python %ScriptPath% ""%%CompanyName[%index1%]%%" ""%%Keyword[%index2%]%%" %RandomNumber1% %RandomNumber2%
+
+exit

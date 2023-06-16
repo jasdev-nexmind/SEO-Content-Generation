@@ -1,8 +1,9 @@
-import os
-import re
-import time
-import openai
 import csv
+import os
+import openai
+import re
+import sys
+import time
 from threading import Thread
 from typing import List
 from dotenv import load_dotenv
@@ -306,15 +307,16 @@ def add_styles_and_components(website: str,
     styles_file = add_styles(filename)
     website = add_components(website)
     website = compile_css(website, filename)
-    # threads = []
-    # t1 = Thread(target=add_styles, args=(filename))
-    # threads.append(t1)
-    # t1.start()
-    # t2 = Thread(target=add_components, args=(website))
-    # threads.append(t2)
-    # t2.start()
-    # for thread in threads:
-    #     thread.join()
+    print(type(website))
+    threads = []
+    t2 = Thread(target=add_components, args=(website))
+    threads.append(t2)
+    t2.start()
+    t1 = Thread(target=add_styles, args=(filename))
+    threads.append(t1)
+    t1.start()
+    for thread in threads:
+        thread.join()
     print("Outlines generated")
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
@@ -335,7 +337,6 @@ def add_components(website: str) -> str:
     website = add(website, "image carousel using image from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")
-    # website = add(website, "buttons")
     return website
 
 def add(website: str, component: str) -> str:
@@ -347,6 +348,7 @@ def add(website: str, component: str) -> str:
     {website}
     """
     website = fail_safe(website)
+    htmlcode = website
     website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     return website    
 
@@ -398,10 +400,9 @@ def change_alignment(styles_file: str) -> str:
     return styles_file
 
 def fail_safe(website: str) -> str:
+    print (htmlcode)
     if website.find('<!DOCTYPE html>') == -1:
         website = htmlcode
-    else:
-        htmlcode = website
     return website
 
 
@@ -438,9 +439,15 @@ def sanitize_filename(filename: str) -> str:
 
 def main():
     # Get the company name and topic from the user
-    company_name = input("Company Name: ")
-    topic = input("Your Keywords: ")
-    
+    if len(sys.argv) < 1:
+        company_name = input("Company Name: ")
+        topic = input("Your Keywords: ")
+        keychoice = False
+        outchoice = False
+    else:
+        company_name = sys.argv[1]
+        topic = sys.argv[2]
+        
     # Open token.csv to track token usage
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
     with open('token_usage.csv', 'a', newline='') as csvfile:
@@ -465,7 +472,11 @@ def main():
         print(f"{number+1}. {keyword}")
             
     # Generate title from keyword
-    keyword_choice = int(input("Choose a keyword: "))
+    if keychoice:
+        keyword_choice = int(sys.argv[3])
+    else:
+        keyword_choice = int(input("Choose a keyword: "))
+    
     titles = generate_title(company_name, keyword_clusters[keyword_choice-1])
     print (titles)
     
@@ -480,7 +491,10 @@ def main():
     print("Outlines generated")
     
     # Generate meta description and template
-    outline_choice = int(input("Choose an outline: "))
+    if outchoice:
+        outline_choice = int(sys.argv[4])
+    else:
+        outline_choice = int(input("Choose an outline: "))
     filename = f"Outline {outline_choice}"
     directory_path = "outline"
     # outlines = []
@@ -496,7 +510,7 @@ def main():
     # print(template)
     
     # Comvert content into HTML
-    global htmlcode 
+    global htmlcode
     htmlcode = convert_to_html(content)
     
     # Combine HTML template with content HTML
