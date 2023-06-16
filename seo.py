@@ -247,7 +247,6 @@ def generate_content(company_name: str,
     prompt = f"""
     Create website content for a company with the following specifications:
     Company Name: {company_name}
-    Industry: {industry}
     Title: {title}.
     Core Keywords: {topic}
     Keywords: {keyword}
@@ -332,8 +331,8 @@ def add_styles_and_components(website: str,
 
 def add_components(website: str) -> str:
     print("Adding components...")
-    website = add(website, "navbar")
-    website = add(website, "image carousel")
+    website = add(website, "navbar from Bootstrao")
+    website = add(website, "image carousel using image from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")
     # website = add(website, "buttons")
@@ -371,9 +370,9 @@ def add_styles(filename: str) -> str:
     
 def change_font() -> str:
     print("Changing font...")
-    prompt= f""" 
+    prompt= f"""    
     - Generate a CSS file with a font-family, font-size, font-weight, and font-style for each tag
-    - Add a background color for each tag
+    - Add a background color for the HTML code
     """
     styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
     return styles_file
@@ -399,10 +398,12 @@ def change_alignment(styles_file: str) -> str:
     return styles_file
 
 def fail_safe(website: str) -> str:
-    start_index = website.find('<!DOCTYPE html>')
     if website.find('<!DOCTYPE html>') == -1:
         website = htmlcode
+    else:
+        htmlcode = website
     return website
+
 
 # def compile_files(website: str,
 #                   content: str,
