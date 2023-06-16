@@ -1,0 +1,38 @@
+Sure! Here's the updated CSS code with animations from the provided websites:
+
+```css
+/* Import AOS animations */
+@import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
+
+/* Import Animate.css animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* CSS code with animations for each tag */
+body {
+  animation: animate__fadeIn 1s;
+}
+
+h1 {
+  animation: animate__bounceInLeft 1s;
+}
+
+p {
+  animation: animate__fadeInUp 1s;
+}
+
+a {
+  animation: animate__heartBeat 1s;
+}
+
+button {
+  animation: animate__rubberBand 1s;
+}
+
+/* Add AOS initialization script */
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+By incorporating these animations into your website, you can enhance user experience and make your content more engaging. Remember to adjust the animation duration and timing function according to your preferences and website design.
+
+Additionally, make sure to optimize your website's meta tags, headings, and image alt text with relevant keywords to improve search engine visibility. Regularly update your website with fresh and valuable content to attract organic traffic and improve your online business performance.

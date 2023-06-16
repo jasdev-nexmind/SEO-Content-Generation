@@ -307,16 +307,16 @@ def add_styles_and_components(website: str,
     styles_file = add_styles(filename)
     website = add_components(website)
     website = compile_css(website, filename)
-    print(type(website))
-    threads = []
-    t2 = Thread(target=add_components, args=(website))
-    threads.append(t2)
-    t2.start()
-    t1 = Thread(target=add_styles, args=(filename))
-    threads.append(t1)
-    t1.start()
-    for thread in threads:
-        thread.join()
+    # print(type(website))
+    # threads = []
+    # t2 = Thread(target=add_components, args=(website))
+    # threads.append(t2)
+    # t2.start()
+    # t1 = Thread(target=add_styles, args=(filename))
+    # threads.append(t1)
+    # t1.start()
+    # for thread in threads:
+    #     thread.join()
     print("Outlines generated")
     # Write the updated HTML content back to the file
     print("Finished adding styles and components to the website")
@@ -333,7 +333,7 @@ def add_styles_and_components(website: str,
 
 def add_components(website: str) -> str:
     print("Adding components...")
-    website = add(website, "navbar from Bootstrao")
+    website = add(website, "navbar from Bootstrap Library")
     website = add(website, "image carousel using image from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")
@@ -347,9 +347,10 @@ def add(website: str, component: str) -> str:
     
     {website}
     """
+    
+    website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     website = fail_safe(website)
     htmlcode = website
-    website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     return website    
 
 def add_styles(filename: str) -> str:
@@ -366,7 +367,7 @@ def add_styles(filename: str) -> str:
     else:
         new_css = styles_file[start_index+6:end_index]
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
-        f.write(styles_file)
+        f.write(new_css)
     print ("Finished adding styles")
     
     
@@ -400,7 +401,6 @@ def change_alignment(styles_file: str) -> str:
     return styles_file
 
 def fail_safe(website: str) -> str:
-    print (htmlcode)
     if website.find('<!DOCTYPE html>') == -1:
         website = htmlcode
     return website
@@ -439,6 +439,8 @@ def sanitize_filename(filename: str) -> str:
 
 def main():
     # Get the company name and topic from the user
+    keychoice = True
+    outchoice = True
     if len(sys.argv) < 1:
         company_name = input("Company Name: ")
         topic = input("Your Keywords: ")

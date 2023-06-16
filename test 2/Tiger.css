@@ -1,0 +1,73 @@
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+</head>
+
+<body>
+  <h1 data-aos="fade-up" data-aos-duration="1000">Welcome to my website</h1>
+  <h2 data-aos="fade-down" data-aos-duration="1000">About Me</h2>
+  <p data-aos="fade-right" data-aos-duration="1000">I am a web developer with experience in HTML, CSS, and JavaScript.</p>
+  <a data-aos="zoom-in" data-aos-duration="1000" href="#">Learn more</a>
+</body>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #f5f5f5;
+  }
+
+  h1 {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 10px;
+  }
+
+  h2 {
+    font-family: Verdana, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+
+  p {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+
+  a {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    background-color: #fff;
+    border: none;
+    color: #333;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #666;
+  }
+</style>
+
+<script>
+  AOS.init();
+</script>

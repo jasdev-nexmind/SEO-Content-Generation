@@ -1,0 +1,27 @@
+
+/* Add AOS animations to tags */
+[data-aos] {
+  transition-duration: 1s;
+}
+
+/* Add animate.css animations to tags */
+.animated {
+  animation-duration: 1s;
+}
+
+/* Add specific animations to tags */
+h1[data-aos="fade-up"] {
+  animation-name: fade-up;
+}
+
+h2[data-aos="fade-down"] {
+  animation-name: fade-down;
+}
+
+p[data-aos="zoom-in"] {
+  animation-name: zoom-in;
+}
+
+a[data-aos="flip-left"] {
+  animation-name: flip-left;
+}

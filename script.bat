@@ -22,11 +22,13 @@ set /A "index1=(%RANDOM% %% 7)"
 set /A "index2=(%RANDOM% %% 7)"
 :: These are the predefined inputs
 
-set "Keyword=Sofa Manufacturing Company in Malaysia"
 set /A "RandomNumber1=(%RANDOM% %% 5) + 1"
 set /A "RandomNumber2=(%RANDOM% %% 5) + 1"
 
+call echo Selected Company Name: %%CompanyName[%index1%]%%
+call echo Selected Keyword: %%Keyword[%index2%]%%
+
 :: This is where you run the Python script with the inputs
-python %ScriptPath% ""%%CompanyName[%index1%]%%" ""%%Keyword[%index2%]%%" %RandomNumber1% %RandomNumber2%
+@REM call python %ScriptPath% "%%CompanyName[%index1%]%%" "%%Keyword[%index2%]%%" %RandomNumber1% %RandomNumber2%
 
 exit
