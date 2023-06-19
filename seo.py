@@ -31,7 +31,7 @@ def generate_response(prompt: str,
         response = openai.ChatCompletion.create(
             model=f"{model}",
             messages=[
-                    {"role": "system", "content": "You are an AI designed to identify, generate, and implement search engine optimized long-tail keywords and content, with the goal of generating website contents and enhance website's visibility, driving organic traffic, and improving online business performance."},
+                    {"role": "system", "content": "You are an AI designed to identify search engine optimized long-tail keywords and generate contents, with the goal of generating website contents and enhance website's visibility, driving organic traffic, and improving online business performance."},
                     {"role": "user", "content": prompt}
                 ],
             temperature=temp,
@@ -138,9 +138,7 @@ def generate_outline(company_name: str,
                      title: str,
                      index: str) -> None:
     prompt = f"""
-    - Generate a content outline of a landing page for {company_name} based on this topic: '{title}' and this keyword: '{keyword}'.
-    - Maximum of 7 bullet points, use "-" as the bullet points.
-    - Don't include any conclusion in the outline.
+    Please create a comprehensive content outline for a landing page dedicated to {company_name} that centers around the topic of '{title}' and the keyword '{keyword}'. Your outline should consist of no more than seven bullet points, each preceded by a dash ("-"). Please refrain from including any concluding statements in your outline.
     """
     outline = chat_with_gpt3("Outline Generation", prompt, temp=0.7, p=0.8)
     filename = f"Outline {index+1}"  # use the first keyword as the filename
@@ -246,20 +244,29 @@ def generate_content(company_name: str,
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
     prompt = f"""
-    Create website content for a company with the following specifications:
+    Please generate website content for a company that meets the following specifications:
     Company Name: {company_name}
     Title: {title}
     Industry: {industry}
     Core Keywords: {topic}
     Keywords: {keyword}
     Outline: {outline}
-    Requirements:
-    1) Make sure the content length is 700 words.
-    2) The content should be engaging and unique.
-    3) Include headers and subheaders.
-    4) Don't include any conclusion
-    5) Generate it in a JSON format for each section.
+    The content should be 700 words in length and must be engaging and unique. Please include headers and subheaders, but do not include any conclusion. Thank you.
     """
+    # Create website content for a company with the following specifications:
+    # Company Name: {company_name}
+    # Title: {title}
+    # Industry: {industry}
+    # Core Keywords: {topic}
+    # Keywords: {keyword}
+    # Outline: {outline}
+    # Requirements:
+    # 1) Make sure the content length is 700 words.
+    # 2) The content should be engaging and unique.
+    # 3) Include headers and subheaders.
+    # 4) Don't include any conclusion
+    # 5) Generate it in a JSON format for each section.
+    
     
     # - Create a 500 word landing page content about {topic} using this outline: {outline}
     # - Include the company name:{company_name}, the title:{title} and the keywords {keyword}.
@@ -327,7 +334,7 @@ def add_styles_and_components(website: str,
 def add_components(website: str) -> str:
     print("Adding components...")
     website = add(website, "navbar from Bootstrap")
-    website = add(website, "image carousel using image from https://via.placeholder.com")
+    website = add(website, "image carousel using images from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")
     print("Finished adding components to the website")
@@ -457,9 +464,9 @@ def main():
     print(industry)
     
     # Generate target audience
-    # audience = get_target(topic)
-    # for number, aud in enumerate(audience):
-    #     print(f"{number+1}. {aud}")
+    audience = get_target(topic)
+    for number, aud in enumerate(audience):
+        print(f"{number+1}. {aud}")
     
     # Generate SEO keywords
     keyword_clusters = generate_keyword_clusters(topic)
