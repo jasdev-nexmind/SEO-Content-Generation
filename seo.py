@@ -123,7 +123,7 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     return keyword_clusters
 
 
-def generate_title(company_name: str, keyword: str) -> List[str]:
+def generate_title(company_name: str, keyword: str) -> str:
     prompt = f"Suggest 1 catchy headline about '{keyword}' for the company {company_name}"
     title = chat_with_gpt3("Title Generation", prompt, temp=0.7, p=0.8)
     title = title.replace('"', '')
@@ -136,7 +136,7 @@ def generate_outline(company_name: str,
                      industry: str,
                      keyword: str,
                      title: str,
-                     index: str) -> None:
+                     index: int) -> None:
     prompt = f"""
     Please create a comprehensive content outline for a landing page dedicated to {company_name} that centers around the topic of '{title}' and the keyword '{keyword}'. Your outline should consist of no more than seven bullet points, each preceded by a dash ("-"). Please refrain from including any concluding statements in your outline.
     """
@@ -238,7 +238,7 @@ def generate_content(company_name: str,
                      industry: str,
                      keyword: str,
                      title: str,
-                     outline: List[str]) -> str:
+                     outline: str) -> str:
     
     print("Generating Content...")
     directory_path = "content"
@@ -331,6 +331,7 @@ def add_styles_and_components(website: str,
 #     template = chat_with_gpt3("HTML Template", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
 #     return template
 
+
 def add_components(website: str) -> str:
     print("Adding components...")
     website = add(website, "navbar from Bootstrap")
@@ -339,6 +340,7 @@ def add_components(website: str) -> str:
     website = add(website, "footer")
     print("Finished adding components to the website")
     return website
+
 
 def add(website: str, component: str) -> str:
     print(f"Adding {component}...")
@@ -352,7 +354,8 @@ def add(website: str, component: str) -> str:
     htmlcode = website
     return website    
 
-def add_styles(filename: str) -> str:
+
+def add_styles(filename: str) -> None:
     print("Adding styles...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
@@ -367,7 +370,7 @@ def add_styles(filename: str) -> str:
         new_css = styles_file[start_index+6:end_index]
     with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
         f.write(new_css)
-    print ("Finished adding styles")
+    print("Finished adding styles")
     
     
 def change_font() -> str:
@@ -399,6 +402,7 @@ def change_alignment(styles_file: str) -> str:
     """
     styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
     return styles_file
+
 
 def fail_safe(website: str) -> str:
     if website.find('<!DOCTYPE html>') == -1:
@@ -444,7 +448,7 @@ def main():
     try:
         company_name = sys.argv[1]
         topic = sys.argv[2]
-    except(IndexError):
+    except IndexError:
         company_name = input("Company Name: ")
         topic = input("Your Keywords: ")
         keychoice = False
@@ -478,14 +482,15 @@ def main():
         keyword_choice = int(sys.argv[3])
     else:
         keyword_choice = int(input("Choose a keyword: "))
-    
-    titles = generate_title(company_name, keyword_clusters[keyword_choice-1])
-    print (titles)
+
+    selected_keyword = keyword_clusters[keyword_choice-1]
+    titles = generate_title(company_name, selected_keyword)
+    print(titles)
     
     # Generate an 5 outlines
     threads = []
-    for i in range (5):
-        t = Thread(target=generate_outline, args=(company_name, topic, industry, keyword, titles, i))
+    for i in range(5):
+        t = Thread(target=generate_outline, args=(company_name, topic, industry, selected_keyword, titles, i))
         threads.append(t)
         t.start()
     for thread in threads:
@@ -497,6 +502,7 @@ def main():
         outline_choice = int(sys.argv[4])
     else:
         outline_choice = int(input("Choose an outline: "))
+
     filename = f"Outline {outline_choice}"
     directory_path = "outline"
     # outlines = []
@@ -505,8 +511,8 @@ def main():
     # description = generate_meta_description(company_name, topic, keyword)
     # print (description)
     # website = create_template(company_name, filename, description, titles)
-    content = generate_content(company_name, topic, industry, keyword, titles, outline)
-    print (content)
+    content = generate_content(company_name, topic, industry, selected_keyword, titles, outline)
+    print(content)
     
     # template = generate_html_template(content)
     # print(template)
