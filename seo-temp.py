@@ -92,6 +92,147 @@ def write_to_csv(data: tuple):
         writer.writerow({'Iteration': iteration, 'Stage': data[0], 'Prompt Tokens': data[1], 'Completion Tokens': data[2], 'Total Tokens': data[3], 'Price': float(price)})
 
 
+##==================================================================================================
+# HTML Template Methods
+##==================================================================================================
+
+def generate_html() -> None:
+    website = create_template()
+    directory_path = "test"
+    os.makedirs(directory_path, exist_ok=True)
+    start_index = website.find('<!DOCTYPE html>')
+    end_index = website.find('</html>', start_index+1)
+    if start_index == -1 and end_index == -1:
+        pass
+    new_website = website[start_index:end_index+7]      
+    with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
+        f.write(new_website)
+
+
+def create_template(company_name: str,
+                    filename: str,
+                    description: str,
+                    title: str) -> str:
+    print("Creating template...")
+    website= f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dynamic Brands</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{description}">
+        <title>{title}</title>
+        <!-- CSS stylesheets -->
+        <link rel="stylesheet" href="{filename}.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid shadow-2xl">
+                    <a class="navbar-brand flex items-center" href="#">
+                        <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
+                    </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/dfjljsxr.json"
+                        trigger="morph"
+                        colors="outline:#121331,primary:#ffffff"
+                        style="width:50px;height:50px">
+                    </lord-icon>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+        </body>
+    </html>	
+    """    
+    return website
+
+def insert_content(website: str, content: str) -> str:
+    print("Inserting content...")
+    start_index = website.find('<body>')
+    end_index = website.find('</body>', start_index+1)
+    if start_index == -1 and end_index == -1:
+        pass
+    new_website = website[:start_index+6] + content + website[end_index:]
+    return new_website
+
+def tag_wrapper(tag: str, content: str) -> str:
+    print("Wrapping content...")
+    if content['type'] == 'title':
+        content['messages'] = f"<title>{content['messages']}</title>"
+    elif content['type'] == 'header 1':
+        content['messages'] = f"<h1>{content['messages']}</h1>"
+    elif content['type'] == 'header 2':
+        content['messages'] = f"<h2>{content['messages']}</h2>"
+    elif content['type'] == 'header 3':
+        content['messages'] = f"<h3>{content['messages']}</h3>"
+    elif content['type'] == 'header 4':
+        content['messages'] = f"<h4>{content['messages']}</h4>"
+    elif content['type'] == 'header 5':
+        content['messages'] = f"<h5>{content['messages']}</h5>"
+
+
+def compile_files(website: str,
+                  content: str,
+                  filename: str,
+                  add_style: bool) -> str:
+    print("Compiling files...")    
+    end_index = website.find('</body>')
+    if end_index == -1:
+        new_website = website
+    else:
+        new_website = website[:end_index] + content + '\n' + website[end_index:]
+    return new_website
+
+
+def compile_css(website: str, filename: str) -> str:
+    print("Compiling CSS...")
+    start_index = website.find('</head>')
+    a_style = f'<link rel="stylesheet" href="{filename}.css">'
+    if start_index == -1:
+        new_website = website
+    else:
+        new_website = website[:start_index] + a_style + '\n' + website[start_index:]
+    return new_website
+        
+
+def sanitize_filename(filename: str) -> str:
+    """Remove special characters and replace spaces with underscores in a string to use as a filename."""
+    return re.sub(r'[^A-Za-z0-9]+', '_', filename)
+
+    
+    
+def fail_safe(website: str) -> str:
+    if website.find('<!DOCTYPE html>') == -1:
+        website = htmlcode
+    return website
+
+#===================================================================================================
+## Content Generation Methods
+#===================================================================================================
+
+
 def get_industry(topic) -> str:
     prompt = f"Generate an industry for these keywords, no explanation is needed: {topic}"
     industry = chat_with_gpt3("Industry Identification", prompt, temp=0.2, p=0.1)
@@ -185,169 +326,8 @@ def generate_content(company_name: str,
     4) Don't include any conclusion
     5) Generate it in a JSON format for each section.
     """
-    # Create website content for a company with the following specifications:
-    # Company Name: {company_name}
-    # Title: {title}
-    # Industry: {industry}
-    # Core Keywords: {topic}
-    # Keywords: {keyword}
-    # Outline: {outline}
-    # Requirements:
-    # 1) Make sure the content length is 700 words.
-    # 2) The content should be engaging and unique.
-    # 3) Include headers and subheaders.
-    # 4) Don't include any conclusion
-    # 5) Generate it in a JSON format for each section.
-    
-    
-    # - Create a 500 word landing page content about {topic} using this outline: {outline}
-    # - Include the company name:{company_name}, the title:{title} and the keywords {keyword}.
-    # Template 1
-    # Generate a website with 1500 words of content in HTML format for a company that provides services related to these {topic}
-    # The keywords should be incorporated into the headings, subheadings, meta descriptions, and spread evenly throughout the website. The website should be engaging and unique.
-    # Use styles such fonts, colors, and animations. Use the Bootstrap library (https://getbootstrap.com/docs/5.3/components) for HTML components and styling. Ensure the CSS styles are properly formatted and included in the <style> tag inside the HTML file.
-    # Include placeholders for brands and logos if none is provided. Make sure to replace � with proper characters or punctuation
-    # 3) The keywords should be incorporated into the headings, subheadings and spread evenly throughout the content. 
-
-    # Template 2
-    # Company Name:
-    # Industry:
-    # Target Audience: Describe your target audience or interested customers so I can better focus on generating suitable content.
-    # Core Keywords: Provide 5-10 core keywords closely related to your business and products/services that you want to be optimized.
-    # Long-Tail Keywords: Provide any number of desired long-tail keywords or simply ask me to generate them for you based on the core keywords you've provided.
-    # Content Preferences: Specify if there are certain content types or topics on which you would like the site to focus, such as blog articles, case studies, product descriptions, etc.
-    # Additional Features: Indicate if there are any additional features that should be incorporated into the site (e.g., social media integration, e-commerce functionality, multimedia elements).
-    
-    # Template 4
-    # Generate a website content for a company that provides services related to these {topic}.
-    # Write about 100 words.
-    # Use this as the an outline for the content: {outline}
-    
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8, model="gpt-3.5-turbo-16k")
     return content
-    
-
-def convert_to_html(content: str) -> str:
-    # Generate HTML code for the website
-    print("Generating HTML code for the website...")
-    prompt = f"""
-    - Convert this content to HTML code:
-    - Seperate the contents into sections and add a <div> tag for each section.
-    - Space the contents out so that they are not tightly packed together.
-    - Include a meta description as well as a meta keywords tag:
-    {content}
-    """
-    website = chat_with_gpt3("HTML Conversion", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
-    return website
-
-
-def add_styles_and_components(website: str,
-                              filename: str) -> str:
-    # Add styles and components to the website 
-    # Call the chat_with_gpt3 function to generate the styles and components
-    
-    styles_file = add_styles(filename)
-    website = add_components(website)
-    website = compile_css(website, filename)
-    print("Outlines generated")
-    # Write the updated HTML content back to the file
-    print("Finished adding styles and components to the website")
-    return website
-
-
-def add_components(website: str) -> str:
-    print("Adding components...")
-    website = add(website, "navbar from Bootstrap")
-    website = add(website, "image carousel using images from https://via.placeholder.com")
-    website = add(website, "contact form")
-    website = add(website, "footer")
-    print("Finished adding components to the website")
-    return website
-
-
-def add(website: str, component: str) -> str:
-    global htmlcode
-    print(f"Adding {component}...")
-    prompt = f"""
-    - Analyze this HTML code
-    - Add a {component} in this HTML code:
-    {website}
-    """
-    website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
-    website = fail_safe(website)
-    htmlcode = website
-    return website    
-
-
-def add_styles(filename: str) -> None:
-    print("Adding styles...")
-    directory_path = "content"
-    os.makedirs(directory_path, exist_ok=True)
-    styles_file = change_font()
-    styles_file = add_animation(styles_file)
-    # styles_file = change_alignment(styles_file)
-    start_index = styles_file.find('```')
-    end_index = styles_file.find('```', start_index+2)
-    if start_index == -1 and end_index == -1:
-        new_css = styles_file
-    else:
-        new_css = styles_file[start_index+6:end_index]
-    with open(os.path.join(directory_path, f'{filename}.css'), 'w') as f:
-        f.write(new_css)
-    print("Finished adding styles")
-    
-    
-def change_font() -> str:
-    print("Changing font...")
-    prompt= f"""    
-    - Generate a CSS file with a font-family, font-size, font-weight, and font-style for each tag
-    - Add a background color for the HTML code
-    """
-    styles_file = chat_with_gpt3("Changing font", prompt, temp=0.2, p=0.1)
-    return styles_file
-
-
-def add_animation(styles_file: str) -> str:
-    print("Adding animation...")
-    prompt= f""" 
-    Add animations for each tag using animations from these website (https://michalsnik.github.io/aos/) and (https://animate.style/) in this CSS code:
-    {styles_file}
-    """
-    styles_file = chat_with_gpt3("Adding animation", prompt, temp=0.2, p=0.1)
-    return styles_file
-
-
-def change_alignment(styles_file: str) -> str:
-    print("Changing alignment...")
-    prompt= f"""
-    -Change the alignment of each tag the website to make it properly aligned
-    -Add a background color:
-    {styles_file}
-    """
-    styles_file = chat_with_gpt3("Changing alignment", prompt, temp=0.2, p=0.1)
-    return styles_file
-
-
-def fail_safe(website: str) -> str:
-    if website.find('<!DOCTYPE html>') == -1:
-        website = htmlcode
-    return website
-
-
-def compile_css(website: str, filename: str) -> str:
-    print("Compiling CSS...")
-    start_index = website.find('</head>')
-    a_style = f'<link rel="stylesheet" href="{filename}.css">'
-    if start_index == -1:
-        new_website = website
-    else:
-        new_website = website[:start_index] + a_style + '\n' + website[start_index:]
-    return new_website
-        
-
-def sanitize_filename(filename: str) -> str:
-    """Remove special characters and replace spaces with underscores in a string to use as a filename."""
-    return re.sub(r'[^A-Za-z0-9]+', '_', filename)
 
 
 def main():
@@ -417,26 +397,30 @@ def main():
     # outlines = []
     with open(os.path.join(directory_path, f'{filename}.txt'), 'r', encoding='utf-8-sig') as f:
         outline = f.read()
+    description = generate_meta_description(company_name, topic, keyword)
+    print (description)
+    website = create_template(company_name, filename, description, titles)
     content = generate_content(company_name, topic, industry, selected_keyword, titles, outline)
     print(content)
     
+    
     # Comvert content into HTML
     global htmlcode
-    htmlcode = convert_to_html(content)
+    # htmlcode = convert_to_html(content)
     
     # Combine HTML template with content HTML
     website = ""
-    compiled_html = add_styles_and_components(htmlcode, sanitize_filename(company_name))
+
     
     # Write into file
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
-    start_index = compiled_html.find('<!DOCTYPE html>')
-    end_index = compiled_html.find('</html>', start_index+1)
+    start_index = htmlcode.find('<!DOCTYPE html>')
+    end_index = htmlcode.find('</html>', start_index+1)
     if start_index == -1 and end_index == -1:
-        new_website = compiled_html
+        new_website = htmlcode
     else:
-        new_website = compiled_html[start_index:end_index+7]      
+        new_website = htmlcode[start_index:end_index+7]      
     with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
         f.write(new_website)
         
