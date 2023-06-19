@@ -31,7 +31,7 @@ def generate_response(prompt: str,
         response = openai.ChatCompletion.create(
             model=f"{model}",
             messages=[
-                    {"role": "system", "content": "You are an AI designed to adeptly identify, generate, and implement search engine optimized long-tail keywords and align pertinent content, with the ultimate goal of generating website contents or enhancing website's visibility, driving organic traffic, and improving online business performance."},
+                    {"role": "system", "content": "You are an AI designed to identify, generate, and implement search engine optimized long-tail keywords and content, with the goal of generating website contents and enhance website's visibility, driving organic traffic, and improving online business performance."},
                     {"role": "user", "content": prompt}
                 ],
             temperature=temp,
@@ -326,7 +326,7 @@ def add_styles_and_components(website: str,
 
 def add_components(website: str) -> str:
     print("Adding components...")
-    website = add(website, "navbar from Bootstrap Library")
+    website = add(website, "navbar from Bootstrap")
     website = add(website, "image carousel using image from https://via.placeholder.com")
     website = add(website, "contact form")
     website = add(website, "footer")

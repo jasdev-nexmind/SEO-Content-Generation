@@ -3437,3 +3437,29 @@ NexMind,Sofa Manufacturing in Malaysia,0,Initial,0,0,0,0
 ,,7,Outline Generation,139,116,255,0.0005099999999999999
 ,,8,Outline Generation,139,114,253,0.0005059999999999999
 ,,9,Content Generation,295,815,1110,0.0022199999999999998
+,,10,HTML Conversion,937,971,1908,0.003816
+,,11,Changing font,98,205,303,0.000606
+,,12,Adding animation,304,487,791,0.0015819999999999999
+,,13,Adding navbar from Bootstrap Library,1056,613,1669,0.003338
+,,14,Adding image carousel using image from https://via.placeholder.com,1062,1284,2346,0.004692
+,,15,Adding contact form,1367,1463,2830,0.00566
+,,16,Adding footer,1545,1510,3055,0.00611
+,,,Complete,0,0,0,0
+Time,Top Tech Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,78,1,79,0.000158
+,,2,Keyword Clusters Search,82,48,130,0.00026
+,,3,Title Generation,79,22,101,0.000202
+,,4,Outline Generation,142,98,240,0.00047999999999999996
+,,5,Outline Generation,142,105,247,0.000494
+,,6,Outline Generation,142,164,306,0.000612
+,,7,Outline Generation,142,178,320,0.0006399999999999999
+,,8,Outline Generation,142,331,473,0.000946
+,,9,Content Generation,360,427,787,0.0015739999999999999
+,,10,HTML Conversion,549,779,1328,0.002656
+,,11,Changing font,98,205,303,0.000606
+,,12,Adding animation,304,493,797,0.001594
+,,13,Adding navbar from Bootstrap,863,1346,2209,0.004418
+,,14,Adding image carousel using image from https://via.placeholder.com,1437,1684,3121,0.006241999999999999
+,,15,Adding contact form,1767,2046,3813,0.007626
+,,16,Adding footer,2128,2003,4131,0.008262
+,,,Complete,0,0,0,0

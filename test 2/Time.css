@@ -5,27 +5,58 @@
 /* Import Animate.css animations */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
 
-/* CSS code with animations for each tag */
+/* CSS file with font-family, font-size, font-weight, and font-style */
 body {
-  animation: fadeInDown 1s;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* Adding a background color for HTML code */
 h1 {
-  animation: fadeInLeft 1s;
+  background-color: #ff0000;
 }
 
 p {
-  animation: fadeInRight 1s;
+  background-color: #00ff00;
 }
 
 a {
-  animation: fadeInUp 1s;
+  background-color: #0000ff;
 }
 
-/* Add more animations for other tags as needed */
+/* Add AOS animations */
+h1[data-aos],
+p[data-aos],
+a[data-aos] {
+  opacity: 0;
+}
 
-/* AOS initialization */
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
+/* Add Animate.css animations */
+h1[data-aos='animate__fadeIn'],
+p[data-aos='animate__fadeIn'],
+a[data-aos='animate__fadeIn'] {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 0.5s;
+  animation-name: animate__fadeIn;
+}
+
+h1[data-aos='animate__slideInLeft'],
+p[data-aos='animate__slideInLeft'],
+a[data-aos='animate__slideInLeft'] {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 0.5s;
+  animation-name: animate__slideInLeft;
+}
+
+h1[data-aos='animate__slideInRight'],
+p[data-aos='animate__slideInRight'],
+a[data-aos='animate__slideInRight'] {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 0.5s;
+  animation-name: animate__slideInRight;
+}

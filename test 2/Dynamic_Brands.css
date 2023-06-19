@@ -1,6 +1,4 @@
-Sure! Here's the updated CSS code with animations from the websites you provided:
 
-```css
 /* Import AOS animations */
 @import url('https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css');
 
@@ -85,8 +83,3 @@ a {
     transform: none;
   }
 }
-```
-
-Make sure to include the necessary JavaScript code to initialize the AOS animations on your website. Additionally, apply the appropriate classes from Animate.css to the HTML elements you want to animate.
-
-By incorporating these animations into your website, you can enhance user experience and make your content more engaging. Remember to optimize your website's content with relevant long-tail keywords to improve its visibility and attract organic traffic.
