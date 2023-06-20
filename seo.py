@@ -247,7 +247,7 @@ def add_styles_and_components(website: str,
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     
-    styles_file = add_styles(filename)
+    add_styles(filename)
     website = add_components(website)
     website = compile_css(website, filename)
     print("Outlines generated")
