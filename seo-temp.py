@@ -6,7 +6,7 @@ import sys
 import time
 import json
 from threading import Thread
-from typing import List
+from typing import List, Dict
 from dotenv import load_dotenv
 
 # Load .env file
@@ -174,29 +174,17 @@ def create_template(company_name: str,
 def preprocess(contentjson: List[str]) -> List[str]:
     print("Preprocessing content...")
     for cont in contentjson["section"]:
-        print("=====")
-        print(cont["type"])
-        print(cont["content"])
+        cont["content"] = tag_wrapper(cont["type"], cont["content"])
+    print (contentjson)
+        
         
 
-
-def tag_wrapper(tag: str, content: str) -> str:
+def tag_wrapper(tag: str, cont: str) -> None:
     print("Wrapping content...")
-    if content["type"] == "title":
-        content["messages"] = f"""<title>{content["messages"]}</title>"""
-    elif content["type"] == "header 1":
-        content["messages"] = f"""<h1>{content["messages"]}</h1>"""
-    elif content["type"] == "header 2":
-        content["messages"] = f"""<h2>{content["messages"]}</h2>"""
-    elif content["type"] == "header 3":
-        content["messages"] = f"""<h3>{content["messages"]}</h3>"""
-    elif content["type"] == "header 4":
-        content["messages"] = f"""<h4>{content["messages"]}</h4>"""
-    elif content["type"] == "header 5":
-        content["messages"] = f"""<h5>{content["messages"]}</h5>"""
+    return(f"""<{tag}>{cont}</{tag}>""")
+   
 
-
-def insert_content(website: str, content: str) -> str:
+def insert_cont(website: str, content: str) -> str:
     print("Inserting content...")
     start_index = website.find('<body>')
     end_index = website.find('</body>', start_index+1)
