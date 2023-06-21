@@ -118,6 +118,7 @@ def generate_keyword_clusters(topic: str) -> List[str]:
     keywords = keywords_str.split('\n')  # split the keywords into a list assuming they are comma-separated
     keywords = [keyword.replace('"', '') for keyword in keywords]
     keywords = [re.sub(r'^\d+\.\s*', '', keyword) for keyword in keywords]
+    keywords = [keyword.strip() for keyword in keywords]
     keyword_clusters.extend(keywords)
     print("Keywords Generated")
     return keyword_clusters
@@ -231,7 +232,7 @@ def convert_to_html(content: str) -> str:
     print("Generating HTML code for the website...")
     prompt = f"""
     - Convert this content to HTML code:
-    - Seperate the contents into sections and add a <div> tag for each section.
+    - Separate the contents into sections and add a <div> tag for each section.
     - Space the contents out so that they are not tightly packed together.
     - Include a meta description as well as a meta keywords tag:
     {content}
@@ -245,7 +246,7 @@ def add_styles_and_components(website: str,
     # Add styles and components to the website 
     # Call the chat_with_gpt3 function to generate the styles and components
     
-    styles_file = add_styles(filename)
+    add_styles(filename)
     website = add_components(website)
     website = compile_css(website, filename)
     print("Outlines generated")
