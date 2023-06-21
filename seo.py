@@ -378,9 +378,9 @@ def main():
     print(industry)
     
     # Generate target audience
-    audience = get_target(topic)
-    for number, aud in enumerate(audience):
-        print(f"{number+1}. {aud}")
+    # audience = get_target(topic)
+    # for number, aud in enumerate(audience):
+    #     print(f"{number+1}. {aud}")
     
     # Generate SEO keywords
     keyword_clusters = generate_keyword_clusters(topic)
