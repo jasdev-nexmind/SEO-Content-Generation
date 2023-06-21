@@ -4,6 +4,7 @@ import openai
 import re
 import sys
 import time
+import json
 from threading import Thread
 from typing import List
 from dotenv import load_dotenv
@@ -35,7 +36,7 @@ def generate_response(prompt: str,
                     {"role": "user", "content": prompt}
                 ],
             temperature=temp,
-            max_tokens=2500,
+            # max_tokens=2500,
             top_p=p,
             frequency_penalty=freq,
             presence_penalty=presence,
@@ -96,8 +97,9 @@ def write_to_csv(data: tuple):
 # HTML Template Methods
 ##==================================================================================================
 
-def generate_html() -> None:
-    website = create_template()
+
+def generate_html(company_name: str, filename: str, description: str, title: str) -> None:
+    website = create_template(company_name, filename, description, title)
     directory_path = "test"
     os.makedirs(directory_path, exist_ok=True)
     start_index = website.find('<!DOCTYPE html>')
@@ -168,6 +170,32 @@ def create_template(company_name: str,
     """    
     return website
 
+
+def preprocess(contentjson: List[str]) -> List[str]:
+    print("Preprocessing content...")
+    for cont in contentjson["section"]:
+        print("=====")
+        print(cont["type"])
+        print(cont["content"])
+        
+
+
+def tag_wrapper(tag: str, content: str) -> str:
+    print("Wrapping content...")
+    if content["type"] == "title":
+        content["messages"] = f"""<title>{content["messages"]}</title>"""
+    elif content["type"] == "header 1":
+        content["messages"] = f"""<h1>{content["messages"]}</h1>"""
+    elif content["type"] == "header 2":
+        content["messages"] = f"""<h2>{content["messages"]}</h2>"""
+    elif content["type"] == "header 3":
+        content["messages"] = f"""<h3>{content["messages"]}</h3>"""
+    elif content["type"] == "header 4":
+        content["messages"] = f"""<h4>{content["messages"]}</h4>"""
+    elif content["type"] == "header 5":
+        content["messages"] = f"""<h5>{content["messages"]}</h5>"""
+
+
 def insert_content(website: str, content: str) -> str:
     print("Inserting content...")
     start_index = website.find('<body>')
@@ -176,21 +204,6 @@ def insert_content(website: str, content: str) -> str:
         pass
     new_website = website[:start_index+6] + content + website[end_index:]
     return new_website
-
-def tag_wrapper(tag: str, content: str) -> str:
-    print("Wrapping content...")
-    if content['type'] == 'title':
-        content['messages'] = f"<title>{content['messages']}</title>"
-    elif content['type'] == 'header 1':
-        content['messages'] = f"<h1>{content['messages']}</h1>"
-    elif content['type'] == 'header 2':
-        content['messages'] = f"<h2>{content['messages']}</h2>"
-    elif content['type'] == 'header 3':
-        content['messages'] = f"<h3>{content['messages']}</h3>"
-    elif content['type'] == 'header 4':
-        content['messages'] = f"<h4>{content['messages']}</h4>"
-    elif content['type'] == 'header 5':
-        content['messages'] = f"<h5>{content['messages']}</h5>"
 
 
 def compile_files(website: str,
@@ -227,6 +240,7 @@ def fail_safe(website: str) -> str:
     if website.find('<!DOCTYPE html>') == -1:
         website = htmlcode
     return website
+
 
 #===================================================================================================
 ## Content Generation Methods
@@ -311,6 +325,27 @@ def generate_content(company_name: str,
     print("Generating Content...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
+    json1 = """{
+        "section": {
+            {
+                "type": "title",
+                "content": "...."
+            },
+            {
+                "type": "h1",
+                "content": "...."
+            },
+            {
+                "type": "h2",
+                "content": "...."
+            },
+            {
+                "type": "p",
+                "content": "...."
+            }
+        }
+    }
+    """
     prompt = f"""
     Create website content for a company with the following specifications:
     Company Name: {company_name}
@@ -319,12 +354,12 @@ def generate_content(company_name: str,
     Core Keywords: {topic}
     Keywords: {keyword}
     Outline: {outline}
+    Format: {json1}
     Requirements:
     1) Make sure the content length is 700 words.
     2) The content should be engaging and unique.
     3) Include headers and subheaders.
     4) Don't include any conclusion
-    5) Generate it in a JSON format for each section.
     """
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8, model="gpt-3.5-turbo-16k")
     return content
@@ -401,30 +436,28 @@ def main():
     print (description)
     website = create_template(company_name, filename, description, titles)
     content = generate_content(company_name, topic, industry, selected_keyword, titles, outline)
-    print(content)
-    
+    contentjson = json.loads(content)
+    contentcode = preprocess(contentjson)
     
     # Comvert content into HTML
     global htmlcode
+    htmlcode = contentcode
     # htmlcode = convert_to_html(content)
-    
-    # Combine HTML template with content HTML
-    website = ""
 
     
     # Write into file
-    directory_path = "content"
-    os.makedirs(directory_path, exist_ok=True)
-    start_index = htmlcode.find('<!DOCTYPE html>')
-    end_index = htmlcode.find('</html>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        new_website = htmlcode
-    else:
-        new_website = htmlcode[start_index:end_index+7]      
-    with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
-        f.write(new_website)
+    # directory_path = "content"
+    # os.makedirs(directory_path, exist_ok=True)
+    # start_index = website.find('<!DOCTYPE html>')
+    # end_index = website.find('</html>', start_index+1)
+    # if start_index == -1 and end_index == -1:
+    #     new_website = htmlcode
+    # else:
+    #     new_website = htmlcode[start_index:end_index+7]      
+    # with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
+    #     f.write(new_website)
         
-    print(f"Finish file for {titles}")
+    # print(f"Finish file for {titles}")
     
     # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
@@ -437,3 +470,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

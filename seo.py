@@ -35,7 +35,7 @@ def generate_response(prompt: str,
                     {"role": "user", "content": prompt}
                 ],
             temperature=temp,
-            max_tokens=2500,
+            # max_tokens=2500,
             top_p=p,
             frequency_penalty=freq,
             presence_penalty=presence,
@@ -183,7 +183,6 @@ def generate_content(company_name: str,
     2) The content should be engaging and unique.
     3) Include headers and subheaders.
     4) Don't include any conclusion
-    5) Generate it in a JSON format for each section.
     """
     # Create website content for a company with the following specifications:
     # Company Name: {company_name}
@@ -266,7 +265,6 @@ def add_components(website: str) -> str:
 
 
 def add(website: str, component: str) -> str:
-    global htmlcode
     print(f"Adding {component}...")
     prompt = f"""
     - Analyze this HTML code
@@ -275,7 +273,6 @@ def add(website: str, component: str) -> str:
     """
     website = chat_with_gpt3(f"Adding {component}", prompt, temp=0.2, p=0.1, model = "gpt-3.5-turbo-16k")
     website = fail_safe(website)
-    htmlcode = website
     return website    
 
 
