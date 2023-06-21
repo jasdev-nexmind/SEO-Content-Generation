@@ -4295,3 +4295,127 @@ Microsoft,Sofa Manufacturing Company in Malaysia,0,Initial,0,0,0,0
 ,,11,Content Generation,367,937,1304,0.002608
 ,,,Complete,0,0,0,0
 Oreo,Best Ice Cream in Malaysia,0,Initial,0,0,0,0
+Apple,Best Biscuit Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,74,3,77,0.000154
+,,2,Target Search,77,104,181,0.00036199999999999996
+,,3,Keyword Clusters Search,78,52,130,0.00026
+,,4,Title Generation,74,19,93,0.000186
+,,5,Outline Generation,137,101,238,0.00047599999999999997
+,,6,Outline Generation,137,92,229,0.00045799999999999997
+,,7,Outline Generation,137,97,234,0.000468
+,,8,Outline Generation,137,110,247,0.000494
+,,9,Outline Generation,137,100,237,0.000474
+,,10,Meta Description Generation,94,58,152,0.00030399999999999996
+Hertz,Sofa Manufacturing Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,3,75,0.00015
+,,2,Target Search,75,73,148,0.000296
+,,3,Keyword Clusters Search,76,57,133,0.000266
+,,4,Title Generation,75,18,93,0.000186
+,,5,Outline Generation,137,92,229,0.00045799999999999997
+,,6,Outline Generation,137,101,238,0.00047599999999999997
+,,7,Outline Generation,137,95,232,0.000464
+,,8,Outline Generation,137,144,281,0.000562
+,,9,Outline Generation,137,124,261,0.000522
+,,10,Meta Description Generation,97,35,132,0.00026399999999999997
+,,11,Content Generation,387,674,1061,0.0021219999999999998
+,,,Complete,0,0,0,0
+Microsoft,Top Tech Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,1,73,0.000146
+,,2,Target Search,75,74,149,0.000298
+,,3,Keyword Clusters Search,76,49,125,0.00025
+,,4,Title Generation,74,16,90,0.00017999999999999998
+,,5,Outline Generation,134,88,222,0.000444
+,,6,Outline Generation,134,92,226,0.000452
+,,7,Outline Generation,134,90,224,0.000448
+,,8,Outline Generation,134,90,224,0.000448
+,,9,Outline Generation,134,102,236,0.000472
+,,10,Meta Description Generation,91,43,134,0.000268
+Time,Top Tech Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,1,73,0.000146
+,,2,Target Search,75,86,161,0.00032199999999999997
+,,3,Keyword Clusters Search,76,49,125,0.00025
+,,4,Title Generation,73,15,88,0.000176
+,,5,Outline Generation,132,78,210,0.00041999999999999996
+,,6,Outline Generation,132,74,206,0.000412
+,,7,Outline Generation,132,88,220,0.00043999999999999996
+,,8,Outline Generation,132,83,215,0.00043
+,,9,Outline Generation,132,91,223,0.000446
+,,10,Meta Description Generation,91,39,130,0.00026
+,,11,Content Generation,490,669,1159,0.0023179999999999997
+Time,Car Delership in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,73,3,76,0.00015199999999999998
+,,2,Target Search,76,100,176,0.000352
+,,3,Keyword Clusters Search,77,51,128,0.000256
+,,4,Title Generation,73,15,88,0.000176
+,,5,Outline Generation,132,109,241,0.00048199999999999995
+,,6,Outline Generation,132,106,238,0.00047599999999999997
+,,7,Outline Generation,132,111,243,0.000486
+,,8,Outline Generation,132,123,255,0.0005099999999999999
+,,9,Outline Generation,132,144,276,0.000552
+,,10,Meta Description Generation,94,43,137,0.000274
+,,11,Content Generation,523,1468,1991,0.003981999999999999
+Apple,Online Florist in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,4,76,0.00015199999999999998
+,,2,Target Search,75,83,158,0.000316
+,,3,Keyword Clusters Search,76,57,133,0.000266
+,,4,Title Generation,74,16,90,0.00017999999999999998
+,,5,Outline Generation,134,97,231,0.00046199999999999995
+,,6,Outline Generation,134,114,248,0.000496
+,,7,Outline Generation,134,108,242,0.000484
+,,8,Outline Generation,134,101,235,0.00047
+,,9,Outline Generation,134,122,256,0.000512
+,,10,Meta Description Generation,94,36,130,0.00026
+,,11,Content Generation,483,904,1387,0.002774
+,,,Complete,0,0,0,0
+NexMind,Top Tech Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,1,73,0.000146
+,,2,Target Search,75,74,149,0.000298
+,,3,Keyword Clusters Search,76,49,125,0.00025
+,,4,Title Generation,76,19,95,0.00018999999999999998
+,,5,Outline Generation,139,113,252,0.000504
+,,6,Outline Generation,139,111,250,0.0005
+,,7,Outline Generation,139,112,251,0.000502
+,,8,Outline Generation,139,117,256,0.000512
+,,9,Outline Generation,139,124,263,0.000526
+,,10,Meta Description Generation,92,43,135,0.00027
+,,11,Content Generation,498,755,1253,0.002506
+,,,Complete,0,0,0,0
+Taj,Best Ice Cream in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,72,3,75,0.00015
+,,2,Target Search,75,92,167,0.000334
+,,3,Keyword Clusters Search,76,60,136,0.000272
+,,4,Title Generation,77,26,103,0.000206
+,,5,Outline Generation,147,101,248,0.000496
+,,6,Outline Generation,147,115,262,0.0005239999999999999
+,,7,Outline Generation,147,117,264,0.0005279999999999999
+,,8,Outline Generation,147,116,263,0.000526
+,,9,Outline Generation,147,131,278,0.000556
+,,10,Meta Description Generation,91,67,158,0.000316
+,,11,Content Generation,529,869,1398,0.002796
+,,,Complete,0,0,0,0
+Microsoft,Top Tech Company in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,74,3,77,0.000154
+,,2,Target Search,77,72,149,0.000298
+,,3,Keyword Clusters Search,78,48,126,0.000252
+,,4,Title Generation,75,18,93,0.000186
+,,5,Outline Generation,137,75,212,0.000424
+,,6,Outline Generation,137,88,225,0.00045
+,,7,Outline Generation,137,85,222,0.000444
+,,8,Outline Generation,137,94,231,0.00046199999999999995
+,,9,Outline Generation,137,91,228,0.00045599999999999997
+,,10,Meta Description Generation,94,40,134,0.000268
+,,11,Content Generation,480,892,1372,0.002744
+,,,Complete,0,0,0,0
+Taj,Online Florist in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,74,5,79,0.000158
+,,2,Target Search,77,78,155,0.00031
+,,3,Keyword Clusters Search,78,51,129,0.000258
+,,4,Title Generation,76,14,90,0.00017999999999999998
+,,5,Outline Generation,134,88,222,0.000444
+,,6,Outline Generation,134,114,248,0.000496
+,,7,Outline Generation,134,77,211,0.00042199999999999996
+,,8,Outline Generation,134,99,233,0.000466
+,,9,Outline Generation,134,219,353,0.0007059999999999999
+,,10,Meta Description Generation,96,55,151,0.00030199999999999997
+,,11,Content Generation,480,1061,1541,0.0030819999999999997
+,,,Complete,0,0,0,0

@@ -48,6 +48,8 @@ def generate_response(prompt: str,
         print("Rate limit reached. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
     except openai.error.Timeout as e:  # timeout error
         print("Request timed out. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
+    except openai.error.ServiceUnavailableError:
+        print("Server Overloaded. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
     except openai.error.APIError as e:
         if hasattr(e, 'response') and e.response.status_code == 429:  # rate limit error
             print("Rate limit reached. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
@@ -67,7 +69,7 @@ def chat_with_gpt3(stage: str,
                    p: float = 0.5,
                    freq: float = 0,
                    presence: float = 0,
-                   model: str = "gpt-3.5-turbo-16k") -> str:
+                   model: str = "gpt-3.5-turbo") -> str:
     max_retries = 5
     for retries in range(max_retries):
         response, prompt_tokens, completion_tokens, total_tokens = generate_response(prompt, temp, p, freq, presence, retries, max_retries, model)
@@ -97,131 +99,69 @@ def write_to_csv(data: tuple):
 # HTML Template Methods
 ##==================================================================================================
 
+# def create_template(company_name: str,
+#                     filename: str,
+#                     description: str,
+#                     title: str) -> str:
+#     print("Creating template...")
+#     website= f"""
+#     <!DOCTYPE html>
+#     <html>
+#     <head>
+#         <title>{company_name}</title>
+#         <meta charset="UTF-8">
+#         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#         <meta name="description" content="{description}">
+#         <title>{title}</title>
+#         <!-- CSS stylesheets -->
+#         <link rel="stylesheet" href="{filename}.css">
+#         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+#         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+#         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+#         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+#     </head>
+#     <body>
+#             <nav class="navbar navbar-expand-lg bg-body-tertiary">
+#                 <div class="container-fluid shadow-2xl">
+#                     <a class="navbar-brand flex items-center" href="#">
+#                         <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
+#                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
+#                     </a>
+#                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+#                     <lord-icon
+#                         src="https://cdn.lordicon.com/dfjljsxr.json"
+#                         trigger="morph"
+#                         colors="outline:#121331,primary:#ffffff"
+#                         style="width:50px;height:50px">
+#                     </lord-icon>
+#                 </button>
+#                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+#                     <ul class="navbar-nav">
+#                     <li class="nav-item">
+#                         <a class="nav-link active" aria-current="page" href="#">Home</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">Products</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">About Us</a>
+#                     </li>
+#                     <li class="nav-item">
+#                         <a class="nav-link" href="#">Contact Us</a>
+#                     </li>
+#                     </ul>
+#                 </div>
+#                 </div>
+#             </nav>
+#         </body>
+#     </html>	
+#     """    
+#     return website
 
-def generate_html(company_name: str, filename: str, description: str, title: str) -> None:
-    website = create_template(company_name, filename, description, title)
-    directory_path = "test"
-    os.makedirs(directory_path, exist_ok=True)
-    start_index = website.find('<!DOCTYPE html>')
-    end_index = website.find('</html>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        pass
-    new_website = website[start_index:end_index+7]      
-    with open(os.path.join(directory_path, f'test.html'), 'w', encoding='utf-8') as f:
-        f.write(new_website)
-
-
-def create_template(company_name: str,
-                    filename: str,
-                    description: str,
-                    title: str) -> str:
-    print("Creating template...")
-    website= f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Dynamic Brands</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="{description}">
-        <title>{title}</title>
-        <!-- CSS stylesheets -->
-        <link rel="stylesheet" href="{filename}.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-    </head>
-    <body>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid shadow-2xl">
-                    <a class="navbar-brand flex items-center" href="#">
-                        <img src="https://via.placeholder.com/50x50" alt="Logo" class="d-inline-block align-text-top" />
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{company_name}</span>
-                    </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <lord-icon
-                        src="https://cdn.lordicon.com/dfjljsxr.json"
-                        trigger="morph"
-                        colors="outline:#121331,primary:#ffffff"
-                        style="width:50px;height:50px">
-                    </lord-icon>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    </ul>
-                </div>
-                </div>
-            </nav>
-        </body>
-    </html>	
-    """    
-    return website
-
-
-def preprocess(contentjson: List[str]) -> List[str]:
-    print("Preprocessing content...")
-    for cont in contentjson["section"]:
-        cont["content"] = tag_wrapper(cont["type"], cont["content"])
-    print (contentjson)
-        
-        
-
-def tag_wrapper(tag: str, cont: str) -> None:
-    print("Wrapping content...")
-    return(f"""<{tag}>{cont}</{tag}>""")
-   
-
-def insert_cont(website: str, content: str) -> str:
-    print("Inserting content...")
-    start_index = website.find('<body>')
-    end_index = website.find('</body>', start_index+1)
-    if start_index == -1 and end_index == -1:
-        pass
-    new_website = website[:start_index+6] + content + website[end_index:]
-    return new_website
-
-
-def compile_files(website: str,
-                  content: str,
-                  filename: str,
-                  add_style: bool) -> str:
-    print("Compiling files...")    
-    end_index = website.find('</body>')
-    if end_index == -1:
-        new_website = website
-    else:
-        new_website = website[:end_index] + content + '\n' + website[end_index:]
-    return new_website
-
-
-def compile_css(website: str, filename: str) -> str:
-    print("Compiling CSS...")
-    start_index = website.find('</head>')
-    a_style = f'<link rel="stylesheet" href="{filename}.css">'
-    if start_index == -1:
-        new_website = website
-    else:
-        new_website = website[:start_index] + a_style + '\n' + website[start_index:]
-    return new_website
-        
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
     return re.sub(r'[^A-Za-z0-9]+', '_', filename)
-
     
     
 def fail_safe(website: str) -> str:
@@ -242,7 +182,7 @@ def get_industry(topic) -> str:
     return industry
 
 
-def get_target(topic: str) -> List[str]:
+def get_audience(topic: str) -> List[str]:
     audienceList = []
     prompt = f"Generate a list of target audience for these keywords, no explanation is needed: {topic}"
     audience = chat_with_gpt3("Target Search", prompt, temp=0.2, p=0.1)
@@ -274,6 +214,18 @@ def generate_title(company_name: str, keyword: str) -> str:
     return title
 
 
+def generate_meta_description(company_name: str,
+                              topic: str,
+                              keywords: str) -> str:
+    print("Generating meta description...")
+    prompt = f"""
+    Generate a meta description for {company_name} based on this topic: '{topic}'.
+    Use these keywords in the meta description: {keywords}
+    """
+    meta_description = chat_with_gpt3("Meta Description Generation", prompt, temp=0.7, p=0.8)
+    return meta_description
+
+
 def generate_outline(company_name: str,
                      topic: str,
                      industry: str,
@@ -288,20 +240,8 @@ def generate_outline(company_name: str,
     directorypath = "outline"
     os.makedirs(directorypath, exist_ok=True)
     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
-        f.write(outline)
+        f.write(outline)     
         
-        
-def generate_meta_description(company_name: str,
-                              topic: str,
-                              keywords: str) -> str:
-    print("Generating meta description...")
-    prompt = f"""
-    Generate a meta description for {company_name} based on this topic: '{topic}'.
-    Use these keywords in the meta description: {keywords}
-    """
-    meta_description = chat_with_gpt3("Meta Description Generation", prompt, temp=0.7, p=0.8)
-    return meta_description
-
 
 def generate_content(company_name: str,
                      topic: str,
@@ -313,24 +253,51 @@ def generate_content(company_name: str,
     print("Generating Content...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
-    json1 = """{
-        "section": {
-            {
-                "type": "title",
-                "content": "...."
-            },
-            {
-                "type": "h1",
-                "content": "...."
-            },
-            {
-                "type": "h2",
-                "content": "...."
-            },
-            {
-                "type": "p",
-                "content": "...."
-            }
+    json1 = """
+    {
+        "banner": {
+                "h1": "...",
+                "h2": "...",
+                "button": [
+                    "About Us",
+                    "Learn More"
+                ]
+        },
+        "about": {
+                "h2": "About Us",
+                "p": "..."
+        },
+        "blogs":{
+            "h2": "",
+            "post": [{
+                    "h3": "...",
+                    "p": "...",
+                },
+                {
+                    "h3": "...",
+                    "p": "...",
+                },
+                {
+                    "h3": "...",
+                    "p": "...",
+                }
+            ]
+        },
+        "faq":{
+            "h2": "Frequently Asked Questions",
+            "question": [{
+                    "h3": "...",
+                    "p": "...",
+                },
+                {
+                    "h3": "...",
+                    "p": "...",
+                },
+                {
+                    "h3": "...",
+                    "p": "...",
+                },...
+            ]
         }
     }
     """
@@ -379,10 +346,10 @@ def main():
     industry = get_industry(topic)
     print(industry)
     
-    # Generate target audience
-    audience = get_target(topic)
-    for number, aud in enumerate(audience):
-        print(f"{number+1}. {aud}")
+    # # Generate target audience
+    # audience = get_audience(topic)
+    # for number, aud in enumerate(audience):
+    #     print(f"{number+1}. {aud}")
     
     # Generate SEO keywords
     keyword_clusters = generate_keyword_clusters(topic)
@@ -396,13 +363,13 @@ def main():
         keyword_choice = int(input("Choose a keyword: "))
 
     selected_keyword = keyword_clusters[keyword_choice-1]
-    titles = generate_title(company_name, selected_keyword)
-    print(titles)
+    title = generate_title(company_name, selected_keyword)
+    print(title)
     
     # Generate an 5 outlines
     threads = []
     for i in range(5):
-        t = Thread(target=generate_outline, args=(company_name, topic, industry, selected_keyword, titles, i))
+        t = Thread(target=generate_outline, args=(company_name, topic, industry, selected_keyword, title, i))
         threads.append(t)
         t.start()
     for thread in threads:
@@ -422,30 +389,26 @@ def main():
         outline = f.read()
     description = generate_meta_description(company_name, topic, keyword)
     print (description)
-    website = create_template(company_name, filename, description, titles)
-    content = generate_content(company_name, topic, industry, selected_keyword, titles, outline)
+    content = generate_content(company_name, topic, industry, selected_keyword, title, outline)
     contentjson = json.loads(content)
-    contentcode = preprocess(contentjson)
+    updated_json = {"meta":{"title":title,"description":description}}
+    updated_json.update(contentjson)
+    print(json.dumps(updated_json, indent=4))
+
+    # contentcode = preprocess(contentjson)
     
     # Comvert content into HTML
     global htmlcode
-    htmlcode = contentcode
     # htmlcode = convert_to_html(content)
 
     
     # Write into file
     # directory_path = "content"
-    # os.makedirs(directory_path, exist_ok=True)
-    # start_index = website.find('<!DOCTYPE html>')
-    # end_index = website.find('</html>', start_index+1)
-    # if start_index == -1 and end_index == -1:
-    #     new_website = htmlcode
-    # else:
-    #     new_website = htmlcode[start_index:end_index+7]      
-    # with open(os.path.join(directory_path, f'{sanitize_filename(titles)}.html'), 'w', encoding='utf-8') as f:
+    # os.makedirs(directory_path, exist_ok=True) 
+    # with open(os.path.join(directory_path, f'{sanitize_filename(title)}.json'), 'w', encoding='utf-8') as f:
     #     f.write(new_website)
         
-    # print(f"Finish file for {titles}")
+    # print(f"Finish file for {title}")
     
     # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
@@ -459,4 +422,62 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+
+
+
+
+
+# {
+#     "logo": "...",
+#     "banner": {
+#             "image": "...",
+#             "h1": "...",
+#             "h2": "...",
+#             "button": [
+#                 "About Us",
+#                 "Learn More"
+#             ]
+#     },
+#     "about": {
+#             "image": "...",
+#             "h2": "About Us",
+#             "p": "..."
+#     },
+#     "blogs":{
+#         "h2": "Customer Review",
+#         "post": [{
+#                 "h3": "...",
+#                 "p": "...",
+#             },
+#             {
+#                 "h3": "...",
+#                 "p": "...",
+#             },
+#             {
+#                 "h3": "...",
+#                 "p": "...",
+#             }
+#         ]
+#     },
+#     "gallery":{
+#         "image": []
+#     },
+#     "faq":{
+#         "h2": "Frequently Asked Questions",
+#         "question": [{
+#                 "h3": "...",
+#                 "p": "...",
+#             },
+#             {
+#                 "h3": "...",
+#                 "p": "...",
+#             },
+#             {
+#                 "h3": "...",
+#                 "p": "...",
+#             },...
+#         ]
+#     }
+# }
 
