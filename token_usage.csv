@@ -4791,3 +4791,11 @@ Dynamic Brands,Sofa Manufacturing Company,0,Initial,0,0,0,0
 ,,7,Image Context Generation,110,91,201,0.00040199999999999996
 ,,8,Content Generation,376,706,1082,0.0021639999999999997
 ,,,Complete,0,0,0,0
+Hertz,Best Hotel in Malaysia,0,Initial,0,0,0,0
+,,1,Industry Identification,73,5,78,0.000156
+,,2,Keyword Clusters Search,77,51,128,0.000256
+,,3,Title Generation,78,15,93,0.000186
+,,4,Image Context Generation,112,65,177,0.000354
+,,5,Image Context Generation,112,44,156,0.000312
+,,6,Meta Description Generation,94,48,142,0.00028399999999999996
+,,7,Image Context Generation,112,90,202,0.000404

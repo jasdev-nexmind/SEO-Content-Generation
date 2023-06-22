@@ -111,7 +111,7 @@ def get_target(topic: str) -> List[str]:
     return audienceList
 
 
-def generate_keyword_clusters(topic: str) -> List[str]:
+def generate_long_tail_keywords(topic: str) -> List[str]:
     keyword_clusters = []
     prompt = f"Generate 5 SEO-optimized long-tail keywords related to the topic: {topic}."
     keywords_str = chat_with_gpt3("Keyword Clusters Search", prompt, temp=0.2, p=0.1)
@@ -380,8 +380,8 @@ def main():
     #     print(f"{number+1}. {aud}")
     
     # Generate SEO keywords
-    keyword_clusters = generate_keyword_clusters(topic)
-    for number, keyword in enumerate(keyword_clusters):
+    long_tail_keywords = generate_long_tail_keywords(topic)
+    for number, keyword in enumerate(long_tail_keywords):
         print(f"{number+1}. {keyword}")
             
     # Generate title from keyword
@@ -390,7 +390,7 @@ def main():
     else:
         keyword_choice = int(input("Choose a keyword: "))
 
-    selected_keyword = keyword_clusters[keyword_choice-1]
+    selected_keyword = long_tail_keywords[keyword_choice-1]
     titles = generate_title(company_name, selected_keyword)
     print(titles)
     

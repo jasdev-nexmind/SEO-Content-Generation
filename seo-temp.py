@@ -58,7 +58,7 @@ def stabilityai_generate(prompt: str,
     
 
 def generate_content_response(prompt: str,
-                      temp: float, 
+                      temp: float,
                       p: float,
                       freq: float,
                       presence: float,
@@ -80,7 +80,7 @@ def generate_content_response(prompt: str,
         )
         # print (response)
         return response.choices[0].message['content'], response['usage']['prompt_tokens'], response['usage']['completion_tokens'], response['usage']['total_tokens']
-    
+
     except openai.error.RateLimitError as e:  # rate limit error
         print("Rate limit reached. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
     except openai.error.Timeout as e:  # timeout error
@@ -118,7 +118,7 @@ def generate_image_response(prompt: str,
         else:
             gallery = [response['data'][i]['url'] for i in range(n)]
             return gallery
-            
+
     except openai.error.RateLimitError as e:  # rate limit error
         print("Rate limit reached. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
     except openai.error.Timeout as e:  # timeout error
@@ -135,7 +135,7 @@ def generate_image_response(prompt: str,
         else:
             raise e  # if it's not a rate limit error, re-raise the exception
     time.sleep(60)
-    
+
 
 def chat_with_gpt3(stage: str,
                    prompt: str,
@@ -163,6 +163,7 @@ def chat_with_dall_e(prompt: str,
             return url
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
 
+
 def write_to_csv(data: tuple):
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
     with open('token_usage.csv', 'a', newline='') as csvfile:
@@ -171,7 +172,7 @@ def write_to_csv(data: tuple):
         if not file_exists:
             writer.writeheader()  # If file doesn't exist, write the header
         with open('token_usage.csv', 'r') as f:
-            last_row = None 
+            last_row = None
             for last_row in csv.DictReader(f):
                 pass  # The loop will leave 'last_row' as the last row
             iteration = int(last_row['Iteration']) + 1 if last_row else 1  # If there is a last row, increment its 'Iteration' value by 1. Otherwise, start at 1
@@ -179,9 +180,9 @@ def write_to_csv(data: tuple):
         writer.writerow({'Iteration': iteration, 'Stage': data[0], 'Prompt Tokens': data[1], 'Completion Tokens': data[2], 'Total Tokens': data[3], 'Price': float(price)})
 
 
-##==================================================================================================
+# ##==================================================================================================
 # JSON Functions
-##==================================================================================================
+# ##==================================================================================================
 
 def deep_update(source, overrides):
     for key, value in overrides.items():
@@ -193,20 +194,21 @@ def deep_update(source, overrides):
             source[key] = value
     return source
 
+
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
     return re.sub(r'[^A-Za-z0-9]+', '_', filename)
-    
-    
+
+
 # def fail_safe(website: str) -> str:
 #     if website.find('<!DOCTYPE html>') == -1:
 #         website = htmlcode
 #     return website
 
 
-#===================================================================================================
-## Content Generation Methods
-#===================================================================================================
+# ##===================================================================================================
+# Content Generation Methods
+# ##===================================================================================================
 
 
 def get_industry(topic) -> str:
@@ -228,7 +230,7 @@ def get_audience(topic: str) -> List[str]:
     return audienceList
 
 
-def generate_keyword_clusters(topic: str) -> List[str]:
+def generate_long_tail_keywords(topic: str) -> List[str]:
     keyword_clusters = []
     prompt = f"Generate 5 SEO-optimized long-tail keywords related to the topic: {topic}."
     keywords_str = chat_with_gpt3("Keyword Clusters Search", prompt, temp=0.2, p=0.1)
@@ -276,14 +278,14 @@ def generate_meta_description(company_name: str,
 #     os.makedirs(directorypath, exist_ok=True)
 #     with open(os.path.join(directorypath, f'{filename}.txt'), 'w') as f:
 #         f.write(outline)     
-        
+
 
 def generate_content(company_name: str,
                      topic: str,
                      industry: str,
                      keyword: str,
                      title: str) -> str:
-    
+
     print("Generating Content...")
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
@@ -352,23 +354,24 @@ def generate_content(company_name: str,
     content = chat_with_gpt3("Content Generation", prompt, temp=0.7, p=0.8, model="gpt-3.5-turbo-16k")
     return content
 
+
 def content_generation(company_name: str,
                        topic: str,
                        industry: str,
                        keyword: str,
-                       title: str) -> None:
+                       title: str) -> dict:
     description = generate_meta_description(company_name, topic, keyword)
     print (description)
     content = generate_content(company_name, topic, industry, keyword, title)
     contentjson = json.loads(content)
-    updated_json = {"meta":{"title":title,"description":description}}
+    updated_json = {"meta": {"title": title, "description": description}}
     updated_json.update(contentjson)
-    return (updated_json)
-            
+    return updated_json
 
-#=======================================================================================================================
+
+# =======================================================================================================================
 # Image Generation
-#=======================================================================================================================
+# =======================================================================================================================
 
 def get_image_context(company_name: str,
                       keyword: str,
@@ -400,20 +403,20 @@ def image_generation(company_name: str,
                      title: str) -> Dict:
     print("Generating Images...")
     image_json = {
-        "banner":{
-            "image":"..."
+        "banner": {
+            "image": "..."
         },
-        "about":{
-            "image":"..."
+        "about": {
+            "image": "..."
         },
-        "gallery":{
-            "image":[]
+        "gallery": {
+            "image": []
         }
     }
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Start the threads and collect the futures
         futures = {executor.submit(get_image_context, company_name, keyword, i): i for i in image_json.keys()}
-        
+
         for future in concurrent.futures.as_completed(futures):
             section = futures[future]
             try:
@@ -427,16 +430,11 @@ def image_generation(company_name: str,
                     image_json[section]["image"].extend(image_url)
 
     return(image_json)
-
-#=======================================================================================================================
-# File Methods
-#=======================================================================================================================
-
-
+    
     
 #=======================================================================================================================
 # Main Function
-#=======================================================================================================================
+# =======================================================================================================================
 
 def main():
     # Get the company name and topic from the user
@@ -456,23 +454,22 @@ def main():
         if not file_exists:
             writer.writeheader()
         writer.writerow({'Company Name': company_name, 'Keyword': topic, 'Iteration': 0, 'Stage': 'Initial', 'Prompt Tokens': 0, 'Completion Tokens': 0, 'Total Tokens': 0, 'Price': 0})
-        
+
     # Generate industry 
     industry = get_industry(topic)
     print(industry)
-    
-    
+
     # Generate SEO keywords
-    keyword_clusters = generate_keyword_clusters(topic)
-    for number, keyword in enumerate(keyword_clusters):
+    long_tail_keywords = generate_long_tail_keywords(topic)
+    for number, keyword in enumerate(long_tail_keywords):
         print(f"{number+1}. {keyword}")
-            
+
     # Generate title from keyword
-    selected_keyword = keyword_clusters[random.randint(0, 4)]
+    selected_keyword = long_tail_keywords[random.randint(0, 4)]
     print("Selected Keyword: " + selected_keyword)
     title = generate_title(company_name, selected_keyword)
     print(title)
-    
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         image_future = executor.submit(image_generation, company_name, topic, industry, selected_keyword, title)
         content_future = executor.submit(content_generation, company_name, topic, industry, selected_keyword, title)
@@ -482,16 +479,13 @@ def main():
             content_result = content_future.result()
         except Exception as e:
             print("An exception occurred during execution: ", e)
-
-        
-    merged_dict = deep_update(content_result, image_result)
     
+    merged_dict = deep_update(content_result, image_result)
+
     directory_path = "content"
-    os.makedirs(directory_path, exist_ok=True) 
+    os.makedirs(directory_path, exist_ok=True)
     with open(os.path.join(directory_path, f'data.json'), 'w', encoding='utf-8') as f:
         json.dump(merged_dict, f, ensure_ascii=False, indent=4)
-    
-    print("Finished file for " + company_name)
     
     # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
