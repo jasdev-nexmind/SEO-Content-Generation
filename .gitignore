@@ -8,12 +8,12 @@ __pycache__/
 
 # HTML files
 .HTML
-content/
 outline/
-*.html
+
 *.htm
 content runs/
 test 2/
+json test run/
 
 # Distribution / packaging
 .Python
