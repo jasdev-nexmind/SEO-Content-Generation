@@ -19,53 +19,26 @@
     }</script>
 </head>
 <body>
-  <div>
-    <div>
-      <section>
-        <header>
-          <div class="header-wrapper">
-            <a href="#" class="header-logo-link">
-              <img class="header-logo" src="https://cdn.shopify.com/s/files/1/0097/2075/8332/files/logo_shoes_black.png?v=1676026182" alt="Logo" />
-            </a>
-            <ul class="navigation">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">Sign Up</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
-            <button class="button-sidebar">
-              <div class="button-sidebar-icon"><span class="material-icons-outlined" @click="isExpanded = !isExpanded"> menu </span></div>
-            </button>
-          </div>
-        </header>
-  
-        <aside :class="{ isExpanded: isExpanded }">
-          <div class="mobile-sidebar-content">
-            <button class="button-sidebar">
-              <div class="button-sidebar-icon"><span class="material-icons-outlined btn-close" @click="isExpanded = !isExpanded"> clear </span></div>
-            </button>
-            <ul class="navigation-mobile">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">Sign Up</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
-          </div>
-        </aside>
-        <div class="header-padding"></div>
-  
-        <!-- <div class="toolbar">Toolbar</div> -->
-      </section>
+  <header>
+    <div class="header-wrapper">
+      <a href="#" class="header-logo-link">
+        <img class="header-logo" src="https://cdn.shopify.com/s/files/1/0097/2075/8332/files/logo_shoes_black.png?v=1676026182" alt="Logo" />
+      </a>
+
     </div>
+
+  </header>
+
+  <div>
+
     <div id="banner">
     </div>
     <div id="aboutus">
       
     </div>
     <div>
-      <section class="nex__articles">
+      
+      <section class="nex__articles " >
         <div class="article-section section__width-xl">
           <div class="banner__text">
             <h2 id="blogtitle" class="banner__heading"></h2>
@@ -132,7 +105,7 @@
             <div class="lightbox-gallery">
               <div class="container">
                 <div class="row">
-                  <div id="gallery" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                  <div id="gallery" class="col-sm-6 col-md-4 col-lg-3">
                       
                   </div>
                 </div>
