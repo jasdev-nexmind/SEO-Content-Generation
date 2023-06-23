@@ -48,7 +48,7 @@ def stabilityai_generate(prompt: str,
 })
     image = Image.open(io.BytesIO(image_bytes))
     print("Done")
-    directory = "D:/Work/autogpt-plugin/SEO-Content-Generation/pictures"  # Change this to your directory
+    directory = "./content"  # Change this to your directory
     
     # Create the directory if it doesn't exist
     if not os.path.exists(directory):
@@ -375,32 +375,31 @@ def content_generation(company_name: str,
 
 def get_image_context(company_name: str,
                       keyword: str,
-                      section: str) -> str:
+                      section: str,
+                      topic: str,
+                      industry: str) -> str:
     context_json = """
         {
             "context":"..."
-            "size":"...(e.g: 1024x1024)"
+            "size":"...(256x256/512x512/1024x1024)"
         }
     """
     prompt = f"""
-    Please help {company_name} generate an image context for the {section} section about this keyword: {keyword}
+    Please generate an context of an image for the {section} section about {keyword} and {topic}. The company name is {company_name} scope of the image is  {industry}
     Format: {context_json}
     """
     image_context = chat_with_gpt3("Image Context Generation", prompt, temp=0.7, p=0.8)
     imagecontext = json.loads(image_context)
-    print(imagecontext)
-    if section != "gallery":
-        imageurl = chat_with_dall_e(imagecontext["context"], imagecontext["size"], 1)
-    else:
-        imageurl = chat_with_dall_e(imagecontext["context"], imagecontext["size"], 8)
+    print(section)
+
+    imageurl = chat_with_dall_e(imagecontext["context"], imagecontext["size"], 1)
     return imageurl
 
 
 def image_generation(company_name: str,
                      topic: str,
                      industry: str,
-                     keyword: str,
-                     title: str) -> Dict:
+                     keyword: str) -> Dict:
     print("Generating Images...")
     image_json = {
         "banner": {
@@ -415,7 +414,11 @@ def image_generation(company_name: str,
     }
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Start the threads and collect the futures
-        futures = {executor.submit(get_image_context, company_name, keyword, i): i for i in image_json.keys()}
+        for i in image_json.keys():
+            if i == "gallery":
+                futures = {executor.submit(get_image_context, company_name, keyword, i, topic, industry): j for j in range (8)}
+            else:
+                futures = {executor.submit(get_image_context, company_name, keyword, i, topic, industry): i}
 
         for future in concurrent.futures.as_completed(futures):
             section = futures[future]
@@ -471,7 +474,7 @@ def main():
     print(title)
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        image_future = executor.submit(image_generation, company_name, topic, industry, selected_keyword, title)
+        image_future = executor.submit(image_generation, company_name, topic, industry, selected_keyword)
         content_future = executor.submit(content_generation, company_name, topic, industry, selected_keyword, title)
 
         try:
@@ -542,7 +545,7 @@ if __name__ == "__main__":
 #         ]
 #     },
 #     "gallery":{
-#         "image": []
+#         
 #     },
 #     "faq":{
 #         "h2": "Frequently Asked Questions",
