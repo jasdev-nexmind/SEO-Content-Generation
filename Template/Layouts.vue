@@ -27,6 +27,7 @@ import LayoutForm_ContactUs2 from "../Layouts/Layout-ContactUs2.vue";
 
 import LayoutForm_FAQ from "../Layouts/Layout-FAQ.vue";
 import LayoutGallery_4Columns from "../Layouts/Layout-Gallery_4Columns.vue";
+import jsonData from '../content/Apple.json';
 
 export default {
   name: "Layouts",
@@ -43,6 +44,8 @@ export default {
   data() {
     return {
       isExpanded: false,
+      myJsonData: jsonData
+
     };
   },
   methods: {

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style3.css">
+    <title></title>
+    <style>
+        /* Put styles here */
+    </style>
+    <script src="main.js"></script>
+    <script>export default{
+      methods: {
+      toggleMenu() {
+        this.isExpanded = !this.isExpanded;
+      },
+    },
+    }</script>
+</head>
+<body>
+  <div>
+    <div>
+      <section>
+        <header>
+          <div class="header-wrapper">
+            <a href="#" class="header-logo-link">
+              <img class="header-logo" src="https://cdn.shopify.com/s/files/1/0097/2075/8332/files/logo_shoes_black.png?v=1676026182" alt="Logo" />
+            </a>
+            <ul class="navigation">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Sign Up</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+            <button class="button-sidebar">
+              <div class="button-sidebar-icon"><span class="material-icons-outlined" @click="isExpanded = !isExpanded"> menu </span></div>
+            </button>
+          </div>
+        </header>
+  
+        <aside :class="{ isExpanded: isExpanded }">
+          <div class="mobile-sidebar-content">
+            <button class="button-sidebar">
+              <div class="button-sidebar-icon"><span class="material-icons-outlined btn-close" @click="isExpanded = !isExpanded"> clear </span></div>
+            </button>
+            <ul class="navigation-mobile">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Sign Up</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </aside>
+        <div class="header-padding"></div>
+  
+        <!-- <div class="toolbar">Toolbar</div> -->
+      </section>
+    </div>
+    <div id="banner">
+    </div>
+    <div id="banner2">
+      
+    </div>
+    <div>
+      <section class="nex__articles">
+        <div class="article-section section__width-xl">
+          <div class="banner__text">
+            <h2 id="blogtitle" class="banner__heading"></h2>
+          </div>
+          <div id="blogpost" class="grid">
+            
+          </div>
+        </div>
+      </section>
+    </div>
+    <div>
+      <section class="bg-blurrylights">
+        <div class="banner__sidebyside">
+          <div class="banner__text">
+            <div>
+              <h1 class="banner__heading">Have a question?</h1>
+              <h4 class="banner_subheading">Contact us if you have any questions!</h4>
+            </div>
+          </div>
+          <div>
+            <div class="input-card">
+              <form action="">
+                <div class="input">
+                  <input class="input__field" id="firstname" type="text" required />
+                  <label for="firstname" class="input__label">First Name</label>
+                </div>
+                <div class="input">
+                  <input class="input__field" id="lastname" type="text" required />
+                  <label for="lastname" class="input__label">Last Name</label>
+                </div>
+                <div class="input">
+                  <input class="input__field" id="email" type="email" required />
+                  <label for="email" class="input__label">Email Address</label>
+                </div>
+                <div class="input">
+                  <input class="input__field" id="phone" type="tel" required />
+                  <label for="phone" class="input__label">Phone</label>
+                </div>
+                <div class="textarea">
+                  <input class="input__field" id="question" type="textarea" required />
+                  <label for="question" class="input__label">Question</label>
+                </div>
+  
+                <button type="submit" value="Submit" class="button-primary ms-auto">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div>
+      <div class="lightbox-target" id="1">
+        <img src="https://via.placeholder.com/150" />
+        <a class="lightbox-close" href="#"></a>
+      </div>
+      <section class="bg-lightgray">
+        <div class="gallery-section section__width-xl">
+          <div class="banner__text">
+            <h2 class="banner__heading">Gallery</h2>
+          </div>
+          <div class="gallery__section">
+            <!-- <a class="lightbox" href="#1"><img src="https://via.placeholder.com/150" /></a> -->
+  
+            <div class="lightbox-gallery">
+              <div class="container">
+                <div class="row">
+                  <div id="gallery" class="col-sm-6 col-md-4 col-lg-3 mb-4" v-for="image in images" :key="image">
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div>
+      <section class="bg-lightgray">
+        <div class="banner__centered">
+          <div class="banner__text">
+            <h2 id="faqtitle" class="banner__heading"></h2>
+          </div>
+          <div class="collapsible__section">
+            <div id="faq" class="faq-collabsible" >
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+</body>
+  
+</html>

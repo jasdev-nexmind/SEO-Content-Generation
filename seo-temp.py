@@ -22,6 +22,8 @@ load_dotenv()
 
 # Get the API key
 openai_api_key = os.getenv("OPENAI_API_KEY")
+API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1-base"
+headers = {"Authorization": f"Bearer {os.getenv('STABILITY_KEY')}"}
 
 # Use the API key
 openai.api_key = openai_api_key
@@ -44,6 +46,7 @@ def stabilityai_generate(prompt: str,
     image_bytes = query({
         "inputs": f"{prompt}"
     })
+
     image = Image.open(io.BytesIO(image_bytes))
     print("Done")
     directory = "D:/Work/autogpt-plugin/SEO-Content-Generation/pictures"  # Change this to your directory
@@ -302,7 +305,7 @@ def generate_content(company_name: str,
                 "p": "..."
         },
         "blogs":{
-            "h2": "Customer Review",
+            "h2": "",
             "post": [{
                     "h3": "...",
                     "p": "...",
@@ -377,7 +380,7 @@ def get_image_context(company_name: str,
     context_json = """
         {
             "context":"..."
-            "size":"...(256x256/512x512/1024x1024)"
+            "size":"...(e.g: 1024x1024)"
         }
     """
     prompt = f"""
@@ -429,6 +432,7 @@ def image_generation(company_name: str,
                     image_json[section]["image"].extend(image_url)
 
     return image_json
+
     
     
 #=======================================================================================================================
@@ -437,17 +441,14 @@ def image_generation(company_name: str,
 
 def main():
     # Get the company name and topic from the user
-    keychoice = True
-    outchoice = True
+    # pic = stabilityai_generate("An image of a beautiful bouquet of flowers arranged in a vase, with a tagline that says 'Affordable online flower shop in Malaysia'. The image showcases a variety of flowers in different colors and sizes, with a focus on the affordability of the shop's offerings.", "512x512")
     try:
         company_name = sys.argv[1]
         topic = sys.argv[2]
     except IndexError:
         company_name = input("Company Name: ")
         topic = input("Your Keywords: ")
-        keychoice = False
-        outchoice = False
-
+        
     # Open token.csv to track token usage
     file_exists = os.path.isfile('token_usage.csv')  # Check if file already exists
     with open('token_usage.csv', 'a', newline='') as csvfile:
@@ -481,14 +482,14 @@ def main():
             content_result = content_future.result()
         except Exception as e:
             print("An exception occurred during execution: ", e)
-
+    
     merged_dict = deep_update(content_result, image_result)
 
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
-    with open(os.path.join(directory_path, f'{sanitize_filename(company_name)}.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(directory_path, f'data.json'), 'w', encoding='utf-8') as f:
         json.dump(merged_dict, f, ensure_ascii=False, indent=4)
-
+    
     # End procedures
     with open('token_usage.csv', 'a', newline='') as csvfile:
         fieldnames = ['Company Name', 'Keyword', 'Iteration', 'Stage', 'Prompt Tokens', 'Completion Tokens', 'Total Tokens', 'Price']
@@ -564,61 +565,3 @@ if __name__ == "__main__":
 #     },
 # }
 
-
-
-# {
-#     "meta": {
-#         "title": "Get on the Road to Financial Freedom with Time - Your Trusted Car Dealership in Malaysia",
-#         "description": "Looking for a specialized car dealership in Malaysia for electric vehicles? Look no further than Time. Our dealership offers a wide range of electric vehicles to suit your needs. Visit us today to learn more!"
-#     },
-#     "banner": {
-#         "h1": "Get on the Road to Financial Freedom with Time",
-#         "h2": "Your Trusted Car Dealership in Malaysia",
-#         "button": [
-#             "About Us",
-#             "Learn More"
-#         ]
-#     },
-#     "about": {
-#         "h2": "About Us",
-#         "p": "Welcome to Time, your trusted car dealership in Malaysia. We specialize in providing expert financing options to help you achieve financial freedom while purchasing your dream car. With our extensive knowledge and experience in the automotive industry, we are committed to offering the best solutions tailored to your needs."
-#     },
-#     "blogs": {
-#         "h2": "Why Choose Time for Financing Options?",
-#         "post": [
-#             {
-#                 "h3": "Expert Car Dealership in Malaysia for Financing Options",
-#                 "p": "At Time, we pride ourselves on being the expert car dealership in Malaysia when it comes to financing options. Our team of professionals understands the complexities of purchasing a car and the importance of making informed financial decisions. We are here to guide you through the process, ensuring that you make the right choices to achieve your financial goals."
-#             },
-#             {
-#                 "h3": "The Importance of Time in Making Financial Decisions",
-#                 "p": "Time plays a crucial role when it comes to making financial decisions, especially when purchasing a car. Making the right choices at the right time can significantly impact your financial well-being. With Time by your side, you can trust us to provide timely advice and assistance, helping you make informed decisions that align with your financial goals."
-#             },
-#             {
-#                 "h3": "How Time's Financing Options Can Help You Achieve Financial Freedom",
-#                 "p": "At Time, we offer a range of financing options that are designed to help you achieve financial freedom. Our flexible payment plans and competitive interest rates ensure that you can afford your dream car without compromising your financial stability. With our guidance, you can take control of your finances and drive towards a brighter future."
-#             }
-#         ]
-#     },
-#     "testimonials": {
-#         "h2": "Testimonials",
-#         "testimonial": [
-#             {
-#                 "h3": "John Doe",
-#                 "p": "Thanks to Time's financing options, I was able to purchase my dream car without any hassle. Their team provided excellent support and guided me throughout the process. I am now on the road to financial freedom, all thanks to Time."
-#             },
-#             {
-#                 "h3": "Jane Smith",
-#                 "p": "I highly recommend Time to anyone looking for a car dealership that offers financing options. They truly understand the importance of time in making financial decisions. With their help, I was able to make the right choices and achieve my financial goals."
-#             }
-#         ]
-#     },
-#     "benefits": {
-#         "h2": "Additional Benefits of Purchasing from Time",
-#         "p": "When you choose to purchase a car from Time, you not only gain access to expert financing options but also enjoy additional benefits. We provide warranty coverage for your peace of mind, ensuring that you are protected against any unforeseen circumstances. Our after-sales services are top-notch, offering you continued support even after you drive off our dealership. With Time, you can experience a hassle-free car buying experience from start to finish."
-#     },
-#     "cta": {
-#         "h2": "Visit Time's Dealership Today",
-#         "p": "Ready to take the first step towards financial freedom? Visit Time's dealership today and explore our wide range of cars and financing options. Our team of experts is here to assist you and help you make the best choices for your financial well-being. Don't wait any longer, start your journey towards financial freedom with Time."
-#     }
-# }
