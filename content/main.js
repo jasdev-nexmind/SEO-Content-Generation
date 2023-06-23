@@ -14,7 +14,15 @@ window.onload = function() {
         // ... and so on for all sections of your JSON ...
 
         // Update the HTML elements
-    
+        let metaTag = document.querySelector('meta[name="description"]');
+
+        // If the meta tag doesn't exist yet, create it
+        if (!metaTag) {
+            metaTag = document.createElement('meta');
+            metaTag.name = "description";
+            document.head.appendChild(metaTag);
+        }
+        metaTag.content = meta.description;
 
         document.getElementById('banner').innerHTML = `
         <section class="bg-blurrylights">
@@ -34,19 +42,19 @@ window.onload = function() {
         `;
         
 
-        document.getElementById('banner2').innerHTML = `
+        document.getElementById('aboutus').innerHTML = `
         <section class="bg-lightgray">
             <div class="banner__sidebyside">
                 <div class="banner__text">
                 <div>
-                    <h1 class="banner__heading">${banner.h1}</h1>
-                    <h5 class="banner_subheading">${banner.h2}</h5>
+                    <h1 class="banner__heading">${about.h2}</h1>
+                    <h5 class="banner_subheading">${about.p}</h5>
                     <button class="button-primary">${banner.button[0]}</button>
                 </div>
                 </div>
                 <div class="banner__image">
                 <div class="img-wrapper">
-                    <img src="${banner.image}" alt="" />
+                    <img src="${about.image}" alt="" />
                 </div>
                 </div>
             </div>

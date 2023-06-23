@@ -15,6 +15,7 @@ from PIL import Image
 from dotenv import load_dotenv
 from threading import Thread
 from typing import List, Dict
+from concurrent.futures import ThreadPoolExecutor, wait
 from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 
 # Load .env file
@@ -36,15 +37,18 @@ openai.Model.list()
  
 
 def query(payload):
-    print("Querying the model...")
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.content
 
 
 def stabilityai_generate(prompt: str,
-                         size: str) -> None:
+                         size: str,
+                         section: str) -> None:
+    print("Generating " + section + " image...")
     image_bytes = query({
-        "inputs": f"{prompt}"
+        "inputs": f"{prompt}",
+        "width":1280,
+        "height":800,
     })
 
     image = Image.open(io.BytesIO(image_bytes))
@@ -55,7 +59,8 @@ def stabilityai_generate(prompt: str,
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    image.save(os.path.join(directory, 'output_image.jpg'))
+    image.save(os.path.join(directory, f'{section}.jpg'))
+    return (f'{section}.jpg')
     
 
 def generate_content_response(prompt: str,
@@ -103,22 +108,17 @@ def generate_content_response(prompt: str,
 
 def generate_image_response(prompt: str,
                             size: str,
-                            n: int,
                             retries: int,
                             max_retries: int) -> list:
     try:
+        print("Generating image...")
         response = openai.Image.create(
             prompt=prompt,
-            n=n,
+            n=1,
             size=size,
         )
         # print (response)
-        if n == 1:
-            image_url = response['data'][0]['url']
-            return [image_url]
-        else:
-            gallery = [response['data'][i]['url'] for i in range(n)]
-            return gallery
+        return response['data'][0]['url']
 
     except openai.error.RateLimitError as e:  # rate limit error
         print("Rate limit reached. Retry attempt " + str(retries + 1) + " of " + str(max_retries) + "...")
@@ -156,10 +156,10 @@ def chat_with_gpt3(stage: str,
 
 def chat_with_dall_e(prompt: str,
                      size: str,
-                     n: int) -> list:
+                     section: str) -> list:
     max_retries = 5
     for retries in range(max_retries):
-        url: list = generate_image_response(prompt, size, n, retries, max_retries)
+        url: list = generate_image_response(prompt, size, retries, max_retries)
         if url is not None:   # If a response was successfully received
             return url
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
@@ -195,6 +195,13 @@ def deep_update(source, overrides):
             source[key] = value
     return source
 
+def correctjson(jsonfile: Dict):
+    prompt = f"""
+    Correct this json file:
+    {jsonfile}
+    """
+    correctedjson = chat_with_gpt3("JSON Correction", prompt, temp=0.2, p=0.1)
+    return correctedjson
 
 def sanitize_filename(filename: str) -> str:
     """Remove special characters and replace spaces with underscores in a string to use as a filename."""
@@ -367,6 +374,8 @@ def content_generation(company_name: str,
     contentjson = json.loads(content)
     updated_json = {"meta": {"title": title, "description": description}}
     updated_json.update(contentjson)
+    print("Content Generated")
+    # print(json.dumps(updated_json, indent=4))
     return updated_json
 
 
@@ -378,48 +387,70 @@ def get_image_context(company_name: str,
                       keyword: str,
                       section: str,
                       topic: str,
-                      industry: str) -> List:
+                      industry: str) -> str:
     context_json = """
         {
             "context":"..."
-            "size":"...(256x256/512x512/1024x1024)"
+            "size":"...(eg. 1024x1024)"
         }
     """
     prompt = f"""
-    Please generate an context of an image for the {section} section about {keyword} and {topic}. The company name is {company_name} scope of the image is  {industry}
+    Please generate a description of an image for the {section} section about {keyword} and {topic}. 
+    The company name is {company_name} and the scope of the image is  {industry}
     Format: {context_json}
     """
     image_context = chat_with_gpt3("Image Context Generation", prompt, temp=0.7, p=0.8)
+    image_context.join("hi")
+    print(image_context)
+    startindex = image_context.find("{")
+    endindex = image_context.rfind("}")
+    if startindex == -1 or endindex == -1:
+        return ("False")
+    else:
+        image_context = image_context[startindex:endindex+1]
     imagecontext = json.loads(image_context)
-    print(section)
-
-    imageurl = chat_with_dall_e(imagecontext["context"], imagecontext["size"], 1)
+    
+    imageurl = stabilityai_generate(imagecontext["context"], imagecontext["size"], section)
     return imageurl
 
 
+def generate_gallery_images(company_name: str,
+                            keyword: str,
+                            topic: str, 
+                            industry: str) -> List[str]:
+    gallery = []
+    for i in range(8):
+        gallery.append(get_image_context(company_name, keyword, f"gallery {i}", topic, industry))
+
+    print(gallery)
+    return gallery
+    
 def image_generation(company_name: str,
                      topic: str,
                      industry: str,
                      keyword: str) -> Dict:
     print("Generating Images...")
     image_json = {
-        "banner": {
-            "image": ""
-        },
-        "about": {
-            "image": ""
-        },
-        "gallery": {
-            "image": []
-        }
+        "banner": 
+            {
+                "image": ""
+            },
+        "about": 
+            {
+                "image": ""
+            },
+        "gallery": 
+            {"image": []
+            }
     }
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        # Start the threads and collect the futures
-        for i in image_json.keys():
-            if i == "gallery":
-                futures = {executor.submit(get_image_context, company_name, keyword, i, topic, industry): j for j in range (8)}
-            else:
-                futures = {executor.submit(get_image_context, company_name, keyword, i, topic, industry): i}
+        # Start the threads and collect the futures for non-gallery sections
+        for section in ["banner", "about"]:
+            futures = {executor.submit(get_image_context, company_name, keyword, section, topic, industry): section}
+
+        # Add the gallery futures
+        image_json["gallery"]["image"] = (generate_gallery_images(company_name, keyword, topic, industry))
 
         for future in concurrent.futures.as_completed(futures):
             section = futures[future]
@@ -428,14 +459,10 @@ def image_generation(company_name: str,
             except Exception as exc:
                 print('%r generated an exception: %s' % (section, exc))
             else:
-                if section != "gallery":
-                    if image_url:
-                        image_json[section]["image"] = image_url.pop(0)
-                else:
-                    image_json[section]["image"].extend(image_url)
-
+                if image_url:
+                    image_json[section]["image"] = image_url
+    print("Images Generated")
     return image_json
-
     
     
 #=======================================================================================================================
@@ -475,18 +502,18 @@ def main():
     print("Selected Keyword: " + selected_keyword)
     title = generate_title(company_name, selected_keyword)
     print(title)
-
+    
     with concurrent.futures.ThreadPoolExecutor() as executor:
         image_future = executor.submit(image_generation, company_name, topic, industry, selected_keyword)
         content_future = executor.submit(content_generation, company_name, topic, industry, selected_keyword, title)
-
+        futures = [image_future, content_future]
+        done, not_done = concurrent.futures.wait(futures, timeout=60, return_when=concurrent.futures.ALL_COMPLETED)
         try:
             image_result = image_future.result()
             content_result = content_future.result()
         except Exception as e:
             print("An exception occurred during execution: ", e)
-    
-    merged_dict = deep_update(content_result, image_result)
+        merged_dict = deep_update(content_result, image_result)
 
     directory_path = "content"
     os.makedirs(directory_path, exist_ok=True)
@@ -568,3 +595,76 @@ if __name__ == "__main__":
 #     },
 # }
 
+
+{
+    "meta": {
+        "title": "Experience Sustainable Luxury: Hertz's Eco-Friendly Lodges in the Heart of Malaysian Rainforest",
+        "description": "Looking for the best hotel in Malaysia? Look no further than Hertz! Our eco-friendly lodges in the Malaysian rainforest offer a unique and sustainable travel experience. Book your stay now and enjoy the natural beauty of Malaysia while minimizing your environmental impact."
+    },
+    "banner": {
+        "h1": "Experience Sustainable Luxury: Hertz's Eco-Friendly Lodges in the Heart of Malaysian Rainforest",
+        "h2": "Discover the Best Hotel in Malaysia",
+        "button": [
+            "About Us",
+            "Learn More"
+        ]
+    },
+    "about": {
+        "h2": "About Us",
+        "p": "At Hertz, we believe in providing sustainable luxury experiences for our guests. Nestled in the heart of the Malaysian rainforest, our eco-friendly lodges offer a unique opportunity to connect with nature while enjoying the utmost comfort and convenience. With a commitment to environmental conservation and responsible tourism, we strive to create a harmonious balance between luxury and sustainability."
+    },
+    "blogs": {
+        "h2": "Latest Articles",
+        "post": [
+            {
+                "h3": "Exploring the Biodiversity of the Malaysian Rainforest",
+                "p": "Embark on a journey through the lush greenery of the Malaysian rainforest and discover its incredible biodiversity. From rare flora and fauna to breathtaking waterfalls, our expert guides will take you on an unforgettable adventure, providing insights into the delicate ecosystem that surrounds our lodges."
+            },
+            {
+                "h3": "The Benefits of Eco-Friendly Tourism",
+                "p": "Learn about the positive impact of eco-friendly tourism and how it contributes to the preservation of natural resources. Discover how our lodges incorporate sustainable practices such as solar power, waste management, and local community engagement to minimize our environmental footprint."
+            },
+            {
+                "h3": "Indulge in Luxury: The Amenities at Hertz's Eco-Friendly Lodges",
+                "p": "Experience the ultimate in luxury at our eco-friendly lodges. From spacious rooms with panoramic rainforest views to gourmet dining options featuring locally sourced ingredients, our lodges offer an unparalleled level of comfort and relaxation. Unwind at our spa, take a dip in the infinity pool, or simply enjoy the tranquility of nature."
+            }
+        ]
+    },
+    "faq": {
+        "h2": "Frequently Asked Questions",
+        "question": [
+            {
+                "h3": "Are the lodges fully sustainable?",
+                "p": "Yes, our lodges are designed with sustainability in mind. We utilize renewable energy sources such as solar power, implement efficient waste management systems, and prioritize the use of eco-friendly materials in our construction and operations."
+            },
+            {
+                "h3": "What activities are available for guests?",
+                "p": "There are plenty of activities to choose from during your stay at our lodges. Explore the rainforest on guided nature walks, embark on thrilling wildlife safaris, or simply relax and rejuvenate in the serene surroundings. Our knowledgeable staff can assist in planning personalized itineraries based on your interests."
+            },
+            {
+                "h3": "How can I make a reservation?",
+                "p": "Making a reservation is easy. Simply visit our website or contact our friendly customer service team. We recommend booking in advance to secure your preferred dates as our lodges are in high demand."
+            }
+        ]
+    }
+}
+
+{
+    "banner": {
+        "image": "banner.jpg"},
+    "about": {
+        "image": "about.jpg"
+        },
+    "gallery": {
+        "image": ["gallery0.jpg",
+        "gallery1.jpg",
+        "gallery2.jpg",
+        "gallery3.jpg",
+        "gallery4.jpg",
+        "gallery5.jpg",
+        "gallery6.jpg",
+        "gallery7.jpg"  
+        ]
+    }
+}
+        
