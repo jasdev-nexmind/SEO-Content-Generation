@@ -1,15 +1,21 @@
 import csv
+import concurrent.futures
+import io
+import json
 import os
 import openai
 import re
 import random
+import requests
 import sys
 import time
-import json
-import concurrent.futures
+import torch
+import io
+from PIL import Image
+from dotenv import load_dotenv
 from threading import Thread
 from typing import List, Dict
-from dotenv import load_dotenv
+from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 
 # Load .env file
 load_dotenv()
@@ -22,6 +28,33 @@ openai.api_key = openai_api_key
 openai.Model.list()
 
 
+#==================================================================================================
+# API Interaction
+#==================================================================================================
+ 
+
+def query(payload):
+    print("Querying the model...")
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.content
+
+
+def stabilityai_generate(prompt: str,
+                         size: str) -> None:
+    image_bytes = query({
+        "inputs": f"{prompt}"
+    })
+    image = Image.open(io.BytesIO(image_bytes))
+    print("Done")
+    directory = "D:/Work/autogpt-plugin/SEO-Content-Generation/pictures"  # Change this to your directory
+    
+    # Create the directory if it doesn't exist
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    image.save(os.path.join(directory, 'output_image.jpg'))
+    
+
 def generate_content_response(prompt: str,
                       temp: float,
                       p: float,
@@ -29,7 +62,7 @@ def generate_content_response(prompt: str,
                       presence: float,
                       retries: int,
                       max_retries: int,
-                      model: str) -> str:
+                      model: str) -> tuple:
     try:
         response = openai.ChatCompletion.create(
             model=f"{model}",
@@ -66,10 +99,10 @@ def generate_content_response(prompt: str,
 
 
 def generate_image_response(prompt: str,
-                    size: str,
-                    n: int,
-                    retries: int,
-                    max_retries: int) -> str:
+                            size: str,
+                            n: int,
+                            retries: int,
+                            max_retries: int) -> list:
     try:
         response = openai.Image.create(
             prompt=prompt,
@@ -79,7 +112,7 @@ def generate_image_response(prompt: str,
         # print (response)
         if n == 1:
             image_url = response['data'][0]['url']
-            return image_url
+            return [image_url]
         else:
             gallery = [response['data'][i]['url'] for i in range(n)]
             return gallery
@@ -120,10 +153,10 @@ def chat_with_gpt3(stage: str,
 
 def chat_with_dall_e(prompt: str,
                      size: str,
-                     n: int) -> str:
+                     n: int) -> list:
     max_retries = 5
     for retries in range(max_retries):
-        url = generate_image_response(prompt, size, n, retries, max_retries)
+        url: list = generate_image_response(prompt, size, n, retries, max_retries)
         if url is not None:   # If a response was successfully received
             return url
     raise Exception(f"Max retries exceeded. The API continues to respond with an error after " + str(max_retries) + " attempts.")
@@ -340,7 +373,7 @@ def content_generation(company_name: str,
 
 def get_image_context(company_name: str,
                       keyword: str,
-                      section: str) -> str:
+                      section: str) -> list:
     context_json = """
         {
             "context":"..."
@@ -369,10 +402,10 @@ def image_generation(company_name: str,
     print("Generating Images...")
     image_json = {
         "banner": {
-            "image": "..."
+            "image": ""
         },
         "about": {
-            "image": "..."
+            "image": ""
         },
         "gallery": {
             "image": []
@@ -385,19 +418,20 @@ def image_generation(company_name: str,
         for future in concurrent.futures.as_completed(futures):
             section = futures[future]
             try:
-                image_url = future.result()
+                image_url: list = future.result()
             except Exception as exc:
                 print('%r generated an exception: %s' % (section, exc))
             else:
                 if section != "gallery":
-                    image_json[section]["image"] = image_url
+                    if image_url:
+                        image_json[section]["image"] = image_url.pop(0)
                 else:
                     image_json[section]["image"].extend(image_url)
 
     return image_json
-
-
-# =======================================================================================================================
+    
+    
+#=======================================================================================================================
 # Main Function
 # =======================================================================================================================
 

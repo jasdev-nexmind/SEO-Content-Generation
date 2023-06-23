@@ -26,7 +26,7 @@ def generate_response(prompt: str,
                       presence: float,
                       retries: int,
                       max_retries: int,
-                      model: str) -> str:
+                      model: str) -> tuple:
     try:
         response = openai.ChatCompletion.create(
             model=f"{model}",
