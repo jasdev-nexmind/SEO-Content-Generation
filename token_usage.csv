@@ -4881,3 +4881,15 @@ Microsoft,Sofa Manufacturing Company in Malaysia,0,Initial,0,0,0,0
 ,,1,Industry Identification,74,4,78,0.000156
 ,,2,Keyword Clusters Search,78,49,127,0.000254
 ,,3,Title Generation,77,51,128,0.000256
+,,4,Meta Description Generation,97,50,147,0.000294
+,,5,Image Context Generation,134,111,245,0.00049
+,,6,Image Context Generation,134,118,252,0.000504
+,,7,Image Context Generation,134,121,255,0.0005099999999999999
+,,8,Image Context Generation,134,121,255,0.0005099999999999999
+,,9,Image Context Generation,134,120,254,0.000508
+,,10,Image Context Generation,134,126,260,0.00052
+,,11,Image Context Generation,134,129,263,0.000526
+,,12,Image Context Generation,134,138,272,0.000544
+,,13,Image Context Generation,134,142,276,0.000552
+,,14,Image Context Generation,134,149,283,0.000566
+,,15,Content Generation,417,700,1117,0.002234
